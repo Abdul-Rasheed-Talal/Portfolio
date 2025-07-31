@@ -5,8 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
+// Removed database dependencies - using Google Sheets instead
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { Mail, Github, Globe, MapPin, Send, Loader2 } from "lucide-react";
 
@@ -47,7 +46,6 @@ const contactInfo = [
 export function Contact() {
   const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.3 });
   const { toast } = useToast();
-  const queryClient = useQueryClient();
   
   const [formData, setFormData] = useState<ContactFormData>({
     name: "",
@@ -56,28 +54,43 @@ export function Contact() {
     message: ""
   });
 
-  const contactMutation = useMutation({
-    mutationFn: (data: ContactFormData) => apiRequest("POST", "/api/contact", data),
-    onSuccess: () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      // Google Sheets form submission
+      const googleSheetUrl = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
+      
+      const formDataToSend = new FormData();
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('subject', formData.subject);
+      formDataToSend.append('message', formData.message);
+      formDataToSend.append('timestamp', new Date().toISOString());
+
+      await fetch(googleSheetUrl, {
+        method: 'POST',
+        body: formDataToSend,
+      });
+
       toast({
         title: "Message Sent!",
         description: "Thank you for your message! I'll get back to you soon.",
       });
+      
       setFormData({ name: "", email: "", subject: "", message: "" });
-      queryClient.invalidateQueries({ queryKey: ["/api/contact-messages"] });
-    },
-    onError: (error: any) => {
+    } catch (error) {
       toast({
         title: "Error",
-        description: error.message || "Failed to send message. Please try again.",
+        description: "Failed to send message. Please try again.",
         variant: "destructive",
       });
-    },
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    contactMutation.mutate(formData);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (field: keyof ContactFormData, value: string) => {
@@ -200,10 +213,10 @@ export function Contact() {
                 
                 <Button 
                   type="submit" 
-                  disabled={contactMutation.isPending}
+                  disabled={isSubmitting}
                   className="w-full bg-primary hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
                 >
-                  {contactMutation.isPending ? (
+                  {isSubmitting ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                       Sending...

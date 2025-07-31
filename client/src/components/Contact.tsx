@@ -61,10 +61,12 @@ export function Contact() {
     setIsSubmitting(true);
 
     try {
-      // Google Sheets form submission - Replace with your actual Google Apps Script URL
-      const googleSheetUrl = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
+      // Google Sheets form submission
+      // IMPORTANT: Replace this URL with your actual Google Apps Script deployment URL
+      const googleSheetUrl = "https://script.google.com/macros/s/AKfycbzXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/exec";
       
-      // TODO: Replace YOUR_SCRIPT_ID with your actual deployment URL from Google Apps Script
+      // For now, we'll simulate the form submission until you set up Google Sheets
+      console.log('Contact form submitted:', formData);
       
       const formDataToSend = new FormData();
       formDataToSend.append('name', formData.name);

@@ -2,11 +2,14 @@
 
 ## Overview
 
-This is a modern full-stack portfolio web application built for Abdul Rasheed Talal, a Computer Information Technology student. The application features a React frontend with TypeScript, an Express.js backend, PostgreSQL database with Drizzle ORM, and includes a contact form with email notifications.
+This is a modern full-stack portfolio web application built for Abdul Rasheed Talal, a 2nd year Computer Information Technology student from Govt College of Technology Bhakkar. The application showcases his academic journey, technical skills, projects, and passion for creating tech solutions for underprivileged communities. Features a React frontend with TypeScript, Express.js backend, and includes a contact form with email notifications.
 
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+Background: 17-year-old CIT student from Bhakkar, Pakistan
+Goal: Build tech company and create opportunities for youth in underprivileged areas
+Skills: C++, C, Python (learning), HTML/CSS, Git/GitHub, Web Development
 
 ## System Architecture
 

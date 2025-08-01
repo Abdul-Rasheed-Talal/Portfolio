@@ -22,13 +22,17 @@ export function Hero() {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center pt-20 px-4">
       <div className="max-w-4xl mx-auto text-center fade-in">
-        {/* Professional headshot placeholder */}
-        <div className="w-40 h-40 mx-auto mb-8 rounded-full bg-gradient-to-r from-primary to-accent p-1">
-          <div className="w-full h-full rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
-            <div className="w-32 h-32 bg-slate-300 dark:bg-slate-600 rounded-full flex items-center justify-center">
-              <span className="text-2xl font-bold text-slate-600 dark:text-slate-300">AR</span>
-            </div>
-          </div>
+        {/* I want my profile picture here */}
+          {/* Placeholder for profile picture */}
+          {/* You can replace this with an actual image tag or component */}
+        <div className="mb-8">
+          <img 
+            src="/assets/profile-picture.jpg" // Replace with your actual image path
+            alt="Abdul Rasheed Talal"
+            className="w-32 h-32 rounded-full mx-auto shadow-lg"
+            loading="lazy"
+            style={{ objectFit: "cover" }}
+          />
         </div>
 
         <h1 className="text-4xl md:text-6xl font-bold mb-6">

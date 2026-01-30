@@ -1,95 +1,57 @@
-import { Github, Mail, Globe } from "lucide-react";
+import { Github, Mail, Heart } from "lucide-react";
 
-const quickLinks = [
-  { href: "#about", label: "About" },
-  { href: "#skills", label: "Skills" },
-  { href: "#projects", label: "Projects" },
-  { href: "#education", label: "Education" },
-  { href: "#contact", label: "Contact" },
-];
-
-const technologies = [
-  "C++ & C Programming",
-  "HTML, CSS & JavaScript", 
-  "Git & GitHub",
-  "Python (Learning)",
-  "Web Development",
+const socialLinks = [
+  {
+    icon: Github,
+    href: "https://github.com/Abdul-Rasheed-Talal",
+    label: "GitHub"
+  },
+  {
+    icon: Mail,
+    href: "mailto:mabdulrasheedtalal@gmail.com",
+    label: "Email"
+  }
 ];
 
 export function Footer() {
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId.substring(1));
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-slate-900 text-slate-300 py-12 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-3 gap-8">
-          <div>
-            <h3 className="text-xl font-bold text-white mb-4">Abdul Rasheed Talal</h3>
-            <p className="text-slate-400 mb-4">
-              Computer Information Technology Student passionate about creating 
-              technology solutions for underprivileged communities.
+    <footer className="py-12 px-4 border-t border-neutral-800">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+          {/* Logo & Copyright */}
+          <div className="text-center md:text-left">
+            <h3 className="text-xl font-bold bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent mb-2">
+              Abdul Rasheed
+            </h3>
+            <p className="text-neutral-400 text-sm">
+              © {currentYear} All rights reserved.
             </p>
-            <div className="flex space-x-4">
-              <a 
-                href="https://github.com/Abdul-Rasheed-Talal" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-slate-400 hover:text-white transition-colors"
-              >
-                <Github className="h-5 w-5" />
-              </a>
-              <a 
-                href="mailto:mabdulrasheedtalal@gmail.com"
-                className="text-slate-400 hover:text-white transition-colors"
-              >
-                <Mail className="h-5 w-5" />
-              </a>
-              <a 
-                href="https://abdul-rasheed-talal.github.io/StartupJourney/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-slate-400 hover:text-white transition-colors"
-              >
-                <Globe className="h-5 w-5" />
-              </a>
-            </div>
           </div>
-          
-          <div>
-            <h4 className="font-bold text-white mb-4">Quick Links</h4>
-            <ul className="space-y-2">
-              {quickLinks.map((link) => (
-                <li key={link.href}>
-                  <button
-                    onClick={() => scrollToSection(link.href)}
-                    className="text-slate-400 hover:text-white transition-colors text-left"
-                  >
-                    {link.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
+
+          {/* Social Links */}
+          <div className="flex space-x-4">
+            {socialLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target={link.href.startsWith('http') ? '_blank' : undefined}
+                rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                className="w-10 h-10 bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 hover:border-orange-500 rounded-lg flex items-center justify-center text-neutral-400 hover:text-orange-400 transition-all duration-300"
+                aria-label={link.label}
+              >
+                <link.icon className="w-5 h-5" />
+              </a>
+            ))}
           </div>
-          
-          <div>
-            <h4 className="font-bold text-white mb-4">Technologies</h4>
-            <ul className="space-y-2 text-slate-400">
-              {technologies.map((tech) => (
-                <li key={tech}>{tech}</li>
-              ))}
-            </ul>
+
+          {/* Made with love */}
+          <div className="flex items-center space-x-2 text-neutral-400 text-sm">
+            <span>Made with</span>
+            <Heart className="w-4 h-4 text-red-500 fill-red-500" />
+            <span>in Pakistan</span>
           </div>
-        </div>
-        
-        <div className="border-t border-slate-700 mt-8 pt-8 text-center">
-          <p className="text-slate-400">
-            &copy; 2024 Abdul Rasheed Talal. Built with passion for technology and social impact.
-          </p>
         </div>
       </div>
     </footer>

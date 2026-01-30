@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import { useTheme } from "./ThemeProvider";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Moon, Sun, Menu } from "lucide-react";
+import { Menu, Download } from "lucide-react";
 
 const navItems = [
   { href: "#home", label: "Home" },
@@ -14,7 +13,6 @@ const navItems = [
 ];
 
 export function Navigation() {
-  const { theme, toggleTheme } = useTheme();
   const [activeSection, setActiveSection] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -32,7 +30,7 @@ export function Navigation() {
         }
         return false;
       });
-      
+
       if (current) {
         setActiveSection(current);
       }
@@ -50,26 +48,26 @@ export function Navigation() {
   };
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      isScrolled 
-        ? "bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700" 
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled
+        ? "bg-black/80 backdrop-blur-md border-b border-neutral-800"
         : "bg-transparent"
-    }`}>
+      }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
-            <h1 className="text-xl font-bold text-primary">Abdul Rasheed Talal</h1>
+            <h1 className="text-xl font-bold bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
+              Abdul Rasheed
+            </h1>
           </div>
-          
+
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <button
                 key={item.href}
                 onClick={() => scrollToSection(item.href)}
-                className={`nav-link text-slate-600 dark:text-slate-300 hover:text-primary transition-colors ${
-                  activeSection === item.href.substring(1) ? "text-primary font-medium" : ""
-                }`}
+                className={`nav-link text-neutral-400 hover:text-orange-400 transition-colors ${activeSection === item.href.substring(1) ? "text-orange-400 font-medium" : ""
+                  }`}
               >
                 {item.label}
               </button>
@@ -77,14 +75,14 @@ export function Navigation() {
           </div>
 
           <div className="flex items-center space-x-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              className="rounded-lg bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600"
+            <a
+              href="/assets/Abdul-Rasheed-internship-CV.pdf"
+              download
+              className="hidden sm:flex items-center space-x-2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 hover:scale-105"
             >
-              {theme === "light" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
-            </Button>
+              <Download className="h-4 w-4" />
+              <span>Resume</span>
+            </a>
 
             {/* Mobile Menu */}
             <Sheet>
@@ -92,22 +90,30 @@ export function Navigation() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="md:hidden rounded-lg bg-slate-200 dark:bg-slate-700"
+                  className="md:hidden rounded-lg bg-neutral-900 border border-neutral-700 hover:border-orange-500"
                 >
-                  <Menu className="h-4 w-4" />
+                  <Menu className="h-5 w-5 text-white" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+              <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-black border-neutral-800">
                 <div className="flex flex-col space-y-4 mt-8">
                   {navItems.map((item) => (
                     <button
                       key={item.href}
                       onClick={() => scrollToSection(item.href)}
-                      className="text-left py-2 text-slate-600 dark:text-slate-300 hover:text-primary transition-colors"
+                      className="text-left py-2 text-neutral-300 hover:text-orange-400 transition-colors"
                     >
                       {item.label}
                     </button>
                   ))}
+                  <a
+                    href="/assets/Abdul-Rasheed-internship-CV.pdf"
+                    download
+                    className="flex items-center space-x-2 bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-3 rounded-lg font-medium mt-4"
+                  >
+                    <Download className="h-4 w-4" />
+                    <span>Download Resume</span>
+                  </a>
                 </div>
               </SheetContent>
             </Sheet>

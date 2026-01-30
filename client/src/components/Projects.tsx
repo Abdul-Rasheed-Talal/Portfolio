@@ -1,165 +1,172 @@
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { useState, useEffect } from "react";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
-import { Building2, Bell, Rocket, Plus, Github, ExternalLink } from "lucide-react";
+import { Github, ExternalLink, Eye } from "lucide-react";
 
+// Projects from CV with actual links
 const projects = [
   {
+    id: 1,
+    title: "GCT Bhakkar Website",
+    description: "Designed and developed a dynamic and responsive website for Government College of Technology Bhakkar. Used JavaScript DOM manipulation to dynamically update page content with interactive UI behavior and form validation.",
+    image: "/assets/projects/gct-bhakkar.png",
+    technologies: ["HTML", "CSS", "JavaScript", "Bootstrap"],
+    liveUrl: "https://gctbhakkar.netlify.app",
+    githubUrl: "https://github.com/Abdul-Rasheed-Talal/gct-bhakkar",
+    category: "Web Development",
+    duration: "11/2025 - Present",
+    featured: true,
+  },
+  {
+    id: 2,
+    title: "Spotify Clone",
+    description: "Built a Spotify-inspired music player web application with dynamic loading of albums and songs from local storage. Implemented core music player controls including Play/Pause, Next/Previous track, and interactive seek bar for audio progress.",
+    image: "/assets/projects/spotify-clone.png",
+    technologies: ["HTML", "CSS", "JavaScript"],
+    liveUrl: "https://spotify-frontend-project.netlify.app/",
+    githubUrl: "https://github.com/Abdul-Rasheed-Talal/spotify-clone",
+    category: "Web Development",
+    duration: "12/2025",
+    featured: true,
+  },
+  {
+    id: 3,
     title: "Bank Management System",
-    description: "A comprehensive console application built in C++ featuring admin controls, PIN verification, account management, and a complete loan system. Demonstrates object-oriented programming and data structure implementation.",
-    icon: Building2,
-    status: "Completed",
-    statusColor: "bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200",
-    tags: ["C++", "OOP", "Data Structures"],
-    links: {
-      github: "https://github.com/Abdul-Rasheed-Talal",
-      demo: "#"
-    }
+    description: "Developed a console-based Bank Management System using C++ with core OOP principles including classes, objects, functions, and encapsulation. Features account creation, deposit, withdrawal, and balance inquiry functionality.",
+    image: "/assets/projects/bank-system.png",
+    technologies: ["C++", "OOP"],
+    liveUrl: null,
+    githubUrl: "https://github.com/Abdul-Rasheed-Talal/BankMgmSystem",
+    category: "Desktop Application",
+    duration: "03/2025 - 04/2025",
+    featured: true,
   },
-  {
-    title: "Prayer Alarm App", 
-    description: "An intelligent prayer time notification system that alerts users 10 minutes before each prayer with automatic synchronization based on location. Features customizable reminders and beautiful Islamic design elements.",
-    icon: Bell,
-    status: "In Progress",
-    statusColor: "bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200",
-    tags: ["Mobile App", "API Integration", "Location Services"],
-    links: {
-      github: "https://github.com/Abdul-Rasheed-Talal",
-      demo: "#"
-    }
-  },
-  {
-    title: "Startup Journey",
-    description: "My personal blog and journey documentation website where I share my experiences, learnings, and progress as I work towards building a tech company. Built with modern web technologies and responsive design.",
-    icon: Rocket,
-    status: "Live",
-    statusColor: "bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200",
-    tags: ["HTML", "CSS", "GitHub Pages"],
-    links: {
-      github: "https://github.com/Abdul-Rasheed-Talal",
-      demo: "https://abdul-rasheed-talal.github.io/StartupJourney/"
-    }
-  }
 ];
 
 export function Projects() {
   const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.2 });
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    if (isIntersecting) {
+      setIsLoaded(true);
+    }
+  }, [isIntersecting]);
 
   return (
-    <section id="projects" className="py-20 px-4 bg-white dark:bg-slate-800">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Featured Projects</h2>
-          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            A showcase of my development journey and the solutions I'm building
+    <section id="projects" className="py-20 px-4">
+      <div className="max-w-7xl mx-auto">
+        <div className={`text-center mb-16 transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            Featured{" "}
+            <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
+              Projects
+            </span>
+          </h2>
+          <p className="text-xl text-neutral-300 max-w-2xl mx-auto">
+            A showcase of my recent work and creative solutions
           </p>
         </div>
-        
-        <div ref={ref} className="grid md:grid-cols-2 gap-8">
+
+        <div ref={ref} className="grid lg:grid-cols-2 gap-8">
           {projects.map((project, index) => (
-            <Card 
-              key={project.title} 
-              className={`project-card bg-slate-50 dark:bg-slate-900 border-0 shadow-lg hover:shadow-xl transition-all duration-300 ${
-                isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
+            <div
+              key={project.id}
+              className={`group relative bg-neutral-900/50 border border-neutral-800 rounded-2xl overflow-hidden hover:border-orange-500/50 transition-all duration-300 hover:scale-[1.02] ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
               style={{ transitionDelay: `${index * 150}ms` }}
             >
-              <CardHeader>
-                <div className="h-48 bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg flex items-center justify-center mb-4">
-                  <project.icon className="h-16 w-16 text-primary" />
-                </div>
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-xl font-bold text-slate-900 dark:text-white">
-                    {project.title}
-                  </CardTitle>
-                  <Badge className={`${project.statusColor} px-3 py-1 rounded-full text-sm font-medium`}>
-                    {project.status}
-                  </Badge>
-                </div>
-              </CardHeader>
-              
-              <CardContent>
-                <CardDescription className="text-slate-600 dark:text-slate-300 mb-6">
-                  {project.description}
-                </CardDescription>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <Badge 
-                      key={tag} 
-                      variant="secondary"
-                      className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200"
-                    >
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-              
-              <CardFooter className="flex space-x-4">
-                <Button variant="outline" size="sm" asChild>
-                  <a 
-                    href={project.links.github} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="flex items-center text-primary hover:text-blue-700 transition-colors"
-                  >
-                    <Github className="mr-2 h-4 w-4" />
-                    View Code
-                  </a>
-                </Button>
-                {project.links.demo !== "#" && (
-                  <Button variant="outline" size="sm" asChild>
-                    <a 
-                      href={project.links.demo} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="flex items-center text-accent hover:text-cyan-700 transition-colors"
-                    >
-                      <ExternalLink className="mr-2 h-4 w-4" />
-                      Live Demo
-                    </a>
-                  </Button>
-                )}
-              </CardFooter>
-            </Card>
-          ))}
+              {/* Main Card Link - Overlay */}
+              <a
+                href={project.liveUrl || project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute inset-0 z-0 focus:outline-none"
+                aria-label={`View ${project.title}`}
+              >
+                <span className="sr-only">View project</span>
+              </a>
 
-          {/* Future Project Placeholder */}
-          <Card className="project-card bg-slate-50 dark:bg-slate-900 border-2 border-dashed border-slate-300 dark:border-slate-600 shadow-lg hover:shadow-xl transition-all duration-300">
-            <CardHeader>
-              <div className="h-48 flex items-center justify-center">
-                <div className="text-center">
-                  <Plus className="h-12 w-12 text-slate-400 mx-auto mb-4" />
-                  <p className="text-slate-500">Next Project Coming Soon</p>
+              <div className="relative z-10 pointer-events-none">
+                <div className="relative overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                    onError={(e) => {
+                      // Fallback to placeholder if image not found
+                      (e.target as HTMLImageElement).src = `https://placehold.co/800x400/1a1a1a/f97316?text=${encodeURIComponent(project.title)}`;
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute top-4 right-4">
+                    <span className="bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                      {project.category}
+                    </span>
+                  </div>
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-neutral-900/80 text-neutral-300 px-3 py-1 rounded-full text-xs">
+                      {project.duration}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="p-6">
+                  <h3 className="text-2xl font-bold text-white mb-3">{project.title}</h3>
+                  <p className="text-neutral-300 mb-4 leading-relaxed line-clamp-3">{project.description}</p>
+
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {project.technologies.map((tech, techIndex) => (
+                      <span
+                        key={techIndex}
+                        className="bg-neutral-800 text-neutral-300 px-3 py-1 rounded-full text-sm"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Buttons - Raised above the overlay link and re-enable pointer events */}
+                  <div className="flex space-x-4 relative z-30 pointer-events-auto">
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center space-x-2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-4 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105"
+                      >
+                        <Eye className="w-4 h-4" />
+                        <span>Live Demo</span>
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    )}
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center space-x-2 border border-neutral-600 hover:border-orange-500 text-neutral-300 hover:text-orange-400 px-4 py-2 rounded-lg font-semibold transition-all duration-300"
+                    >
+                      <Github className="w-4 h-4" />
+                      <span>Code</span>
+                    </a>
+                  </div>
                 </div>
               </div>
-            </CardHeader>
-            
-            <CardContent>
-              <CardTitle className="text-xl font-bold text-slate-900 dark:text-white mb-4">
-                What's Next?
-              </CardTitle>
-              <CardDescription className="text-slate-600 dark:text-slate-300 mb-6">
-                I'm constantly working on new projects and learning new technologies. 
-                Follow my journey to see what innovative solutions I'll build next!
-              </CardDescription>
-            </CardContent>
-            
-            <CardFooter>
-              <Button variant="outline" size="sm" asChild>
-                <a 
-                  href="https://github.com/Abdul-Rasheed-Talal" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-primary hover:text-blue-700 transition-colors"
-                >
-                  <Github className="mr-2 h-4 w-4" />
-                  Follow on GitHub
-                </a>
-              </Button>
-            </CardFooter>
-          </Card>
+            </div>
+          ))}
+        </div>
+
+        <div className={`text-center mt-12 transition-all duration-700 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}>
+          <a
+            href="https://github.com/Abdul-Rasheed-Talal"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center space-x-2 bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 hover:border-orange-500 text-neutral-300 hover:text-orange-400 px-8 py-4 rounded-xl font-semibold transition-all duration-300"
+          >
+            <span>View All Projects on GitHub</span>
+            <ExternalLink className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+          </a>
         </div>
       </div>
     </section>

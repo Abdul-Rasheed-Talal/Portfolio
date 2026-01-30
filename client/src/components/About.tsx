@@ -1,55 +1,107 @@
+import { useState, useEffect } from "react";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
-import { Laptop } from "lucide-react";
+import { Github, Coffee, Heart, Zap } from "lucide-react";
+
+const userData = {
+  name: "Abdul Rasheed",
+  title: "Web Developer",
+  location: "Bhakkar, Pakistan",
+  availableForHire: true,
+  // Shortened professional summary
+  bio: "CIT student with a strong foundation in web development and programming. I build dynamic, responsive web applications using HTML, CSS, JavaScript, and Bootstrap, along with console-based systems in C++. Passionate about solving problems and continuously learning new technologies.",
+  social: {
+    github: "https://github.com/Abdul-Rasheed-Talal",
+  },
+};
 
 export function About() {
   const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.3 });
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    if (isIntersecting) {
+      setIsLoaded(true);
+    }
+  }, [isIntersecting]);
 
   return (
-    <section id="about" className="py-20 px-4 bg-white dark:bg-slate-800">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">About Me</h2>
-          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            Discover my journey, passion, and vision for creating positive change through technology
-          </p>
+    <section id="about" className="py-20 px-4">
+      <div className="max-w-7xl mx-auto">
+        <div className={`text-center mb-16 transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            About{" "}
+            <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">Me</span>
+          </h2>
         </div>
-        
-        <div ref={ref} className="grid md:grid-cols-2 gap-12 items-center">
-          <div className={`transition-all duration-700 ${isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            {/* Young developer at work illustration */}
-            <div className="bg-gradient-to-br from-primary/10 to-accent/10 rounded-2xl p-8 h-80 flex items-center justify-center">
-              <Laptop className="h-24 w-24 text-primary" />
+
+        <div ref={ref} className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className={`space-y-6 transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}>
+            <p className="text-lg text-neutral-300 leading-relaxed">{userData.bio}</p>
+
+            <div className="flex flex-wrap gap-4">
+              <div className="flex items-center space-x-2 bg-neutral-900/50 px-4 py-2 rounded-lg border border-neutral-800">
+                <Coffee className="w-5 h-5 text-orange-400" />
+                <span className="text-neutral-300">Tea Enthusiast</span>
+              </div>
+              <div className="flex items-center space-x-2 bg-neutral-900/50 px-4 py-2 rounded-lg border border-neutral-800">
+                <Heart className="w-5 h-5 text-red-400" />
+                <span className="text-neutral-300">Open Source Learner</span>
+              </div>
+              <div className="flex items-center space-x-2 bg-neutral-900/50 px-4 py-2 rounded-lg border border-neutral-800">
+                <Zap className="w-5 h-5 text-yellow-400" />
+                <span className="text-neutral-300">Problem Solver</span>
+              </div>
+            </div>
+
+            {/* Social Links - Only GitHub */}
+            <div className="flex space-x-4 pt-6">
+              <a
+                href={userData.social.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 hover:border-orange-500 rounded-xl flex items-center justify-center text-neutral-400 hover:text-orange-400 transition-all duration-300 hover:scale-110"
+              >
+                <Github className="w-6 h-6" />
+              </a>
             </div>
           </div>
-          
-          <div className={`transition-all duration-700 delay-200 ${isIntersecting ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">My Story</h3>
-            <div className="prose prose-lg text-slate-600 dark:text-slate-300 space-y-4">
-              <p>
-                I'm a dedicated Computer Information Technology student currently in my 2nd year at 
-                <strong className="text-slate-800 dark:text-slate-200"> Govt College of Technology Bhakkar</strong>. My journey started with a simple 
-                belief: technology can bridge gaps and create opportunities where none existed before.
-              </p>
-              <p>
-                Coming from a backward area of Pakistan where talent is often overlooked, I'm determined 
-                to change that narrative. My goal is to build my own tech company and create job 
-                opportunities and tech training for youth in underprivileged areas.
-              </p>
-              <p>
-                Every line of code I write, every project I build, is a step towards that vision. 
-                I believe in the power of persistence, continuous learning, and using technology 
-                as a force for positive social change.
-              </p>
-            </div>
-            
-            <div className="mt-8 grid grid-cols-2 gap-6">
-              <div className="text-center p-4 bg-slate-50 dark:bg-slate-700 rounded-lg">
-                <div className="text-2xl font-bold text-primary">17</div>
-                <div className="text-sm text-slate-600 dark:text-slate-300">Years Old</div>
+
+          <div className={`relative transition-all duration-700 delay-200 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}>
+            <div className="bg-neutral-900/50 border border-neutral-800 rounded-2xl p-8">
+              <div className="flex items-center space-x-2 mb-6">
+                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                <span className="text-neutral-400 ml-4 font-mono text-sm">developer.js</span>
               </div>
-              <div className="text-center p-4 bg-slate-50 dark:bg-slate-700 rounded-lg">
-                <div className="text-2xl font-bold text-primary">2+</div>
-                <div className="text-sm text-slate-600 dark:text-slate-300">Years Learning</div>
+              <div className="font-mono text-sm space-y-2">
+                <div className="text-purple-400">
+                  const <span className="text-blue-400">developer</span> = {"{"}
+                </div>
+                <div className="text-neutral-400 ml-4">
+                  name: <span className="text-green-400">'{userData.name}'</span>,
+                </div>
+                <div className="text-neutral-400 ml-4">
+                  title: <span className="text-green-400">'{userData.title}'</span>,
+                </div>
+                <div className="text-neutral-400 ml-4">
+                  location: <span className="text-green-400">'{userData.location}'</span>,
+                </div>
+                <div className="text-neutral-400 ml-4">
+                  available: <span className="text-orange-400">{userData.availableForHire.toString()}</span>,
+                </div>
+                <div className="text-neutral-400 ml-4">
+                  skills: [<span className="text-green-400">'HTML'</span>,{" "}
+                  <span className="text-green-400">'CSS'</span>,{" "}
+                  <span className="text-green-400">'JavaScript'</span>],
+                </div>
+                <div className="text-neutral-400 ml-4">
+                  passion: <span className="text-green-400">'Building amazing things'</span>
+                </div>
+                <div className="text-purple-400">{"}"}</div>
               </div>
             </div>
           </div>

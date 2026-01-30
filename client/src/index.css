@@ -2,50 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
+/* New Dark Theme - Orange/Red Gradient Portfolio */
 :root {
-  --background: hsl(0, 0%, 100%);
-  --foreground: hsl(215, 25%, 27%);
-  --muted: hsl(210, 40%, 96%);
-  --muted-foreground: hsl(215, 16%, 47%);
-  --popover: hsl(0, 0%, 100%);
-  --popover-foreground: hsl(215, 25%, 27%);
-  --card: hsl(0, 0%, 100%);
-  --card-foreground: hsl(215, 25%, 27%);
-  --border: hsl(214, 32%, 91%);
-  --input: hsl(214, 32%, 91%);
-  --primary: hsl(217, 91%, 60%);
+  --background: hsl(0, 0%, 0%);
+  --foreground: hsl(0, 0%, 100%);
+  --muted: hsl(0, 0%, 10%);
+  --muted-foreground: hsl(0, 0%, 64%);
+  --popover: hsl(0, 0%, 5%);
+  --popover-foreground: hsl(0, 0%, 100%);
+  --card: hsl(0, 0%, 7%);
+  --card-foreground: hsl(0, 0%, 100%);
+  --border: hsl(0, 0%, 15%);
+  --input: hsl(0, 0%, 15%);
+  --primary: hsl(24, 100%, 50%);
   --primary-foreground: hsl(0, 0%, 100%);
-  --secondary: hsl(210, 40%, 96%);
-  --secondary-foreground: hsl(222, 84%, 5%);
-  --accent: hsl(188, 91%, 50%);
-  --accent-foreground: hsl(215, 25%, 27%);
+  --secondary: hsl(0, 0%, 10%);
+  --secondary-foreground: hsl(0, 0%, 100%);
+  --accent: hsl(0, 84%, 60%);
+  --accent-foreground: hsl(0, 0%, 100%);
   --destructive: hsl(0, 84%, 60%);
   --destructive-foreground: hsl(0, 0%, 98%);
-  --ring: hsl(215, 25%, 27%);
-  --radius: 0.5rem;
+  --ring: hsl(24, 100%, 50%);
+  --radius: 0.75rem;
 }
 
 .dark {
-  --background: hsl(224, 71%, 4%);
-  --foreground: hsl(213, 31%, 91%);
-  --muted: hsl(223, 47%, 11%);
-  --muted-foreground: hsl(215, 20%, 65%);
-  --popover: hsl(224, 71%, 4%);
-  --popover-foreground: hsl(213, 31%, 91%);
-  --card: hsl(224, 71%, 4%);
-  --card-foreground: hsl(213, 31%, 91%);
-  --border: hsl(216, 34%, 17%);
-  --input: hsl(216, 34%, 17%);
-  --primary: hsl(217, 91%, 60%);
-  --primary-foreground: hsl(222, 84%, 5%);
-  --secondary: hsl(222, 47%, 11%);
-  --secondary-foreground: hsl(213, 31%, 91%);
-  --accent: hsl(216, 34%, 17%);
-  --accent-foreground: hsl(213, 31%, 91%);
-  --destructive: hsl(0, 63%, 31%);
-  --destructive-foreground: hsl(213, 31%, 91%);
-  --ring: hsl(216, 34%, 17%);
-  --radius: 0.5rem;
+  --background: hsl(0, 0%, 0%);
+  --foreground: hsl(0, 0%, 100%);
+  --muted: hsl(0, 0%, 10%);
+  --muted-foreground: hsl(0, 0%, 64%);
+  --popover: hsl(0, 0%, 5%);
+  --popover-foreground: hsl(0, 0%, 100%);
+  --card: hsl(0, 0%, 7%);
+  --card-foreground: hsl(0, 0%, 100%);
+  --border: hsl(0, 0%, 15%);
+  --input: hsl(0, 0%, 15%);
+  --primary: hsl(24, 100%, 50%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(0, 0%, 10%);
+  --secondary-foreground: hsl(0, 0%, 100%);
+  --accent: hsl(0, 84%, 60%);
+  --accent-foreground: hsl(0, 0%, 100%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(24, 100%, 50%);
 }
 
 @layer base {
@@ -54,7 +54,7 @@
   }
 
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply font-sans antialiased bg-black text-white;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   }
 
@@ -64,6 +64,31 @@
 }
 
 @layer components {
+  /* Gradient Text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent;
+  }
+
+  /* Gradient Button */
+  .btn-gradient {
+    @apply bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold transition-all duration-300 shadow-2xl;
+  }
+
+  .btn-gradient:hover {
+    box-shadow: 0 25px 50px -12px rgba(249, 115, 22, 0.25);
+    transform: scale(1.05);
+  }
+
+  /* Card Hover Effects */
+  .card-hover {
+    @apply bg-neutral-900/50 border border-neutral-800 rounded-2xl transition-all duration-300;
+  }
+
+  .card-hover:hover {
+    @apply border-orange-500/50 scale-105;
+  }
+
+  /* Typing Cursor */
   .typing-cursor {
     animation: blink 1s infinite;
   }
@@ -73,10 +98,12 @@
     51%, 100% { opacity: 0; }
   }
 
+  /* Skill Bar Animation */
   .skill-bar {
-    transition: width 1.5s ease-in-out;
+    @apply bg-gradient-to-r from-orange-500 to-red-500 rounded-full transition-all duration-1000 ease-out;
   }
 
+  /* Fade In Animation */
   .fade-in {
     animation: fadeIn 0.6s ease-in-out;
   }
@@ -101,6 +128,7 @@
     }
   }
 
+  /* Navigation Link */
   .nav-link {
     position: relative;
     transition: color 0.3s ease;
@@ -117,16 +145,37 @@
     height: 2px;
     bottom: -4px;
     left: 0;
-    background-color: hsl(var(--primary));
+    background: linear-gradient(to right, #f97316, #ef4444);
     transition: width 0.3s ease;
   }
 
+  /* Project Card */
   .project-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
   .project-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 20px 40px -15px rgba(249, 115, 22, 0.2);
+  }
+
+  /* Floating Animation */
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* Glow Effect */
+  .glow-orange {
+    box-shadow: 0 0 40px rgba(249, 115, 22, 0.3);
+  }
+
+  /* Background Blobs */
+  .bg-blob {
+    @apply absolute rounded-full blur-3xl animate-pulse pointer-events-none;
   }
 }

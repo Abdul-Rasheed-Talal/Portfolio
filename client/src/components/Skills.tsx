@@ -1,152 +1,300 @@
+import { useState, useEffect } from "react";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
-import { useEffect, useState } from "react";
-import { Code, Globe, Wrench, Lightbulb, Heart, GraduationCap, Users, Target } from "lucide-react";
+import { Rocket, BookOpen, Code2, Wrench, Database, Palette } from "lucide-react";
 
-const programmingSkills = [
-  { name: "C++", level: 75, status: "Intermediate" },
-  { name: "C", level: 60, status: "Basic" },
-  { name: "Python", level: 45, status: "Learning" },
+// Skills organized by categories with icons
+const skillCategories = [
+  {
+    title: "Core Technologies",
+    icon: Code2,
+    color: "#E34F26",
+    skills: [
+      {
+        name: "HTML5",
+        level: 85,
+        color: "#E34F26",
+        icon: (
+          <svg viewBox="0 0 24 24" className="w-10 h-10" fill="#E34F26">
+            <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z" />
+          </svg>
+        )
+      },
+      {
+        name: "CSS3",
+        level: 80,
+        color: "#1572B6",
+        icon: (
+          <svg viewBox="0 0 24 24" className="w-10 h-10" fill="#1572B6">
+            <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716h-6.64l.24 2.573h6.182l-.366 3.523-2.91.804-2.956-.81-.188-2.11h-2.61l.29 3.855L12 19.288l5.373-1.53L18.59 4.414z" />
+          </svg>
+        )
+      },
+      {
+        name: "JavaScript",
+        level: 70,
+        color: "#F7DF1E",
+        icon: (
+          <svg viewBox="0 0 24 24" className="w-10 h-10" fill="#F7DF1E">
+            <path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z" />
+          </svg>
+        )
+      },
+      {
+        name: "Bootstrap",
+        level: 75,
+        color: "#7952B3",
+        icon: (
+          <svg viewBox="0 0 24 24" className="w-10 h-10" fill="#7952B3">
+            <path d="M11.77 11.24H9.956V8.202h2.152c1.17 0 1.834.522 1.834 1.466 0 1.008-.773 1.572-2.174 1.572zm.324 1.206H9.957v3.348h2.231c1.459 0 2.232-.585 2.232-1.685s-.795-1.663-2.326-1.663zM24 11.39v1.218c-1.128.108-1.817.944-2.226 2.268-.407 1.319-.463 2.937-.42 4.186.045 1.3-.968 2.5-2.337 2.5H4.985c-1.37 0-2.383-1.2-2.337-2.5.043-1.249-.013-2.867-.42-4.186-.41-1.324-1.1-2.16-2.228-2.268V11.39c1.128-.108 1.819-.944 2.227-2.268.408-1.319.464-2.937.42-4.186-.045-1.3.968-2.5 2.338-2.5h14.032c1.37 0 2.382 1.2 2.337 2.5-.043 1.249.013 2.867.42 4.186.409 1.324 1.098 2.16 2.226 2.268zm-7.927 2.817c0-1.354-.953-2.333-2.368-2.488v-.057c1.04-.169 1.856-1.135 1.856-2.213 0-1.537-1.213-2.538-3.062-2.538h-4.16v10.172h4.181c2.218 0 3.553-1.086 3.553-2.876z" />
+          </svg>
+        )
+      },
+    ]
+  },
+  {
+    title: "Development Tools",
+    icon: Wrench,
+    color: "#F05032",
+    skills: [
+      {
+        name: "Git & GitHub",
+        level: 80,
+        color: "#F05032",
+        icon: (
+          <svg viewBox="0 0 24 24" className="w-10 h-10" fill="#F05032">
+            <path d="M23.546 10.93L13.067.452c-.604-.603-1.582-.603-2.188 0L8.708 2.627l2.76 2.76c.645-.215 1.379-.07 1.889.441.516.515.658 1.258.438 1.9l2.658 2.66c.645-.223 1.387-.078 1.9.435.721.72.721 1.884 0 2.604-.719.719-1.881.719-2.6 0-.539-.541-.674-1.337-.404-1.996L12.86 8.955v6.525c.176.086.342.203.488.348.713.721.713 1.883 0 2.6-.719.721-1.889.721-2.609 0-.719-.719-.719-1.879 0-2.598.182-.18.387-.316.605-.406V8.835c-.217-.091-.424-.222-.6-.401-.545-.545-.676-1.342-.396-2.009L7.636 3.7.45 10.881c-.6.605-.6 1.584 0 2.189l10.48 10.477c.604.604 1.582.604 2.186 0l10.43-10.43c.605-.603.605-1.582 0-2.187" />
+          </svg>
+        )
+      },
+      {
+        name: "Postman",
+        level: 65,
+        color: "#FF6C37",
+        icon: (
+          <svg viewBox="0 0 24 24" className="w-10 h-10" fill="#FF6C37">
+            <path d="M13.527.099C6.955-.744.942 3.9.099 10.473c-.843 6.572 3.8 12.584 10.373 13.428 6.573.843 12.587-3.801 13.428-10.374C24.744 6.955 20.101.943 13.527.099zm2.471 7.485a.855.855 0 0 0-.593.25l-4.453 4.453-.307-.307-.643-.643c4.389-4.376 5.18-4.418 5.996-3.753zm-4.863 4.861l4.44-4.44a.62.62 0 1 1 .847.903l-4.699 4.125-.588-.588zm.33.694l-1.1.238a.06.06 0 0 1-.067-.082l.238-1.1c.04-.04.107-.04.146 0l.783.797c.04.04.04.107 0 .147zm-3.245 1.95l-.167-.167a.272.272 0 0 1 0-.38l1.382-1.382c.053-.044.138-.044.182 0l.566.566-1.963.9v.463zm11.032 1.684l-4.08 4.08-8.51-1.665 2.027-.865c.053.053.107.107.174.107l6.378-2.759a.074.074 0 0 1 .08.013l.138.138a.274.274 0 0 0 .38 0l.14-.14c.106-.106.18-.18.026-.333l-.154-.154a.115.115 0 0 1 0-.16l3.422-1.488c.155-.054.26.094.155.26l-3.422 1.488a.118.118 0 0 0 0 .16l.154.154c.04.04.04.107 0 .147z" />
+          </svg>
+        )
+      },
+      {
+        name: "AI Tools",
+        level: 70,
+        color: "#10A37F",
+        icon: (
+          <svg viewBox="0 0 24 24" className="w-10 h-10" fill="#10A37F">
+            <path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855l-5.833-3.387L15.119 7.2a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.676 8.105v-5.678a.79.79 0 0 0-.407-.667zm2.01-3.023l-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08L8.704 5.46a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5z" />
+          </svg>
+        )
+      },
+    ]
+  },
+  {
+    title: "Database & Design",
+    icon: Database,
+    color: "#4479A1",
+    skills: [
+      {
+        name: "MySQL Workbench",
+        level: 65,
+        color: "#4479A1",
+        icon: (
+          <svg viewBox="0 0 24 24" className="w-10 h-10" fill="#4479A1">
+            <path d="M16.405 5.501c-.115 0-.193.014-.274.033v.013h.014c.054.104.146.18.214.273.054.107.1.214.154.32l.014-.015c.094-.066.14-.172.14-.333-.04-.047-.046-.094-.08-.14-.04-.067-.126-.1-.18-.153zM5.77 18.695h-.927a50.854 50.854 0 00-.27-4.41h-.008l-1.41 4.41H2.45l-1.4-4.41h-.01a72.892 72.892 0 00-.195 4.41H0c.055-1.966.192-3.81.41-5.53h1.15l1.335 4.064h.008l1.347-4.063h1.095c.242 2.015.384 3.86.428 5.53zm4.017-4.08c-.378 2.045-.876 3.533-1.492 4.46-.482.716-1.01 1.073-1.583 1.073-.153 0-.34-.046-.566-.138v-.494c.11.017.24.026.386.026.268 0 .483-.075.647-.222.197-.18.295-.382.295-.605 0-.155-.077-.47-.23-.944L6.23 14.615h.91l.727 2.36c.164.536.233.91.205 1.123.4-1.064.678-2.227.835-3.483zm12.325 4.08h-2.63v-5.53h.885v4.85h1.745zm-3.32.135l-1.016-.5c.09-.076.177-.158.255-.25.433-.506.648-1.258.648-2.253 0-1.83-.718-2.746-2.155-2.746-.704 0-1.254.232-1.65.697-.43.508-.646 1.256-.646 2.245 0 .972.19 1.686.574 2.14.35.41.877.615 1.583.615.264 0 .506-.033.725-.098l1.325.772.36-.622zM15.5 17.588c-.225-.36-.337-.94-.337-1.736 0-1.393.424-2.09 1.27-2.09.443 0 .77.167.977.5.224.362.336.936.336 1.723 0 1.404-.424 2.108-1.27 2.108-.445 0-.77-.167-.978-.5zm-1.658-.425c0 .47-.172.856-.516 1.156-.344.3-.803.45-1.384.45-.543 0-1.064-.172-1.573-.515l.237-.476c.438.22.833.328 1.19.328.332 0 .593-.073.783-.22a.754.754 0 00.3-.615c0-.33-.23-.61-.648-.845-.388-.213-1.163-.657-1.163-.657-.422-.307-.632-.636-.632-1.177 0-.45.157-.81.472-1.085.315-.278.72-.415 1.22-.415.512 0 .98.136 1.4.41l-.213.476a2.726 2.726 0 00-1.064-.23c-.283 0-.502.068-.654.206a.685.685 0 00-.248.524c0 .328.234.61.666.85.393.215 1.187.67 1.187.67.433.305.648.63.648 1.168zm9.382-5.852c-.535-.014-.95.04-1.297.188-.1.04-.26.04-.274.167.055.053.063.14.11.214.08.134.218.313.346.407.14.11.28.216.427.31.26.16.555.255.81.416.145.094.293.213.44.313.073.05.12.14.214.172v-.02c-.046-.06-.06-.147-.105-.214-.067-.067-.134-.127-.2-.193a3.223 3.223 0 00-.695-.675c-.214-.146-.682-.35-.77-.595l-.013-.014c.146-.013.32-.066.46-.106.227-.06.435-.047.67-.106.106-.027.213-.06.32-.094v-.06c-.12-.12-.21-.283-.334-.395a8.867 8.867 0 00-1.104-.823c-.21-.134-.476-.22-.697-.334-.08-.04-.214-.06-.26-.127-.12-.146-.19-.34-.275-.514a17.69 17.69 0 01-.547-1.163c-.12-.262-.193-.523-.34-.763-.69-1.137-1.437-1.826-2.586-2.5-.247-.14-.543-.2-.856-.274-.167-.008-.334-.02-.5-.027-.11-.047-.216-.174-.31-.235-.38-.24-1.364-.76-1.644-.072-.18.434.267.862.422 1.082.115.153.26.328.34.5.047.116.06.235.107.356.106.294.207.622.347.897.073.14.153.287.247.413.054.073.146.107.167.227-.094.136-.1.334-.154.5-.24.757-.146 1.693.194 2.25.107.166.362.534.703.393.3-.12.234-.5.32-.835.02-.08.007-.133.048-.187v.015c.094.188.188.367.274.555.206.328.566.668.867.895.16.12.287.328.487.402v-.02h-.015c-.043-.058-.1-.086-.154-.133a3.445 3.445 0 01-.35-.4 8.76 8.76 0 01-.747-1.218c-.11-.21-.202-.436-.29-.643-.04-.08-.04-.2-.107-.24-.1.146-.247.273-.32.453-.127.288-.14.642-.188 1.01-.027.007-.014 0-.027.014-.214-.052-.287-.274-.367-.46-.2-.475-.233-1.238-.06-1.785.047-.14.247-.582.167-.716-.042-.127-.174-.2-.247-.303a2.478 2.478 0 01-.24-.427c-.16-.374-.24-.788-.414-1.162-.08-.173-.22-.354-.334-.513-.127-.18-.267-.307-.368-.52-.033-.073-.08-.194-.027-.274.014-.054.042-.075.094-.09.088-.072.335.022.422.062.247.1.455.194.662.334.094.066.195.193.315.226h.14c.214.047.455.014.655.073.355.114.675.28.962.46a5.953 5.953 0 012.085 2.286c.08.154.115.295.188.455.14.33.313.663.455.982.14.315.275.636.476.897.1.14.502.213.682.286.133.06.34.115.46.188.23.14.454.3.67.454.11.076.443.243.463.378z" />
+          </svg>
+        )
+      },
+      {
+        name: "Figma",
+        level: 60,
+        color: "#F24E1E",
+        icon: (
+          <svg viewBox="0 0 24 24" className="w-10 h-10" fill="#F24E1E">
+            <path d="M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.02 3.019 3.02h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117V8.981H8.148zM8.172 24c-2.489 0-4.515-2.014-4.515-4.49s2.014-4.49 4.49-4.49h4.588v4.441c0 2.503-2.047 4.539-4.563 4.539zm-.024-7.51a3.023 3.023 0 0 0-3.019 3.019c0 1.665 1.365 3.019 3.044 3.019 1.705 0 3.093-1.376 3.093-3.068v-2.97H8.148zm7.704 0h-.098c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h.098c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.49-4.49 4.49zm-.097-7.509c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h.098c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-.098z" />
+          </svg>
+        )
+      },
+    ]
+  },
 ];
 
-const webSkills = [
-  { name: "HTML & CSS", level: 70, status: "Intermediate" },
-  { name: "JavaScript", level: 40, status: "Learning" },
-  { name: "Responsive Design", level: 65, status: "Intermediate" },
+// Currently Learning
+const learningSkills = [
+  {
+    name: "React.js",
+    color: "#61DAFB",
+    description: "Frontend Library",
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-8 h-8" fill="#61DAFB">
+        <path d="M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.278-1.375.793-1.683 3.264-.973 6.365C1.98 8.917 0 10.42 0 12.004c0 1.59 1.99 3.097 5.043 4.03-.704 3.113-.39 5.588.988 6.38.32.187.69.275 1.102.275 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.603 4.887 2.603.41 0 .783-.09 1.106-.275 1.374-.792 1.683-3.263.973-6.365C22.02 15.096 24 13.59 24 12.004c0-1.59-1.99-3.097-5.043-4.032.704-3.11.39-5.587-.988-6.38-.318-.184-.688-.277-1.092-.278zm-.005 1.09v.006c.225 0 .406.044.558.127.666.382.955 1.835.73 3.704-.054.46-.142.945-.25 1.44-.96-.236-2.006-.417-3.107-.534-.66-.905-1.345-1.727-2.035-2.447 1.592-1.48 3.087-2.292 4.105-2.295zm-9.77.02c1.012 0 2.514.808 4.11 2.28-.686.72-1.37 1.537-2.02 2.442-1.107.117-2.154.298-3.113.538-.112-.49-.195-.964-.254-1.42-.23-1.868.054-3.32.714-3.707.19-.09.4-.127.563-.132zm4.882 3.05c.455.468.91.992 1.36 1.564-.44-.02-.89-.034-1.345-.034-.46 0-.915.01-1.36.034.44-.572.895-1.096 1.345-1.565zM12 8.1c.74 0 1.477.034 2.202.093.406.582.802 1.203 1.183 1.86.372.64.71 1.29 1.018 1.946-.308.655-.646 1.31-1.013 1.95-.38.66-.773 1.288-1.18 1.87-.728.063-1.466.098-2.21.098-.74 0-1.477-.035-2.202-.093-.406-.582-.802-1.204-1.183-1.86-.372-.64-.71-1.29-1.018-1.946.303-.657.646-1.313 1.013-1.954.38-.66.773-1.286 1.18-1.868.728-.064 1.466-.098 2.21-.098zm-3.635.254c-.24.377-.48.763-.704 1.16-.225.39-.435.782-.635 1.174-.265-.656-.49-1.31-.676-1.947.64-.15 1.315-.283 2.015-.386zm7.26 0c.695.103 1.365.23 2.006.387-.18.632-.405 1.282-.66 1.933-.2-.39-.41-.783-.64-1.174-.225-.392-.465-.774-.705-1.146zm3.063.675c.484.15.944.317 1.375.498 1.732.74 2.852 1.708 2.852 2.476-.005.768-1.125 1.74-2.857 2.475-.42.18-.88.342-1.355.493-.28-.958-.646-1.956-1.1-2.98.45-1.017.81-2.01 1.085-2.964zm-13.395.004c.278.96.645 1.957 1.1 2.98-.45 1.017-.812 2.01-1.086 2.964-.484-.15-.944-.318-1.37-.5-1.732-.737-2.852-1.706-2.852-2.474 0-.768 1.12-1.742 2.852-2.476.42-.18.88-.342 1.356-.494zm11.678 4.28c.265.657.49 1.312.676 1.948-.64.157-1.316.29-2.016.39.24-.375.48-.762.705-1.158.225-.39.435-.788.636-1.18zm-9.945.02c.2.392.41.783.64 1.175.23.39.465.772.705 1.143-.695-.102-1.365-.23-2.006-.386.18-.63.406-1.282.66-1.933zM17.92 16.32c.112.493.2.968.254 1.423.23 1.868-.054 3.32-.714 3.708-.147.09-.338.128-.563.128-1.012 0-2.514-.807-4.11-2.28.686-.72 1.37-1.536 2.02-2.44 1.107-.118 2.154-.3 3.113-.54zm-11.83.01c.96.234 2.006.415 3.107.532.66.905 1.345 1.727 2.035 2.446-1.595 1.483-3.092 2.295-4.11 2.295-.22-.005-.406-.05-.553-.132-.666-.38-.955-1.834-.73-3.703.054-.46.142-.944.25-1.438zm4.56.64c.44.02.89.034 1.345.034.46 0 .915-.01 1.36-.034-.44.572-.895 1.095-1.345 1.565-.455-.47-.91-.993-1.36-1.565z" />
+      </svg>
+    )
+  },
 ];
 
-const toolSkills = [
-  { name: "Git & GitHub", level: 70, status: "Intermediate" },
-  { name: "Bash/Command Line", level: 55, status: "Basic" },
-  { name: "Problem Solving", level: 80, status: "Strong" },
+// Future Learning Goals - Professional categories
+const futureLearningCategories = [
+  {
+    category: "Backend Development",
+    items: ["Express.js", "MongoDB"],
+    color: "#47A248"
+  },
+  {
+    category: "DevOps & Cloud",
+    items: ["Docker", "CI/CD", "AWS", "Azure"],
+    color: "#2496ED"
+  },
 ];
-
-const softSkills = [
-  { icon: Heart, label: "Passionate" },
-  { icon: GraduationCap, label: "Quick Learner" },
-  { icon: Users, label: "Team Player" },
-  { icon: Target, label: "Goal-Oriented" },
-];
-
-interface SkillBarProps {
-  name: string;
-  level: number;
-  status: string;
-  isVisible: boolean;
-}
-
-function SkillBar({ name, level, status, isVisible }: SkillBarProps) {
-  const [width, setWidth] = useState(0);
-
-  useEffect(() => {
-    if (isVisible) {
-      const timer = setTimeout(() => {
-        setWidth(level);
-      }, 200);
-      return () => clearTimeout(timer);
-    }
-  }, [isVisible, level]);
-
-  return (
-    <div className="skill-item">
-      <div className="flex justify-between mb-2">
-        <span className="font-medium">{name}</span>
-        <span className="text-sm text-slate-500">{status}</span>
-      </div>
-      <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
-        <div 
-          className="bg-primary h-2 rounded-full skill-bar transition-all duration-1500 ease-out"
-          style={{ width: `${width}%` }}
-        />
-      </div>
-    </div>
-  );
-}
 
 export function Skills() {
-  const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.3 });
+  const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.2 });
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [animatedLevels, setAnimatedLevels] = useState<{ [key: string]: number }>({});
+
+  useEffect(() => {
+    if (isIntersecting) {
+      setIsLoaded(true);
+      const timer = setTimeout(() => {
+        const levels: { [key: string]: number } = {};
+        skillCategories.forEach(category => {
+          category.skills.forEach(skill => {
+            levels[skill.name] = skill.level;
+          });
+        });
+        setAnimatedLevels(levels);
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [isIntersecting]);
 
   return (
-    <section id="skills" className="py-20 px-4 bg-slate-50 dark:bg-slate-900">
+    <section id="skills" className="py-20 px-4">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Skills & Technologies</h2>
-          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            Technologies I work with and continue to learn as I build my expertise
+        {/* Section Header */}
+        <div className={`text-center mb-16 transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            Technical{" "}
+            <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
+              Skills
+            </span>
+          </h2>
+          <p className="text-xl text-neutral-400 max-w-2xl mx-auto">
+            Technologies and tools I work with
           </p>
         </div>
-        
-        <div ref={ref} className="grid md:grid-cols-2 gap-8">
-          {/* Programming Languages */}
-          <div className="bg-white dark:bg-slate-800 rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center">
-              <Code className="text-primary mr-3 h-5 w-5" />
-              Programming Languages
-            </h3>
-            <div className="space-y-4">
-              {programmingSkills.map((skill) => (
-                <SkillBar 
-                  key={skill.name}
-                  name={skill.name}
-                  level={skill.level}
-                  status={skill.status}
-                  isVisible={isIntersecting}
-                />
-              ))}
+
+        {/* Skills by Category - Centered */}
+        <div ref={ref} className="space-y-16">
+          {skillCategories.map((category, catIndex) => (
+            <div
+              key={category.title}
+              className={`transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                }`}
+              style={{ transitionDelay: `${catIndex * 100}ms` }}
+            >
+              {/* Category Header */}
+              <div className="flex items-center justify-center gap-3 mb-8">
+                <category.icon className="w-6 h-6" style={{ color: category.color }} />
+                <h3 className="text-xl font-bold text-white">{category.title}</h3>
+              </div>
+
+              {/* Skills Grid - Centered */}
+              <div className="flex flex-wrap justify-center gap-6">
+                {category.skills.map((skill) => (
+                  <div
+                    key={skill.name}
+                    className="bg-neutral-900/60 border border-neutral-800 rounded-2xl p-6 w-40 hover:border-orange-500/50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-orange-500/10 text-center group"
+                  >
+                    {/* Icon */}
+                    <div className="mb-4 flex justify-center transform group-hover:scale-110 transition-transform duration-300">
+                      {skill.icon}
+                    </div>
+
+                    {/* Name */}
+                    <h4 className="text-white font-semibold text-sm mb-3">{skill.name}</h4>
+
+                    {/* Progress Bar */}
+                    <div className="w-full bg-neutral-800 rounded-full h-2 mb-2">
+                      <div
+                        className="h-2 rounded-full transition-all duration-1000 ease-out"
+                        style={{
+                          width: `${animatedLevels[skill.name] || 0}%`,
+                          backgroundColor: skill.color
+                        }}
+                      ></div>
+                    </div>
+
+                    {/* Percentage */}
+                    <span className="text-xs font-bold" style={{ color: skill.color }}>
+                      {skill.level}%
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
+          ))}
+        </div>
+
+        {/* Divider */}
+        <div className="my-16 border-t border-neutral-800"></div>
+
+        {/* Currently Learning Section */}
+        <div className={`text-center transition-all duration-700 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}>
+          <div className="flex items-center justify-center gap-3 mb-8">
+            <BookOpen className="w-6 h-6 text-cyan-400" />
+            <h3 className="text-xl font-bold text-white">Currently Learning</h3>
           </div>
 
-          {/* Web Development */}
-          <div className="bg-white dark:bg-slate-800 rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center">
-              <Globe className="text-primary mr-3 h-5 w-5" />
-              Web Development
-            </h3>
-            <div className="space-y-4">
-              {webSkills.map((skill) => (
-                <SkillBar 
-                  key={skill.name}
-                  name={skill.name}
-                  level={skill.level}
-                  status={skill.status}
-                  isVisible={isIntersecting}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Tools & Technologies */}
-          <div className="bg-white dark:bg-slate-800 rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center">
-              <Wrench className="text-primary mr-3 h-5 w-5" />
-              Tools & Technologies
-            </h3>
-            <div className="space-y-4">
-              {toolSkills.map((skill) => (
-                <SkillBar 
-                  key={skill.name}
-                  name={skill.name}
-                  level={skill.level}
-                  status={skill.status}
-                  isVisible={isIntersecting}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Soft Skills */}
-          <div className="bg-white dark:bg-slate-800 rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center">
-              <Lightbulb className="text-primary mr-3 h-5 w-5" />
-              Soft Skills
-            </h3>
-            <div className="grid grid-cols-2 gap-4">
-              {softSkills.map((skill) => (
-                <div key={skill.label} className="text-center p-4 bg-slate-50 dark:bg-slate-700 rounded-lg">
-                  <skill.icon className="text-primary text-2xl h-8 w-8 mx-auto mb-2" />
-                  <div className="font-medium text-sm">{skill.label}</div>
+          <div className="flex justify-center">
+            {learningSkills.map((skill) => (
+              <div
+                key={skill.name}
+                className="bg-gradient-to-br from-cyan-500/10 to-blue-600/10 border border-cyan-500/30 rounded-2xl px-8 py-6 flex items-center gap-4 hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/10"
+              >
+                {skill.icon}
+                <div className="text-left">
+                  <span className="text-white font-bold text-lg block">{skill.name}</span>
+                  <span className="text-cyan-400 text-sm">{skill.description}</span>
                 </div>
-              ))}
-            </div>
+                <span className="text-xs text-white bg-cyan-500/30 px-3 py-1.5 rounded-full font-medium ml-2">
+                  In Progress
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Future Learning Goals */}
+        <div className={`mt-16 text-center transition-all duration-700 delay-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}>
+          <div className="flex items-center justify-center gap-3 mb-8">
+            <Rocket className="w-6 h-6 text-purple-400" />
+            <h3 className="text-xl font-bold text-white">Future Learning Goals</h3>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-8">
+            {futureLearningCategories.map((cat) => (
+              <div
+                key={cat.category}
+                className="bg-neutral-900/40 border border-neutral-800 rounded-xl p-6 text-center"
+              >
+                <h4 className="text-white font-semibold mb-4 flex items-center justify-center gap-2">
+                  <span className="w-2 h-2 rounded-full" style={{ backgroundColor: cat.color }}></span>
+                  {cat.category}
+                </h4>
+                <div className="flex flex-wrap justify-center gap-2">
+                  {cat.items.map((item) => (
+                    <span
+                      key={item}
+                      className="bg-neutral-800/80 text-neutral-300 px-3 py-1.5 rounded-lg text-sm border border-neutral-700 hover:border-purple-500/50 transition-colors"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
-import { Github, Coffee, Heart, Zap } from "lucide-react";
+import { Github, Coffee, Heart, Zap, Linkedin } from "lucide-react";
 
 const userData = {
   name: "Abdul Rasheed",
@@ -8,9 +8,10 @@ const userData = {
   location: "Bhakkar, Pakistan",
   availableForHire: true,
   // Shortened professional summary
-  bio: "CIT student with a strong foundation in web development and programming. I build dynamic, responsive web applications using HTML, CSS, JavaScript, and Bootstrap, along with console-based systems in C++. Passionate about solving problems and continuously learning new technologies.",
+  bio: "Aspiring Full-Stack Developer proficient in HTML, CSS, JavaScript, Bootstrap, and MySQL. Experienced with Git, GitHub, and Figma; currently learning React.js. Passionate about building responsive web apps and exploring DevOps/Cloud (AWS/Azure). Actively seeking internships to gain real-world experience.",
   social: {
     github: "https://github.com/Abdul-Rasheed-Talal",
+    linkedin: "https://www.linkedin.com/in/abdulrasheedtalal/",
   },
 };
 
@@ -56,7 +57,7 @@ export function About() {
             </div>
 
             {/* Social Links - Only GitHub */}
-            <div className="flex space-x-4 pt-6">
+            <div className="flex justify-center space-x-4 pt-6">
               <a
                 href={userData.social.github}
                 target="_blank"
@@ -64,6 +65,14 @@ export function About() {
                 className="w-12 h-12 bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 hover:border-orange-500 rounded-xl flex items-center justify-center text-neutral-400 hover:text-orange-400 transition-all duration-300 hover:scale-110"
               >
                 <Github className="w-6 h-6" />
+              </a>
+              <a
+                href={userData.social.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 hover:border-blue-600 rounded-xl flex items-center justify-center text-neutral-400 hover:text-blue-600 transition-all duration-300 hover:scale-110"
+              >
+                <Linkedin className="w-6 h-6" />
               </a>
             </div>
           </div>

@@ -49,15 +49,17 @@ export function Navigation() {
 
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled
-        ? "bg-black/80 backdrop-blur-md border-b border-neutral-800"
-        : "bg-transparent"
+      ? "bg-black/80 backdrop-blur-md border-b border-neutral-800"
+      : "bg-transparent"
       }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
-            <h1 className="text-xl font-bold bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
-              Abdul Rasheed
-            </h1>
+            <div className="font-mono text-2xl font-bold tracking-tighter cursor-pointer group">
+              <span className="text-neutral-500 group-hover:text-orange-500 transition-colors">{"<"}</span>
+              <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">AR</span>
+              <span className="text-neutral-500 group-hover:text-orange-500 transition-colors">{"/>"}</span>
+            </div>
           </div>
 
           {/* Desktop Navigation */}

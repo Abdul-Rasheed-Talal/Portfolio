@@ -1,10 +1,15 @@
-import { Github, Mail, Heart } from "lucide-react";
+import { Github, Mail, Heart, Linkedin } from "lucide-react";
 
 const socialLinks = [
   {
     icon: Github,
     href: "https://github.com/Abdul-Rasheed-Talal",
     label: "GitHub"
+  },
+  {
+    icon: Linkedin,
+    href: "https://www.linkedin.com/in/abdulrasheedtalal/",
+    label: "LinkedIn"
   },
   {
     icon: Mail,

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useTypingAnimation } from "@/hooks/use-typing-animation";
-import { Github, Mail, MapPin, Phone, Download, Send } from "lucide-react";
+import { Github, Mail, MapPin, Phone, Download, Send, Linkedin } from "lucide-react";
 
 const typingTexts = [
   "Web Developer",
@@ -28,6 +28,7 @@ const userData = {
   },
   social: {
     github: "https://github.com/Abdul-Rasheed-Talal",
+    linkedin: "https://www.linkedin.com/in/abdulrasheedtalal/",
   },
 };
 
@@ -164,7 +165,7 @@ export function Hero() {
         </div>
 
         {/* Social Links - with bottom margin */}
-        <div className="flex justify-center space-x-4 mt-8 mb-16">
+        <div className="flex justify-center space-x-4 mt-8 mb-4">
           <a
             href={userData.social.github}
             target="_blank"
@@ -172,6 +173,14 @@ export function Hero() {
             className="w-12 h-12 bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 hover:border-orange-500 rounded-xl flex items-center justify-center text-neutral-400 hover:text-orange-400 transition-all duration-300 hover:scale-110"
           >
             <Github className="w-6 h-6" />
+          </a>
+          <a
+            href={userData.social.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-12 h-12 bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 hover:border-blue-600 rounded-xl flex items-center justify-center text-neutral-400 hover:text-blue-600 transition-all duration-300 hover:scale-110"
+          >
+            <Linkedin className="w-6 h-6" />
           </a>
           <a
             href={`mailto:${userData.email}`}

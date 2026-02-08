@@ -1,67 +1,76 @@
 {
-    "projects": [
-        {
-            "id": 1,
-            "title": "GCT Bhakkar Website",
-            "description": "Designed and developed a dynamic and responsive website for Government College of Technology Bhakkar. Used JavaScript DOM manipulation to dynamically update page content with interactive UI behavior and form validation.",
-            "image": "/assets/projects/gct-bhakkar.png",
-            "technologies": [
-                "HTML",
-                "CSS",
-                "JavaScript",
-                "Bootstrap"
-            ],
-            "liveUrl": "https://gctbhakkar.netlify.app",
-            "githubUrl": "https://github.com/Abdul-Rasheed-Talal/gct-bhakkar",
-            "category": "Web Development",
-            "duration": "11/2025 - Present",
-            "featured": true,
-            "stats": {
-                "stars": 0,
-                "forks": 0,
-                "updated": "Just now"
-            }
-        },
-        {
-            "id": 2,
-            "title": "Spotify Clone",
-            "description": "Built a Spotify-inspired music player web application with dynamic loading of albums and songs from local storage. Implemented core music player controls including Play/Pause, Next/Previous track, and interactive seek bar for audio progress.",
-            "image": "/assets/projects/spotify-clone.png",
-            "technologies": [
-                "HTML",
-                "CSS",
-                "JavaScript"
-            ],
-            "liveUrl": "https://spotify-frontend-project.netlify.app/",
-            "githubUrl": "https://github.com/Abdul-Rasheed-Talal/spotify-clone",
-            "category": "Web Development",
-            "duration": "12/2025",
-            "featured": true,
-            "stats": {
-                "stars": 2,
-                "forks": 1,
-                "updated": "1 week ago"
-            }
-        },
-        {
-            "id": 3,
-            "title": "Bank Management System",
-            "description": "Developed a console-based Bank Management System using C++ with core OOP principles including classes, objects, functions, and encapsulation. Features account creation, deposit, withdrawal, and balance inquiry functionality.",
-            "image": "/assets/projects/bank-system.png",
-            "technologies": [
-                "C++",
-                "OOP"
-            ],
-            "liveUrl": null,
-            "githubUrl": "https://github.com/Abdul-Rasheed-Talal/BankMgmSystem",
-            "category": "Desktop Application",
-            "duration": "03/2025 - 04/2025",
-            "featured": true,
-            "stats": {
-                "stars": 5,
-                "forks": 0,
-                "updated": "1 month ago"
-            }
-        }
-    ]
+  "projects": [
+    {
+      "liveUrl": "https://gctbhakkar.netlify.app",
+      "technologies": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Bootstrap"
+      ],
+      "githubUrl": "https://github.com/Abdul-Rasheed-Talal/gct-bhakkar",
+      "featured": true,
+      "duration": "11/2025 - Present",
+      "title": "GCT Bhakkar Website",
+      "id": 1,
+      "image": "/assets/projects/gct-bhakkar.png",
+      "description": "Designed and developed a dynamic and responsive website for Government College of Technology Bhakkar. Used JavaScript DOM manipulation to dynamically update page content with interactive UI behavior and form validation.",
+      "category": "Web Development",
+      "stats": {
+        "stars": 0,
+        "forks": 0,
+        "updated": "Just now"
+      }
+    },
+    {
+      "liveUrl": "https://spotify-frontend-project.netlify.app/",
+      "technologies": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "githubUrl": "https://github.com/Abdul-Rasheed-Talal/spotify-clone",
+      "featured": true,
+      "duration": "12/2025",
+      "title": "Spotify Clone",
+      "id": 2,
+      "image": "/assets/projects/spotify-clone.png",
+      "description": "Built a Spotify-inspired music player web application with dynamic loading of albums and songs from local storage. Implemented core music player controls including Play/Pause, Next/Previous track, and interactive seek bar for audio progress.",
+      "category": "Web Development",
+      "stats": {
+        "stars": 2,
+        "forks": 1,
+        "updated": "1 week ago"
+      }
+    },
+    {
+      "liveUrl": null,
+      "technologies": [
+        "C++",
+        "OOP"
+      ],
+      "githubUrl": "https://github.com/Abdul-Rasheed-Talal/BankMgmSystem",
+      "featured": true,
+      "duration": "03/2025 - 04/2025",
+      "title": "Bank Management System",
+      "id": 3,
+      "image": "/assets/projects/bank-system.png",
+      "description": "Developed a console-based Bank Management System using C++ with core OOP principles including classes, objects, functions, and encapsulation. Features account creation, deposit, withdrawal, and balance inquiry functionality.",
+      "category": "Desktop Application",
+      "stats": {
+        "stars": 5,
+        "forks": 0,
+        "updated": "1 month ago"
+      }
+    },
+    {
+      "stats": {
+        "stars": 0,
+        "forks": 0
+      },
+      "title": "New Project",
+      "description": "This is a new project",
+      "image": "/images/uploads/gemini_generated_image_q6q4nlq6q4nlq6q4.png"
+    }
+  ]
 }

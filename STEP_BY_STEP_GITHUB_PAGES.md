@@ -29,7 +29,7 @@
 ## Step 2: Prepare Your Code for GitHub (3 minutes)
 
 ### 2.1 Initialize Git Repository
-In your Replit terminal, run these commands one by one:
+In your terminal, run these commands one by one:
 
 ```bash
 # Navigate to your project root (if not already there)
@@ -166,7 +166,7 @@ function doPost(e) {
 6. **Copy the deployment URL** (very important!)
 
 ### 6.4 Update Your Contact Form
-1. Go back to Replit
+1. Go back to your code editor
 2. Open `client/src/components/Contact.tsx`
 3. Find line with `googleSheetUrl`
 4. Replace the placeholder URL with your actual deployment URL

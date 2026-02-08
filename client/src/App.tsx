@@ -38,22 +38,26 @@ function Router() {
   );
 }
 
+import ErrorBoundary from "@/components/ErrorBoundary";
+
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ModeProvider>
-        <ThemeProvider>
-          <TooltipProvider>
-            <Toaster />
-            <ModeGate />
-            <FeedbackPopup />
-            <FuturisticDeveloperLayout>
-              <Router />
-            </FuturisticDeveloperLayout>
-          </TooltipProvider>
-        </ThemeProvider>
-      </ModeProvider>
-    </QueryClientProvider>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <ModeProvider>
+          <ThemeProvider>
+            <TooltipProvider>
+              <Toaster />
+              <ModeGate />
+              <FeedbackPopup />
+              <FuturisticDeveloperLayout>
+                <Router />
+              </FuturisticDeveloperLayout>
+            </TooltipProvider>
+          </ThemeProvider>
+        </ModeProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 }
 

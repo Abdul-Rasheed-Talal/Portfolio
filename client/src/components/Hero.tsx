@@ -12,12 +12,7 @@ const typingTexts = [
 ];
 
 export function Hero() {
-  const [isLoaded, setIsLoaded] = useState(false);
   const typedText = useTypingAnimation(typingTexts, 100, 50, 2000);
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -29,14 +24,17 @@ export function Hero() {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center pt-20 px-4 relative overflow-hidden">
       {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Background Elements - Hidden on mobile for performance */}
+      {/* Background Elements - Hidden on mobile for performance */}
+      {/* Background Elements - Hidden on mobile for performance */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none hidden md:block">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-orange-500/10 to-red-500/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-blue-500/8 to-purple-500/8 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-green-500/6 to-cyan-500/6 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
 
-      {/* Floating Code Elements */}
-      <div className="absolute inset-0 pointer-events-none">
+      {/* Floating Code Elements - Hidden on mobile */}
+      <div className="absolute inset-0 pointer-events-none hidden md:block">
         <div className="absolute top-20 left-10 text-orange-400/20 text-4xl font-mono animate-bounce" style={{ animationDelay: '0.3s' }}>
           {"<>"}
         </div>
@@ -51,18 +49,20 @@ export function Hero() {
         </div>
       </div>
 
-      <div className={`relative z-10 text-center max-w-4xl mx-auto transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}>
+      <div className="relative z-10 text-center max-w-4xl mx-auto animate-fade-in-up">
         {/* Avatar */}
         <div className="relative mb-8">
           <div className="w-48 h-48 mx-auto rounded-full overflow-hidden p-1 bg-gradient-to-r from-orange-500 to-red-500">
             <img
               src={heroData.image}
+              srcSet={`${heroData.image}?w=200 200w, ${heroData.image}?w=400 400w, ${heroData.image} 800w`}
+              sizes="(max-width: 640px) 150px, (max-width: 768px) 200px, 192px"
               alt={heroData.headline}
               width={192}
               height={192}
-              // @ts-ignore - fetchPriority is standard but React types might complain
-              fetchPriority="high"
+              // @ts-ignore - fetchpriority is the correct HTML attribute
+              fetchpriority="high"
+              decoding="async"
               className="w-full h-full object-cover rounded-full bg-neutral-800"
               onError={(e) => {
                 (e.target as HTMLImageElement).src = "https://ui-avatars.com/api/?name=Abdul+Rasheed&background=f97316&color=fff&size=200";

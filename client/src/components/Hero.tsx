@@ -59,6 +59,10 @@ export function Hero() {
             <img
               src={heroData.image}
               alt={heroData.headline}
+              width={192}
+              height={192}
+              // @ts-ignore - fetchPriority is standard but React types might complain
+              fetchPriority="high"
               className="w-full h-full object-cover rounded-full bg-neutral-800"
               onError={(e) => {
                 (e.target as HTMLImageElement).src = "https://ui-avatars.com/api/?name=Abdul+Rasheed&background=f97316&color=fff&size=200";

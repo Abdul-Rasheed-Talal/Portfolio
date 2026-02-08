@@ -9,19 +9,31 @@ import { ModeGate } from "@/components/layout/ModeGate";
 import { FuturisticDeveloperLayout } from "@/components/layout/FuturisticDeveloperLayout";
 import { FeedbackPopup } from "@/components/FeedbackPopup";
 
-import Portfolio from "@/pages/portfolio";
-import NotFound from "@/pages/not-found";
+import { Suspense, lazy } from "react";
+import Preloader from "@/components/Preloader";
+
+// Lazy load pages
+const Portfolio = lazy(() => import("@/pages/portfolio"));
+const NotFound = lazy(() => import("@/pages/not-found"));
 
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Portfolio} />
+      <Route path="/">
+        <Suspense fallback={<Preloader />}>
+          <Portfolio />
+        </Suspense>
+      </Route>
       {/* Redirect /admin to the static file */}
       <Route path="/admin" component={() => {
         window.location.href = "/admin/index.html";
         return null;
       }} />
-      <Route component={NotFound} />
+      <Route>
+        <Suspense fallback={<Preloader />}>
+          <NotFound />
+        </Suspense>
+      </Route>
     </Switch>
   );
 }

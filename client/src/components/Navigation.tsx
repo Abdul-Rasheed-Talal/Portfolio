@@ -3,7 +3,7 @@ import { useMode } from "@/context/ModeContext";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Download, ChevronDown, Terminal } from "lucide-react";
-
+import { useToast } from "@/hooks/use-toast";
 
 const navItems = [
   { href: "#home", label: "Home" },
@@ -15,10 +15,37 @@ const navItems = [
 ];
 
 export function Navigation() {
-  const { toggleMode } = useMode();
+  const { mode, toggleMode, setMode } = useMode();
   const [activeSection, setActiveSection] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
+  const { toast } = useToast();
 
+  // Check for mobile and disable dev mode
+  useEffect(() => {
+    const checkMobile = () => {
+      if (window.innerWidth < 768) { // md breakpoint
+        if (mode === 'developer') {
+          setMode('normal');
+        }
+
+        // Show toast only once per session or on load if checking for mobile
+        // To avoid spamming, we might want to check a session ref, but for now simple is fine check
+        const hasNotified = sessionStorage.getItem('mobile-dev-mode-notified');
+        if (!hasNotified) {
+          toast({
+            title: "Developer Mode Unavailable",
+            description: "This portfolio has a Developer Mode. If you want to try it, please visit on a laptop/PC. It's not available on mobile for better DX.",
+            duration: 5000,
+          });
+          sessionStorage.setItem('mobile-dev-mode-notified', 'true');
+        }
+      }
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, [mode, setMode, toast]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,6 +76,18 @@ export function Navigation() {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const handleModeToggle = () => {
+    if (window.innerWidth < 768) {
+      toast({
+        title: "Desktop Only Feature",
+        description: "Developer Mode is only available on larger screens for the best experience.",
+        variant: "destructive",
+      });
+      return;
+    }
+    toggleMode();
   };
 
   // Normal Mode Navigation
@@ -84,7 +123,7 @@ export function Navigation() {
           <div className="flex items-center space-x-3 md:space-x-4">
             {/* Dev Mode Toggle */}
             <button
-              onClick={() => toggleMode()}
+              onClick={handleModeToggle}
               className="p-2 text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-md transition-all duration-300"
               title="Switch to Developer Mode"
             >

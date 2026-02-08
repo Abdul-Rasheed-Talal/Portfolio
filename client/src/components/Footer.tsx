@@ -1,5 +1,6 @@
 import { Github, Mail, Heart, Linkedin } from "lucide-react";
 
+
 const socialLinks = [
   {
     icon: Github,
@@ -19,8 +20,10 @@ const socialLinks = [
 ];
 
 export function Footer() {
+
   const currentYear = new Date().getFullYear();
 
+  // Normal Mode
   return (
     <footer className="py-12 px-4 border-t border-neutral-800">
       <div className="max-w-7xl mx-auto">

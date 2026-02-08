@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import { useMode } from "@/context/ModeContext";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Download } from "lucide-react";
+import { Menu, Download, ChevronDown, Terminal } from "lucide-react";
+
 
 const navItems = [
   { href: "#home", label: "Home" },
@@ -13,8 +15,10 @@ const navItems = [
 ];
 
 export function Navigation() {
+  const { toggleMode } = useMode();
   const [activeSection, setActiveSection] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,6 +51,7 @@ export function Navigation() {
     }
   };
 
+  // Normal Mode Navigation
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled
       ? "bg-black/80 backdrop-blur-md border-b border-neutral-800"
@@ -55,7 +60,7 @@ export function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
-            <div className="font-mono text-2xl font-bold tracking-tighter cursor-pointer group">
+            <div className="font-mono text-xl md:text-2xl font-bold tracking-tighter cursor-pointer group">
               <span className="text-neutral-500 group-hover:text-orange-500 transition-colors">{"<"}</span>
               <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">AR</span>
               <span className="text-neutral-500 group-hover:text-orange-500 transition-colors">{"/>"}</span>
@@ -63,12 +68,12 @@ export function Navigation() {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
             {navItems.map((item) => (
               <button
                 key={item.href}
                 onClick={() => scrollToSection(item.href)}
-                className={`nav-link text-neutral-400 hover:text-orange-400 transition-colors ${activeSection === item.href.substring(1) ? "text-orange-400 font-medium" : ""
+                className={`nav-link text-sm uppercase tracking-wider text-neutral-400 hover:text-orange-400 transition-colors ${activeSection === item.href.substring(1) ? "text-orange-400 font-medium" : ""
                   }`}
               >
                 {item.label}
@@ -76,11 +81,20 @@ export function Navigation() {
             ))}
           </div>
 
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-3 md:space-x-4">
+            {/* Dev Mode Toggle */}
+            <button
+              onClick={() => toggleMode()}
+              className="p-2 text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-md transition-all duration-300"
+              title="Switch to Developer Mode"
+            >
+              <Terminal className="w-5 h-5" />
+            </button>
+
             <a
               href="/assets/Abdul-Rasheed-internship-CV.pdf"
               download
-              className="hidden sm:flex items-center space-x-2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 hover:scale-105"
+              className="hidden sm:flex items-center space-x-2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 hover:scale-105 shadow-lg shadow-orange-500/20"
             >
               <Download className="h-4 w-4" />
               <span>Resume</span>
@@ -111,7 +125,7 @@ export function Navigation() {
                   <a
                     href="/assets/Abdul-Rasheed-internship-CV.pdf"
                     download
-                    className="flex items-center space-x-2 bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-3 rounded-lg font-medium mt-4"
+                    className="flex items-center space-x-2 bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-3 rounded-lg font-medium mt-4 justify-center"
                   >
                     <Download className="h-4 w-4" />
                     <span>Download Resume</span>

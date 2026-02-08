@@ -1,0 +1,49 @@
+backend:
+  name: git-gateway
+  branch: main # Branch to update (change to master if applicable)
+
+local_backend: true # Allow local development without authentication
+
+media_folder: "client/public/images/uploads" # Media files will be stored in the repo under this path
+public_folder: "/images/uploads" # The src attribute for uploaded media
+
+collections:
+  - name: "content"
+    label: "Content"
+    files:
+      - name: "projects"
+        label: "Projects"
+        file: "client/src/content/projects.json"
+        editor:
+          preview: false
+        fields:
+          - { label: "Projects List", name: "projects", widget: "list", fields: [
+              { label: "Title", name: "title", widget: "string" },
+              { label: "Description", name: "description", widget: "text" },
+              { label: "Image", name: "image", widget: "image" },
+              { label: "Technologies", name: "technologies", widget: "list", field: { label: "Tech", name: "tech", widget: "string" } },
+              { label: "Live Demo URL", name: "liveUrl", widget: "string", required: false },
+              { label: "GitHub URL", name: "githubUrl", widget: "string", required: false },
+              { label: "Stats", name: "stats", widget: "object", fields: [
+                  { label: "Stars", name: "stars", widget: "number", default: 0 },
+                  { label: "Forks", name: "forks", widget: "number", default: 0 }
+              ]}
+            ] 
+          }
+
+      - name: "skills"
+        label: "Skills"
+        file: "client/src/content/skills.json"
+        editor:
+           preview: false
+        fields:
+           - { label: "Skill Categories", name: "categories", widget: "list", fields: [
+                { label: "Title", name: "title", widget: "string" },
+                { label: "Color", name: "color", widget: "color" },
+                { label: "Icon Name", name: "iconName", widget: "select", options: ["Code2", "Wrench", "Database", "Rocket", "BookOpen", "LayoutTemplate", "Smartphone", "Server", "Cloud"] }, 
+                { label: "Skills", name: "skills", widget: "list", fields: [
+                    { label: "Name", name: "name", widget: "string" },
+                    { label: "Level (0-100)", name: "level", widget: "number" },
+                    { label: "Color", name: "color", widget: "color" }
+                ]}
+             ]}

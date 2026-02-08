@@ -7,6 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { Mail, Github, MapPin, Send, Loader2, Phone, CheckCircle } from "lucide-react";
 
+
 interface ContactFormData {
   name: string;
   email: string;
@@ -104,6 +105,9 @@ export function Contact() {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+
+
+  // Normal Mode
   return (
     <section id="contact" className="py-20 px-4">
       <div className="max-w-7xl mx-auto">

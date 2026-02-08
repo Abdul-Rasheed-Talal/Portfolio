@@ -2,45 +2,11 @@ import { useState, useEffect } from "react";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { Github, ExternalLink, Eye } from "lucide-react";
 
+
 // Projects from CV with actual links
-const projects = [
-  {
-    id: 1,
-    title: "GCT Bhakkar Website",
-    description: "Designed and developed a dynamic and responsive website for Government College of Technology Bhakkar. Used JavaScript DOM manipulation to dynamically update page content with interactive UI behavior and form validation.",
-    image: "/assets/projects/gct-bhakkar.png",
-    technologies: ["HTML", "CSS", "JavaScript", "Bootstrap"],
-    liveUrl: "https://gctbhakkar.netlify.app",
-    githubUrl: "https://github.com/Abdul-Rasheed-Talal/gct-bhakkar",
-    category: "Web Development",
-    duration: "11/2025 - Present",
-    featured: true,
-  },
-  {
-    id: 2,
-    title: "Spotify Clone",
-    description: "Built a Spotify-inspired music player web application with dynamic loading of albums and songs from local storage. Implemented core music player controls including Play/Pause, Next/Previous track, and interactive seek bar for audio progress.",
-    image: "/assets/projects/spotify-clone.png",
-    technologies: ["HTML", "CSS", "JavaScript"],
-    liveUrl: "https://spotify-frontend-project.netlify.app/",
-    githubUrl: "https://github.com/Abdul-Rasheed-Talal/spotify-clone",
-    category: "Web Development",
-    duration: "12/2025",
-    featured: true,
-  },
-  {
-    id: 3,
-    title: "Bank Management System",
-    description: "Developed a console-based Bank Management System using C++ with core OOP principles including classes, objects, functions, and encapsulation. Features account creation, deposit, withdrawal, and balance inquiry functionality.",
-    image: "/assets/projects/bank-system.png",
-    technologies: ["C++", "OOP"],
-    liveUrl: null,
-    githubUrl: "https://github.com/Abdul-Rasheed-Talal/BankMgmSystem",
-    category: "Desktop Application",
-    duration: "03/2025 - 04/2025",
-    featured: true,
-  },
-];
+import projectsData from "../content/projects.json";
+
+const projects = projectsData.projects;
 
 export function Projects() {
   const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.2 });
@@ -52,6 +18,9 @@ export function Projects() {
     }
   }, [isIntersecting]);
 
+
+
+  // Normal Mode
   return (
     <section id="projects" className="py-20 px-4">
       <div className="max-w-7xl mx-auto">
@@ -116,7 +85,7 @@ export function Projects() {
                   <p className="text-neutral-300 mb-4 leading-relaxed line-clamp-3">{project.description}</p>
 
                   <div className="flex flex-wrap gap-2 mb-6">
-                    {project.technologies.map((tech, techIndex) => (
+                    {project.technologies?.map((tech, techIndex) => (
                       <span
                         key={techIndex}
                         className="bg-neutral-800 text-neutral-300 px-3 py-1 rounded-full text-sm"

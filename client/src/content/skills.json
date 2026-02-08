@@ -1,0 +1,70 @@
+{
+    "skillCategories": [
+        {
+            "title": "Core Technologies",
+            "iconName": "Code2",
+            "color": "#E34F26",
+            "skills": [
+                {
+                    "name": "HTML5",
+                    "level": 85,
+                    "color": "#E34F26"
+                },
+                {
+                    "name": "CSS3",
+                    "level": 80,
+                    "color": "#1572B6"
+                },
+                {
+                    "name": "JavaScript",
+                    "level": 70,
+                    "color": "#F7DF1E"
+                },
+                {
+                    "name": "Bootstrap",
+                    "level": 75,
+                    "color": "#7952B3"
+                }
+            ]
+        },
+        {
+            "title": "Development Tools",
+            "iconName": "Wrench",
+            "color": "#F05032",
+            "skills": [
+                {
+                    "name": "Git & GitHub",
+                    "level": 80,
+                    "color": "#F05032"
+                },
+                {
+                    "name": "Postman",
+                    "level": 65,
+                    "color": "#FF6C37"
+                },
+                {
+                    "name": "AI Tools",
+                    "level": 70,
+                    "color": "#10A37F"
+                }
+            ]
+        },
+        {
+            "title": "Database & Design",
+            "iconName": "Database",
+            "color": "#4479A1",
+            "skills": [
+                {
+                    "name": "MySQL Workbench",
+                    "level": 65,
+                    "color": "#4479A1"
+                },
+                {
+                    "name": "Figma",
+                    "level": 60,
+                    "color": "#F24E1E"
+                }
+            ]
+        }
+    ]
+}

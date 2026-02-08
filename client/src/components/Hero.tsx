@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useTypingAnimation } from "@/hooks/use-typing-animation";
 import { Github, Mail, MapPin, Phone, Download, Send, Linkedin } from "lucide-react";
 
+
 const typingTexts = [
   "Web Developer",
   "CIT Student",
@@ -36,6 +37,7 @@ export function Hero() {
   const [isLoaded, setIsLoaded] = useState(false);
   const typedText = useTypingAnimation(typingTexts, 100, 50, 2000);
 
+
   useEffect(() => {
     setIsLoaded(true);
   }, []);
@@ -46,6 +48,8 @@ export function Hero() {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center pt-20 px-4 relative overflow-hidden">

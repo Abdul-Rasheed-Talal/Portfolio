@@ -102,7 +102,23 @@ git push -u origin main
 3. Follow DNS instructions
 4. Automatic SSL included
 
-## Step 6: Final Updates
+## Step 6: CMS Setup (Netlify Only)
+
+**Required for `/admin` to work:**
+
+1.  **Enable Identity**:
+    *   Go to **Site Settings** > **Identity** > **Enable Identity**.
+2.  **Registration Preferences**:
+    *   Set to **Invite Only** (to prevent random people from creating accounts).
+    *   OR leave Open functionality if you want to register, then switch to Invite Only.
+3.  **Enable Git Gateway**:
+    *   Go to **Site Settings** > **Identity** > **Services** > **Git Gateway**.
+    *   Click **Enable Git Gateway** (You may need to connect GitHub).
+4.  **Login**:
+    *   Go to `your-site.netlify.app/admin`.
+    *   Login with the credentials you create via the Identity tab (you can send an invite to yourself).
+
+## Step 7: Final Updates
 
 1. **Update Contact Form**: Replace `YOUR_SCRIPT_ID` with real Google Apps Script URL
 2. **Test Contact Form**: Submit a test message and check Google Sheet

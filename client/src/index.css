@@ -61,9 +61,19 @@
   html {
     scroll-behavior: smooth;
   }
+
+  /* Mode Transitions */
+  html[data-mode="normal"] body {
+    background-color: black;
+  }
+
+  html[data-mode="developer"] body {
+    background-color: #1e1e1e;
+  }
 }
 
 @layer components {
+
   /* Gradient Text */
   .gradient-text {
     @apply bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent;
@@ -94,8 +104,16 @@
   }
 
   @keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
+
+    0%,
+    50% {
+      opacity: 1;
+    }
+
+    51%,
+    100% {
+      opacity: 0;
+    }
   }
 
   /* Skill Bar Animation */
@@ -113,18 +131,24 @@
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
   }
 
   @keyframes slideUp {
-    from { 
-      opacity: 0; 
-      transform: translateY(20px); 
+    from {
+      opacity: 0;
+      transform: translateY(20px);
     }
-    to { 
-      opacity: 1; 
-      transform: translateY(0); 
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 
@@ -161,8 +185,15 @@
 
   /* Floating Animation */
   @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
   }
 
   .animate-float {
@@ -178,4 +209,22 @@
   .bg-blob {
     @apply absolute rounded-full blur-3xl animate-pulse pointer-events-none;
   }
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #424242;
+  border-radius: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #4f4f4f;
 }

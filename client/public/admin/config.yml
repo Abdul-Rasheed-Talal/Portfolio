@@ -40,7 +40,13 @@ collections:
            - { label: "Skill Categories", name: "categories", widget: "list", fields: [
                 { label: "Title", name: "title", widget: "string" },
                 { label: "Color", name: "color", widget: "color" },
-                { label: "Icon Name", name: "iconName", widget: "select", options: ["Code2", "Wrench", "Database", "Rocket", "BookOpen", "LayoutTemplate", "Smartphone", "Server", "Cloud"] }, 
+                { label: "Icon Name", name: "iconName", widget: "select", options: [
+                    "Code2", "Wrench", "Database", "Rocket", "BookOpen", "LayoutTemplate", "Smartphone", "Server", "Cloud",
+                    "Terminal", "Globe", "Cpu", "Layers", "Box", "GitBranch", "Monitor", "HardDrive", "Wifi", "Command",
+                    "Hash", "FileJson", "Brain", "LineChart", "Target",
+                    "React", "Node", "Html", "Css", "Javascript", "Typescript", "Python", "Java", "Docker", "Aws", "Git", "Linux",
+                    "Next", "Vite", "Tailwind", "Bootstrap", "Prisma", "Mongodb", "Postgres", "Mysql", "Firebase", "Netlify", "Vercel", "Figma"
+                  ] }, 
                 { label: "Skills", name: "skills", widget: "list", fields: [
                     { label: "Name", name: "name", widget: "string" },
                     { label: "Level (0-100)", name: "level", widget: "number" },
@@ -106,3 +112,14 @@ collections:
                   { label: "Achievement", name: "achievement", widget: "string" },
                   { label: "Status", name: "status", widget: "select", options: ["Current", "Completed"] }
               ]}
+
+          - name: "team"
+            label: "Team Section"
+            file: "client/src/content/team.json"
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Subheading", name: "subheading", widget: "string" }
+              - { label: "Badge Text", name: "badgeText", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Team Name", name: "teamName", widget: "string" }
+              - { label: "Team URL", name: "teamUrl", widget: "string" }

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { Users, ExternalLink, ArrowRight, Zap } from "lucide-react";
+import teamData from "../content/team.json";
 
 export function Team() {
     const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.1 });
@@ -30,19 +31,19 @@ export function Team() {
                         <div className="flex-1 text-center md:text-left">
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm font-medium mb-6">
                                 <Users className="w-4 h-4" />
-                                <span>Collaborative Development</span>
+                                <span>{teamData.badgeText}</span>
                             </div>
 
                             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                                Building Big with <span className="text-purple-500">My Team</span>
+                                {teamData.heading.split("My Team")[0]} <span className="text-purple-500">My Team</span>
                             </h2>
 
                             <p className="text-neutral-300 text-lg mb-8 leading-relaxed">
-                                Beyond individual projects, I collaborate with a talented group of developers to build scalable, production-ready applications. Check out our collective work and open-source contributions.
+                                {teamData.description}
                             </p>
 
                             <a
-                                href="https://team-website-sigma.vercel.app"
+                                href={teamData.teamUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-2 bg-white text-black hover:bg-neutral-200 px-6 py-3 rounded-xl font-bold transition-all hover:scale-105 group"
@@ -55,7 +56,7 @@ export function Team() {
                         <div className="flex-1 w-full max-w-sm">
                             {/* Preview Card */}
                             <a
-                                href="https://team-website-sigma.vercel.app"
+                                href={teamData.teamUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="block group cursor-pointer"
@@ -65,7 +66,7 @@ export function Team() {
                                     <div className="absolute inset-0 flex items-center justify-center bg-neutral-900/50 group-hover:bg-neutral-900/40 transition-colors">
                                         <div className="text-purple-500 font-mono text-xl font-bold flex items-center gap-2">
                                             <Zap className="w-6 h-6" />
-                                            <span>TEAM SIGMA</span>
+                                            <span>{teamData.teamName}</span>
                                         </div>
                                     </div>
 
@@ -73,7 +74,7 @@ export function Team() {
                                     <div className="absolute inset-0 bg-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
                                 </div>
                                 <div className="mt-3 flex items-center justify-between text-sm">
-                                    <span className="text-neutral-400 group-hover:text-purple-400 transition-colors">team-website-sigma.vercel.app</span>
+                                    <span className="text-neutral-400 group-hover:text-purple-400 transition-colors">{teamData.teamUrl.replace(/^https?:\/\//, '')}</span>
                                     <ArrowRight className="w-4 h-4 text-neutral-500 group-hover:translate-x-1 transition-transform" />
                                 </div>
                             </a>

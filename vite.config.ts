@@ -27,9 +27,7 @@ export default defineConfig({
             if (id.includes("framer-motion")) {
               return "animations";
             }
-            if (id.includes("react") || id.includes("react-dom") || id.includes("react-router-dom")) {
-              return "react-vendor";
-            }
+            // Keep react and other vendors together to avoid initialization issues
             return "vendor";
           }
         },

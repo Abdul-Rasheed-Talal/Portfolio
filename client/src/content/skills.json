@@ -67,12 +67,5 @@
       ]
     }
   ],
-  "categories": [
-    {
-      "iconName": "Database",
-      "skills": [],
-      "color": "#ff0000",
-      "title": "New skill"
-    }
-  ]
+  "categories": []
 }

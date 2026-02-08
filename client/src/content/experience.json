@@ -1,0 +1,16 @@
+{
+    "experience": [
+        {
+            "role": "Full Stack Developer",
+            "company": "Freelance",
+            "duration": "2024 - Present",
+            "description": "Developing custom web applications and e-commerce solutions for clients using the MERN stack.",
+            "technologies": [
+                "React",
+                "Node.js",
+                "MongoDB",
+                "Express"
+            ]
+        }
+    ]
+}

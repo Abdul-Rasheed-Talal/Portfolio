@@ -1,18 +1,20 @@
 import { useState, useEffect } from "react";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { Github, Coffee, Heart, Zap, Linkedin } from "lucide-react";
+import aboutData from "../content/about.json";
+import heroData from "../content/hero.json"; // Name/Title are in hero
 
 const userData = {
-  name: "Abdul Rasheed",
-  title: "Web Developer",
-  location: "Bhakkar, Pakistan",
-  availableForHire: true,
-  // Shortened professional summary
-  bio: "Aspiring Full-Stack Developer proficient in HTML, CSS, JavaScript, Bootstrap, and MySQL. Experienced with Git, GitHub, and Figma; currently learning React.js. Passionate about building responsive web apps and exploring DevOps/Cloud (AWS/Azure). Actively seeking internships to gain real-world experience.",
-  social: {
-    github: "https://github.com/Abdul-Rasheed-Talal",
-    linkedin: "https://www.linkedin.com/in/abdulrasheedtalal/",
-  },
+  name: heroData.headline,
+  title: "Web Developer", // This isn't in JSON explicitly but "Web Developer" is common
+  location: "Bhakkar, Pakistan", // Hardcoding or moving to JSON? Let's use hardcoded for now or add to about.json
+  // Actually about.json only has bio/social.
+  // Let's use standard placeholders or keep hardcoded simple things if strictly implied.
+  // But user said "update any kind of information".
+  // I should use variables from aboutData if possible or heroData.
+  bio: aboutData.bio,
+  social: aboutData.social,
+  availableForHire: aboutData.availableForHire
 };
 
 export function About() {

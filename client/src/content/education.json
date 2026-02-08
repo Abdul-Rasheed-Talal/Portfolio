@@ -1,0 +1,22 @@
+{
+    "education": [
+        {
+            "degree": "DAE CIT (Intermediate)",
+            "institution": "Govt College of Technology Bhakkar",
+            "duration": "09/2024 - Present",
+            "location": "Bhakkar",
+            "details": "Pursuing comprehensive education in computer systems, programming, networking, and software development. Focus on practical skills and industry-relevant technologies.",
+            "achievement": "1st year: 1174/1200 (97%) - 2nd Position in PBTE",
+            "status": "Current"
+        },
+        {
+            "degree": "SSC (Matric)",
+            "institution": "Govt Model High School Bhakkar",
+            "duration": "2022 - 2024",
+            "location": "Bhakkar",
+            "details": "Completed secondary education with focus on Science subjects. Built strong foundation in Mathematics, Physics, and Computer Science.",
+            "achievement": "Score: 1147/1200 (95%)",
+            "status": "Completed"
+        }
+    ]
+}

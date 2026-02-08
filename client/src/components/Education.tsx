@@ -1,28 +1,9 @@
 import { useState, useEffect } from "react";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { GraduationCap, Award, Trophy, Star, Target, TrendingUp } from "lucide-react";
+import educationJson from "../content/education.json";
 
-// Education from CV
-const educationData = [
-  {
-    degree: "DAE CIT (Intermediate)",
-    institution: "Govt College of Technology Bhakkar",
-    duration: "09/2024 - Present",
-    location: "Bhakkar",
-    details: "Pursuing comprehensive education in computer systems, programming, networking, and software development. Focus on practical skills and industry-relevant technologies.",
-    achievement: "1st year: 1174/1200 (97%) - 2nd Position in PBTE",
-    status: "Current",
-  },
-  {
-    degree: "SSC (Matric)",
-    institution: "Govt Model High School Bhakkar",
-    duration: "2022 - 2024",
-    location: "Bhakkar",
-    details: "Completed secondary education with focus on Science subjects. Built strong foundation in Mathematics, Physics, and Computer Science.",
-    achievement: "Score: 1147/1200 (95%)",
-    status: "Completed",
-  },
-];
+const educationData = educationJson.education;
 
 const achievements = [
   { icon: Trophy, text: "2nd Position in PBTE Board", color: "text-yellow-400" },
@@ -76,8 +57,8 @@ export function Education() {
                   </div>
                 </div>
                 <span className={`px-3 py-1 rounded-full text-xs font-semibold ${edu.status === "Current"
-                    ? "bg-green-500/20 text-green-400 border border-green-500/30"
-                    : "bg-neutral-700 text-neutral-300"
+                  ? "bg-green-500/20 text-green-400 border border-green-500/30"
+                  : "bg-neutral-700 text-neutral-300"
                   }`}>
                   {edu.status}
                 </span>

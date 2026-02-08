@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { ModeProvider } from "@/context/ModeContext";
 import { ModeGate } from "@/components/layout/ModeGate";
 import { FuturisticDeveloperLayout } from "@/components/layout/FuturisticDeveloperLayout";
+import { FeedbackPopup } from "@/components/FeedbackPopup";
 
 import Portfolio from "@/pages/portfolio";
 import NotFound from "@/pages/not-found";
@@ -33,6 +34,7 @@ function App() {
           <TooltipProvider>
             <Toaster />
             <ModeGate />
+            <FeedbackPopup />
             <FuturisticDeveloperLayout>
               <Router />
             </FuturisticDeveloperLayout>

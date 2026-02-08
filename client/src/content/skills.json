@@ -7,23 +7,55 @@
       "skills": [
         {
           "name": "HTML5",
-          "level": 85,
+          "level": 90,
           "color": "#E34F26"
         },
         {
           "name": "CSS3",
-          "level": 80,
+          "level": 85,
           "color": "#1572B6"
         },
         {
           "name": "JavaScript",
-          "level": 70,
+          "level": 80,
           "color": "#F7DF1E"
         },
         {
-          "name": "Bootstrap",
+          "name": "TypeScript",
           "level": 75,
-          "color": "#7952B3"
+          "color": "#3178C6"
+        },
+        {
+          "name": "React.js",
+          "level": 75,
+          "color": "#61DAFB"
+        },
+        {
+          "name": "Next.js",
+          "level": 60,
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "title": "Database & Design",
+      "iconName": "Database",
+      "color": "#4479A1",
+      "skills": [
+        {
+          "name": "MySQL Workbench",
+          "level": 65,
+          "color": "#4479A1"
+        },
+        {
+          "name": "Figma",
+          "level": 60,
+          "color": "#F24E1E"
+        },
+        {
+          "name": "Tailwind CSS",
+          "level": 85,
+          "color": "#38B2AC"
         }
       ]
     },
@@ -43,29 +75,60 @@
           "color": "#FF6C37"
         },
         {
-          "name": "AI Tools",
-          "level": 70,
-          "color": "#10A37F"
+          "name": "VS Code",
+          "level": 85,
+          "color": "#007ACC"
         }
       ]
     },
     {
-      "title": "Database & Design",
-      "iconName": "Database",
-      "color": "#4479A1",
+      "title": "Learning List",
+      "iconName": "BookOpen",
+      "color": "#F05032",
       "skills": [
         {
-          "name": "MySQL Workbench",
-          "level": 65,
-          "color": "#4479A1"
+          "name": "Express",
+          "level": 50,
+          "color": "#000000"
         },
         {
-          "name": "Figma",
+          "name": "REST API",
           "level": 60,
-          "color": "#F24E1E"
+          "color": "#009688"
+        },
+        {
+          "name": "AWS",
+          "level": 40,
+          "color": "#FF9900"
+        },
+        {
+          "name": "DevOps",
+          "level": 30,
+          "color": "#239120"
+        }
+      ]
+    },
+    {
+      "title": "Future Goals",
+      "iconName": "Target",
+      "color": "#FFD700",
+      "skills": [
+        {
+          "name": "AI/ML",
+          "level": 0,
+          "color": "#FF69B4"
+        },
+        {
+          "name": "Data Science",
+          "level": 0,
+          "color": "#4B0082"
+        },
+        {
+          "name": "System Design",
+          "level": 0,
+          "color": "#FF4500"
         }
       ]
     }
-  ],
-  "categories": []
+  ]
 }

@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useTypingAnimation } from "@/hooks/use-typing-animation";
 import { Github, Mail, MapPin, Phone, Download, Send, Linkedin } from "lucide-react";
-
+import heroData from "../content/hero.json";
+import aboutData from "../content/about.json";
 
 const typingTexts = [
   "Web Developer",
@@ -10,33 +11,9 @@ const typingTexts = [
   "Tech Enthusiast"
 ];
 
-// User Data from CV
-const userData = {
-  name: "Abdul Rasheed",
-  title: "Web Developer",
-  tagline: "Crafting digital experiences with code and creativity",
-  location: "Bhakkar, Pakistan",
-  email: "mabdulrasheedtalal@gmail.com",
-  phone: "03361115907",
-  resumeUrl: "/assets/Abdul-Rasheed-internship-CV.pdf",
-  avatar: "/assets/profile-picture.jpg",
-  availableForHire: true,
-  availabilityText: "Seeking Internship Opportunities",
-  stats: {
-    yearsLearning: "2+",
-    projects: "5+",
-    skills: "9+",
-  },
-  social: {
-    github: "https://github.com/Abdul-Rasheed-Talal",
-    linkedin: "https://www.linkedin.com/in/abdulrasheedtalal/",
-  },
-};
-
 export function Hero() {
   const [isLoaded, setIsLoaded] = useState(false);
   const typedText = useTypingAnimation(typingTexts, 100, 50, 2000);
-
 
   useEffect(() => {
     setIsLoaded(true);
@@ -48,8 +25,6 @@ export function Hero() {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
-
-
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center pt-20 px-4 relative overflow-hidden">
@@ -82,8 +57,8 @@ export function Hero() {
         <div className="relative mb-8">
           <div className="w-48 h-48 mx-auto rounded-full overflow-hidden p-1 bg-gradient-to-r from-orange-500 to-red-500">
             <img
-              src={userData.avatar}
-              alt={userData.name}
+              src={heroData.image}
+              alt={heroData.headline}
               className="w-full h-full object-cover rounded-full bg-neutral-800"
               onError={(e) => {
                 (e.target as HTMLImageElement).src = "https://ui-avatars.com/api/?name=Abdul+Rasheed&background=f97316&color=fff&size=200";
@@ -92,19 +67,17 @@ export function Hero() {
           </div>
 
           {/* Status Badge */}
-          {userData.availableForHire && (
-            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
-              <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-2 rounded-full text-sm font-semibold flex items-center space-x-2 shadow-lg">
-                <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-                <span>{userData.availabilityText}</span>
-              </div>
+          <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-2 rounded-full text-sm font-semibold flex items-center space-x-2 shadow-lg min-w-max">
+              <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+              <span>{heroData.availabilityText || "Available for Hire"}</span>
             </div>
-          )}
+          </div>
         </div>
 
         {/* Name & Title */}
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 leading-tight">
-          {userData.name}
+          {heroData.headline}
         </h1>
         {/* Typing effect with more visible color */}
         <h2 className="text-2xl md:text-3xl font-bold mb-4">
@@ -113,21 +86,21 @@ export function Hero() {
           </span>
         </h2>
         <p className="text-xl text-neutral-300 max-w-2xl mx-auto mb-8 leading-relaxed">
-          {userData.tagline}
+          {heroData.subheadline}
         </p>
 
         {/* Stats */}
         <div className="grid grid-cols-3 gap-6 mb-12 max-w-xl mx-auto">
           <div className="text-center">
-            <div className="text-3xl font-black text-orange-400 mb-1">{userData.stats.yearsLearning}</div>
+            <div className="text-3xl font-black text-orange-400 mb-1">{heroData.stats.yearsLearning}</div>
             <div className="text-neutral-400 text-sm">Years Learning</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-black text-blue-400 mb-1">{userData.stats.projects}</div>
+            <div className="text-3xl font-black text-blue-400 mb-1">{heroData.stats.projects}</div>
             <div className="text-neutral-400 text-sm">Projects Built</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-black text-green-400 mb-1">{userData.stats.skills}</div>
+            <div className="text-3xl font-black text-green-400 mb-1">{heroData.stats.skills}</div>
             <div className="text-neutral-400 text-sm">Technologies</div>
           </div>
         </div>
@@ -143,7 +116,7 @@ export function Hero() {
           </button>
 
           <a
-            href={userData.resumeUrl}
+            href={heroData.resumeUrl || "#"}
             download
             className="group border-2 border-neutral-600 hover:border-orange-500 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 flex items-center space-x-3 hover:bg-gradient-to-r hover:from-orange-500/10 hover:to-red-500/10"
           >
@@ -156,22 +129,22 @@ export function Hero() {
         <div className="flex flex-wrap justify-center items-center gap-8 text-neutral-400">
           <div className="flex items-center space-x-2">
             <MapPin className="w-4 h-4" />
-            <span>{userData.location}</span>
+            <span>Bhakkar, Pakistan</span>
           </div>
-          <a href={`mailto:${userData.email}`} className="flex items-center space-x-2 hover:text-orange-400 transition-colors">
+          <a href={`mailto:${aboutData.social.email}`} className="flex items-center space-x-2 hover:text-orange-400 transition-colors">
             <Mail className="w-4 h-4" />
-            <span>{userData.email}</span>
+            <span>{aboutData.social.email}</span>
           </a>
-          <a href={`tel:${userData.phone}`} className="flex items-center space-x-2 hover:text-orange-400 transition-colors">
+          <a href={`tel:${aboutData.social.phone}`} className="flex items-center space-x-2 hover:text-orange-400 transition-colors">
             <Phone className="w-4 h-4" />
-            <span>{userData.phone}</span>
+            <span>{aboutData.social.phone}</span>
           </a>
         </div>
 
         {/* Social Links - with bottom margin */}
         <div className="flex justify-center space-x-4 mt-8 mb-4">
           <a
-            href={userData.social.github}
+            href={aboutData.social.github}
             target="_blank"
             rel="noopener noreferrer"
             className="w-12 h-12 bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 hover:border-orange-500 rounded-xl flex items-center justify-center text-neutral-400 hover:text-orange-400 transition-all duration-300 hover:scale-110"
@@ -179,7 +152,7 @@ export function Hero() {
             <Github className="w-6 h-6" />
           </a>
           <a
-            href={userData.social.linkedin}
+            href={aboutData.social.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             className="w-12 h-12 bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 hover:border-blue-600 rounded-xl flex items-center justify-center text-neutral-400 hover:text-blue-600 transition-all duration-300 hover:scale-110"
@@ -187,7 +160,7 @@ export function Hero() {
             <Linkedin className="w-6 h-6" />
           </a>
           <a
-            href={`mailto:${userData.email}`}
+            href={`mailto:${aboutData.social.email}`}
             className="w-12 h-12 bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 hover:border-blue-500 rounded-xl flex items-center justify-center text-neutral-400 hover:text-blue-400 transition-all duration-300 hover:scale-110"
           >
             <Mail className="w-6 h-6" />

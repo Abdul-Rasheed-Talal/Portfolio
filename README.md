@@ -1,88 +1,87 @@
-# Abdul Rasheed Talal - Portfolio
+# 🚀 M. Abdul Rasheed (Talal) - Interactive Portfolio
 
-A modern, professional portfolio website showcasing my journey as a Web Developer and CIT student. Built with high-performance modern web technologies.
+> A Next-Gen Developer Portfolio featuring a dual-mode interface: **Visual Polish** for clients and a **Simulated IDE** for developers.
 
-![Portfolio Preview](client/public/assets/profile-picture.jpg)
+![Portfolio Preview](https://github.com/Abdul-Rasheed-Talal/My-Portfolio/blob/main/public/preview.png?raw=true)
 
-## 🚀 Features
+## 🌟 Key Features
 
-- **Modern Dark UI**: Premium dark theme with glassmorphism and animated gradients
-- **Responsive Design**: Fully optimized for mobile, tablet, and desktop
-- **Dynamic Content**:
-  - Typing animations
-  - Interactive skill bars with real SVG icons
-  - Filterable project cards with live previews
-  - Achievement timelines
-- **Contact Form**: Functional contact form integrated with Google Sheets
-- **Performance**: High Lighthouse scores with optimized assets
+### 🌗 Dual Experience Mode
+-   **Normal Mode**: A sleek, modern scrolling website designed for recruiters and clients. Features smooth animations, glassmorphism, and vibrant gradients.
+-   **Developer Mode**: A fully interactive **VS Code-like Environment**.
+    -   **File Explorer**: Navigate through "project files" to see content.
+    -   **Terminal**: Run custom commands like `help`, `about`, `contact`.
+    -   **Settings**: Customize the "IDE" theme (Void/Solarized), font size, and minimap.
+
+### 📱 Mobile Optimized
+-   **Responsive Design**: Flawless experience across all devices.
+-   **Gesture Controls**: Horizontal swipe carousels for Projects and scrollable tabs for Skills to minimize vertical scrolling.
+-   **Touch-Friendly**: Optimized button sizes and interaction targets.
+
+### 💬 Interactive Feedback System
+-   **Feedback Popup**: A non-intrusive popup that appears after 10 seconds to gather visitor insights.
+-   **No-Database Backend**: Powered by **Google Scripts** for zero-maintenance form submissions (Contact & Feedback).
+-   **Star Rating**: 5-star rating system for quick engagement.
+
+### 🎨 Visuals & Animations
+-   **Tech Stack**: Built with **React**, **TypeScript**, **Tailwind CSS**, and **Framer Motion**.
+-   **Dynamic Content**:
+    -   **Skills**: Tabbed interface with progress bars and "Target" indicators for future goals.
+    -   **Projects**: Badge-style category indicators and hover effects.
+
+---
 
 ## 🛠️ Tech Stack
 
-- **Frontend Framework**: [React 18](https://reactjs.org/) + [Vite](https://vitejs.dev/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/) + Tailwind Animate
-- **Icons**: [Lucide React](https://lucide.dev/) + SVG Logos
-- **Animation**: Framer Motion (Ready) + Custom CSS Keyframes
-- **Routing**: Wouter (Lightweight routing)
+-   **Frontend**: React (Vite), TypeScript
+-   **Styling**: Tailwind CSS, Shadcn UI
+-   **Animations**: Framer Motion
+-   **Icons**: Lucide React, React Icons
+-   **State Management**: React Context API
+-   **Routing**: Wouter
+
+---
+
+## ⚡ Getting Started
+
+1.  **Clone the repository**:
+    ```bash
+    git clone https://github.com/Abdul-Rasheed-Talal/My-Portfolio.git
+    ```
+2.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
+3.  **Run the development server**:
+    ```bash
+    npm run dev
+    ```
+
+---
 
 ## 📂 Project Structure
 
-```bash
-Portfolio/
-├── client/
-│   ├── public/          # Static assets (images, CV)
-│   └── src/
-│       ├── components/  # Reusable UI components (Hero, Skills, Projects...)
-│       ├── hooks/       # Custom React hooks
-│       ├── lib/         # Utility functions
-│       └── pages/       # Page views
-├── package.json         # Dependencies and scripts
-└── vite.config.ts       # Vite configuration
+```
+src/
+├── components/         # UI Components (Hero, About, Skills, Projects, etc.)
+│   ├── developer/      # Specific components for Developer Mode (IDE view)
+│   └── layout/         # Layout wrappers (FuturisticDeveloperLayout)
+├── content/            # JSON data for Skills and Projects
+├── context/            # Global state (ModeContext for switching themes)
+├── hooks/              # Custom hooks (useIntersectionObserver)
+└── pages/              # Main route pages
 ```
 
-## 🚀 Quick Start
+---
 
-### Prerequisites
-- Node.js (v18 or higher)
-- npm (v9 or higher)
+## 🤝 Contact & Feedback
 
-### Installation
+Feel free to explore the **Developer Mode** by clicking the "Enter Developer Mode" floating button!
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/Abdul-Rasheed-Talal/portfolio.git
-   cd portfolio
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Start local server**
-   ```bash
-   npm run dev
-   ```
-   The site will open at `http://localhost:5173`
-
-4. **Build for production**
-   ```bash
-   npm run build
-   ```
-
-## 📝 Configuration
-
-### Contact Form Setup
-The contact form uses a serverless approach with Google Sheets.
-👉 **[Read the Setup Guide](CONTACT_FORM_SETUP.md)** to connect your own Google Sheet.
-
-### Deployment
-This portfolio is static-site ready and can be deployed anywhere.
-👉 **[Read the GitHub Pages Guide](STEP_BY_STEP_GITHUB_PAGES.md)** for easy deployment.
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
+-   **Email**: [mabdulrasheedtalal@gmail.com](mailto:mabdulrasheedtalal@gmail.com)
+-   **LinkedIn**: [Abdul Rasheed Talal](https://www.linkedin.com/in/abdulrasheedtalal/)
+-   **GitHub**: [@Abdul-Rasheed-Talal](https://github.com/Abdul-Rasheed-Talal)
 
 ---
-**Abdul Rasheed Talal** - Web Developer
-[GitHub](https://github.com/Abdul-Rasheed-Talal) | [Email](mailto:mabdulrasheedtalal@gmail.com)
+
+Built with ❤️ by **Abdul Rasheed Talal**.

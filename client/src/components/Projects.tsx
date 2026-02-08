@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
-import { Github, ExternalLink, Eye } from "lucide-react";
-
-
-// Projects from CV with actual links
+import { ExternalLink, Github, ArrowRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import projectsData from "../content/projects.json";
 
-const projects = projectsData.projects;
-
 export function Projects() {
-  const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.2 });
+  const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.1 });
   const [isLoaded, setIsLoaded] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(2); // Show 2 initially as requested
+
+  const allProjects = projectsData.projects || [];
+  const totalProjects = allProjects.length;
+  const visibleProjects = allProjects.slice(0, visibleCount);
+  const hasMore = visibleCount < totalProjects;
 
   useEffect(() => {
     if (isIntersecting) {
@@ -18,123 +20,145 @@ export function Projects() {
     }
   }, [isIntersecting]);
 
+  const handleLoadMore = () => {
+    setVisibleCount(prev => Math.min(prev + 2, totalProjects)); // Load 2 more or all remaining
+  };
 
-
-  // Normal Mode
   return (
-    <section id="projects" className="py-20 px-4">
-      <div className="max-w-7xl mx-auto">
-        <div className={`text-center mb-16 transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}>
+    <section id="projects" className="pt-4 pb-24 px-4 relative">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div ref={ref} className={`text-center mb-8 md:mb-16 transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Featured{" "}
-            <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
-              Projects
-            </span>
+            Featured <span className="text-orange-500">Projects</span>
           </h2>
-          <p className="text-xl text-neutral-300 max-w-2xl mx-auto">
-            A showcase of my recent work and creative solutions
+          <p className="text-xl text-neutral-400 max-w-2xl mx-auto mb-8">
+            A collection of <span className="text-orange-500 font-bold">{totalProjects}</span> projects showcasing my journey in building digital solutions.
           </p>
         </div>
 
-        <div ref={ref} className="grid lg:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <div
-              key={project.id}
-              className={`group relative bg-neutral-900/50 border border-neutral-800 rounded-2xl overflow-hidden hover:border-orange-500/50 transition-all duration-300 hover:scale-[1.02] ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                }`}
-              style={{ transitionDelay: `${index * 150}ms` }}
+        {/* Projects Grid/Carousel */}
+        <div className="relative max-w-6xl mx-auto">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={visibleCount}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+              className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory gap-4 pb-8 md:grid md:grid-cols-2 md:gap-12 md:pb-0 px-2 md:px-0 no-scrollbar justify-start md:justify-center md:place-items-center"
             >
-              {/* Main Card Link - Overlay */}
-              <a
-                href={project.liveUrl || project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="absolute inset-0 z-0 focus:outline-none"
-                aria-label={`View ${project.title}`}
-              >
-                <span className="sr-only">View project</span>
-              </a>
+              {visibleProjects.map((project, index) => (
+                <motion.div
+                  key={project.id}
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="flex-none w-[85vw] md:w-full max-w-[550px] snap-center group relative bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden hover:border-neutral-700 transition-all duration-300 flex flex-col h-full hover:shadow-2xl hover:shadow-orange-500/5"
+                >
+                  {/* Image Container */}
+                  <div className="relative h-48 md:h-64 overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = `https://placehold.co/600x400/1a1a1a/333?text=${encodeURIComponent(project.title)}`;
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-black/50 group-hover:bg-black/20 transition-all duration-300" />
 
-              <div className="relative z-10 pointer-events-none">
-                <div className="relative overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                    onError={(e) => {
-                      // Fallback to placeholder if image not found
-                      (e.target as HTMLImageElement).src = `https://placehold.co/800x400/1a1a1a/f97316?text=${encodeURIComponent(project.title)}`;
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="absolute top-4 right-4">
-                    <span className="bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                      {project.category}
-                    </span>
-                  </div>
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-neutral-900/80 text-neutral-300 px-3 py-1 rounded-full text-xs">
-                      {project.duration}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold text-white mb-3">{project.title}</h3>
-                  <p className="text-neutral-300 mb-4 leading-relaxed line-clamp-3">{project.description}</p>
-
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.technologies?.map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="bg-neutral-800 text-neutral-300 px-3 py-1 rounded-full text-sm"
-                      >
-                        {tech}
+                    {/* Floating Category Badge */}
+                    <div className="absolute top-3 left-3">
+                      <span className="bg-black/70 backdrop-blur-md text-white/90 text-xs px-3 py-1 rounded-full border border-white/10 shadow-lg">
+                        {project.category || 'Development'}
                       </span>
-                    ))}
+                    </div>
                   </div>
 
-                  {/* Buttons - Raised above the overlay link and re-enable pointer events */}
-                  <div className="flex space-x-4 relative z-30 pointer-events-auto">
-                    {project.liveUrl && (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center space-x-2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-4 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105"
-                      >
-                        <Eye className="w-4 h-4" />
-                        <span>Live Demo</span>
-                        <ExternalLink className="w-4 h-4" />
-                      </a>
-                    )}
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center space-x-2 border border-neutral-600 hover:border-orange-500 text-neutral-300 hover:text-orange-400 px-4 py-2 rounded-lg font-semibold transition-all duration-300"
-                    >
-                      <Github className="w-4 h-4" />
-                      <span>Code</span>
-                    </a>
+                  {/* Content */}
+                  <div className="p-6 md:p-8 flex flex-col flex-grow">
+                    <div className="flex justify-between items-start mb-4">
+                      <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-orange-500 transition-colors">
+                        {project.title}
+                      </h3>
+                    </div>
+
+                    <p className="text-neutral-400 text-sm leading-relaxed mb-6 line-clamp-3 flex-grow">
+                      {project.description}
+                    </p>
+
+                    <div className="mt-auto">
+                      {/* Tech Stack */}
+                      <div className="flex flex-wrap gap-2 mb-8">
+                        {project.technologies?.slice(0, 4).map((tech, i) => (
+                          <span
+                            key={i}
+                            className="text-[10px] text-neutral-300 bg-neutral-800 border border-neutral-700 px-3 py-1 rounded-full"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                        {project.technologies && project.technologies.length > 4 && (
+                          <span className="text-[10px] text-neutral-500 px-2 py-1">+{project.technologies.length - 4}</span>
+                        )}
+                      </div>
+
+                      {/* Actions */}
+                      <div className="flex items-center gap-4 pt-6 border-t border-neutral-800">
+                        {project.liveUrl && (
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 flex items-center justify-center gap-2 bg-white text-black hover:bg-neutral-200 px-4 py-3 rounded-xl text-sm font-bold transition-transform hover:scale-105 active:scale-95"
+                          >
+                            <ExternalLink className="w-4 h-4" /> Live Demo
+                          </a>
+                        )}
+                        {project.githubUrl && (
+                          <a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`flex-1 flex items-center justify-center gap-2 border border-neutral-700 hover:border-white text-white px-4 py-3 rounded-xl text-sm font-medium transition-all hover:bg-neutral-800 ${!project.liveUrl ? 'w-full' : ''}`}
+                          >
+                            <Github className="w-4 h-4" /> Source
+                          </a>
+                        )}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          ))}
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
         </div>
 
-        <div className={`text-center mt-12 transition-all duration-700 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}>
+        {/* Load More Action - Subtle Button */}
+        {hasMore && (
+          <div className="mt-8 md:mt-16 text-center">
+            <button
+              onClick={handleLoadMore}
+              className="group inline-flex items-center gap-3 px-8 py-3 rounded-full border border-neutral-800 bg-neutral-900/50 text-neutral-400 hover:text-white hover:border-orange-500/50 hover:bg-neutral-900 transition-all duration-300"
+            >
+              <span className="font-medium">View More Projects</span>
+              <div className="w-6 h-6 rounded-full bg-neutral-800 flex items-center justify-center group-hover:bg-orange-500 group-hover:text-black transition-colors">
+                <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5" />
+              </div>
+            </button>
+          </div>
+        )}
+
+        <div className="mt-8 md:mt-16 text-center">
           <a
             href="https://github.com/Abdul-Rasheed-Talal"
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center space-x-2 bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 hover:border-orange-500 text-neutral-300 hover:text-orange-400 px-8 py-4 rounded-xl font-semibold transition-all duration-300"
+            className="inline-flex items-center gap-2 text-neutral-400 hover:text-white transition-colors border-b border-transparent hover:border-white pb-0.5"
           >
-            <span>View All Projects on GitHub</span>
-            <ExternalLink className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+            <span>View full archive on GitHub</span>
+            <ExternalLink className="w-4 h-4" />
           </a>
         </div>
       </div>

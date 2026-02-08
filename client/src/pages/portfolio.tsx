@@ -1,5 +1,6 @@
 import { Hero } from "@/components/Hero";
 import { About } from "@/components/About";
+import { Team } from "@/components/Team";
 import { Skills } from "@/components/Skills";
 import { Projects } from "@/components/Projects";
 import { Education } from "@/components/Education";
@@ -15,6 +16,7 @@ export default function Portfolio() {
       <main>
         <Hero />
         <About />
+        <Team />
         <Skills />
         <Projects />
         <Education />

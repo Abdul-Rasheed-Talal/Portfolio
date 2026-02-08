@@ -1,0 +1,13 @@
+{
+    "greeting": "Hi, I'm",
+    "headline": "Abdul Rasheed Talal",
+    "subheadline": "Functional Full Stack Developer | Building High-Performance Web Solutions",
+    "image": "/assets/profile-picture.jpg",
+    "resumeUrl": "/assets/resume.pdf",
+    "availabilityText": "Seeking Internship Opportunities",
+    "stats": {
+        "yearsLearning": "2+",
+        "projects": "5+",
+        "skills": "9+"
+    }
+}

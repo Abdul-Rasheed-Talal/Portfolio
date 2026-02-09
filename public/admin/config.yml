@@ -17,109 +17,171 @@ collections:
         editor:
           preview: false
         fields:
-          - { label: "Projects List", name: "projects", widget: "list", fields: [
-              { label: "Title", name: "title", widget: "string" },
-              { label: "Description", name: "description", widget: "text" },
-              { label: "Image", name: "image", widget: "image" },
-              { label: "Technologies", name: "technologies", widget: "list", field: { label: "Tech", name: "tech", widget: "string" } },
-              { label: "Live Demo URL", name: "liveUrl", widget: "string", required: false },
-              { label: "GitHub URL", name: "githubUrl", widget: "string", required: false },
-              { label: "Stats", name: "stats", widget: "object", fields: [
-                  { label: "Stars", name: "stars", widget: "number", default: 0 },
-                  { label: "Forks", name: "forks", widget: "number", default: 0 }
-              ]}
-            ] 
-          }
+          - label: "Projects List"
+            name: "projects"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Image", name: "image", widget: "image" }
+              - label: "Technologies"
+                name: "technologies"
+                widget: "list"
+                field: { label: "Tech", name: "tech", widget: "string" }
+              - { label: "Live Demo URL", name: "liveUrl", widget: "string", required: false }
+              - { label: "GitHub URL", name: "githubUrl", widget: "string", required: false }
+              - label: "Stats"
+                name: "stats"
+                widget: "object"
+                fields:
+                  - { label: "Stars", name: "stars", widget: "number", default: 0 }
+                  - { label: "Forks", name: "forks", widget: "number", default: 0 }
 
       - name: "skills"
         label: "Skills"
         file: "client/src/content/skills.json"
         editor:
-           preview: false
+          preview: false
         fields:
-           - { label: "Skill Categories", name: "categories", widget: "list", fields: [
-                { label: "Title", name: "title", widget: "string" },
-                { label: "Color", name: "color", widget: "color" },
-                { label: "Icon Name", name: "iconName", widget: "select", options: [
-                    "Code2", "Wrench", "Database", "Rocket", "BookOpen", "LayoutTemplate", "Smartphone", "Server", "Cloud",
-                    "Terminal", "Globe", "Cpu", "Layers", "Box", "GitBranch", "Monitor", "HardDrive", "Wifi", "Command",
-                    "Hash", "FileJson", "Brain", "LineChart", "Target",
-                    "React", "Node", "Html", "Css", "Javascript", "Typescript", "Python", "Java", "Docker", "Aws", "Git", "Linux",
-                    "Next", "Vite", "Tailwind", "Bootstrap", "Prisma", "Mongodb", "Postgres", "Mysql", "Firebase", "Netlify", "Vercel", "Figma"
-                  ] }, 
-                { label: "Skills", name: "skills", widget: "list", fields: [
-                    { label: "Name", name: "name", widget: "string" },
-                    { label: "Level (0-100)", name: "level", widget: "number" },
-                    { label: "Color", name: "color", widget: "color" }
-                ]}
-             ]}
-             ]}
-          
-      - name: "personal_info"
-        label: "Personal Info & Content"
-        files:
-          - name: "hero"
-            label: "Hero / Introduction"
-            file: "client/src/content/hero.json"
+          - label: "Skill Categories"
+            name: "categories"
+            widget: "list"
             fields:
-              - { label: "Greeting", name: "greeting", widget: "string" }
-              - { label: "Main Headline", name: "headline", widget: "string" }
-              - { label: "Subheadline", name: "subheadline", widget: "string" }
-              - { label: "Availability Text", name: "availabilityText", widget: "string", default: "Seeking Internship Opportunities" }
-              - { label: "Hero Image", name: "image", widget: "image" }
-              - { label: "Resume URL", name: "resumeUrl", widget: "string" }
-              - { label: "Stats", name: "stats", widget: "object", fields: [
-                  { label: "Years Learning", name: "yearsLearning", widget: "string" },
-                  { label: "Projects Built", name: "projects", widget: "string" },
-                  { label: "Technologies", name: "skills", widget: "string" }
-              ]}
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Color", name: "color", widget: "color" }
+              - label: "Icon Name"
+                name: "iconName"
+                widget: "select"
+                options:
+                  - "Code2"
+                  - "Wrench"
+                  - "Database"
+                  - "Rocket"
+                  - "BookOpen"
+                  - "LayoutTemplate"
+                  - "Smartphone"
+                  - "Server"
+                  - "Cloud"
+                  - "Terminal"
+                  - "Globe"
+                  - "Cpu"
+                  - "Layers"
+                  - "Box"
+                  - "GitBranch"
+                  - "Monitor"
+                  - "HardDrive"
+                  - "Wifi"
+                  - "Command"
+                  - "Hash"
+                  - "FileJson"
+                  - "Brain"
+                  - "LineChart"
+                  - "Target"
+                  - "React"
+                  - "Node"
+                  - "Html"
+                  - "Css"
+                  - "Javascript"
+                  - "Typescript"
+                  - "Python"
+                  - "Java"
+                  - "Docker"
+                  - "Aws"
+                  - "Git"
+                  - "Linux"
+                  - "Next"
+                  - "Vite"
+                  - "Tailwind"
+                  - "Bootstrap"
+                  - "Prisma"
+                  - "Mongodb"
+                  - "Postgres"
+                  - "Mysql"
+                  - "Firebase"
+                  - "Netlify"
+                  - "Vercel"
+                  - "Figma"
+              - label: "Skills"
+                name: "skills"
+                widget: "list"
+                fields:
+                  - { label: "Name", name: "name", widget: "string" }
+                  - { label: "Level (0-100)", name: "level", widget: "number" }
+                  - { label: "Color", name: "color", widget: "color" }
 
-          - name: "about"
-            label: "About Me"
-            file: "client/src/content/about.json"
+  - name: "personal_info"
+    label: "Personal Info & Content"
+    files:
+      - name: "hero"
+        label: "Hero / Introduction"
+        file: "client/src/content/hero.json"
+        fields:
+          - { label: "Greeting", name: "greeting", widget: "string" }
+          - { label: "Main Headline", name: "headline", widget: "string" }
+          - { label: "Subheadline", name: "subheadline", widget: "string" }
+          - { label: "Availability Text", name: "availabilityText", widget: "string", default: "Seeking Internship Opportunities" }
+          - { label: "Hero Image", name: "image", widget: "image" }
+          - { label: "Resume URL", name: "resumeUrl", widget: "string" }
+          - label: "Stats"
+            name: "stats"
+            widget: "object"
             fields:
-              - { label: "Bio", name: "bio", widget: "text" }
-              - { label: "Available for Hire", name: "availableForHire", widget: "boolean", default: true }
-              - { label: "Social Links", name: "social", widget: "object", fields: [
-                  { label: "GitHub URL", name: "github", widget: "string" },
-                  { label: "LinkedIn URL", name: "linkedin", widget: "string" },
-                  { label: "Email", name: "email", widget: "string" },
-                  { label: "Phone", name: "phone", widget: "string" }
-              ]}
+              - { label: "Years Learning", name: "yearsLearning", widget: "string" }
+              - { label: "Projects Built", name: "projects", widget: "string" }
+              - { label: "Technologies", name: "skills", widget: "string" }
 
-          - name: "experience"
-            label: "Experience"
-            file: "client/src/content/experience.json"
+      - name: "about"
+        label: "About Me"
+        file: "client/src/content/about.json"
+        fields:
+          - { label: "Bio", name: "bio", widget: "text" }
+          - { label: "Available for Hire", name: "availableForHire", widget: "boolean", default: true }
+          - label: "Social Links"
+            name: "social"
+            widget: "object"
             fields:
-              - { label: "Experience List", name: "experience", widget: "list", fields: [
-                  { label: "Role", name: "role", widget: "string" },
-                  { label: "Company", name: "company", widget: "string" },
-                  { label: "Duration", name: "duration", widget: "string" },
-                  { label: "Description", name: "description", widget: "text" },
-                  { label: "Technologies", name: "technologies", widget: "list", required: false }
-              ]}
+              - { label: "GitHub URL", name: "github", widget: "string" }
+              - { label: "LinkedIn URL", name: "linkedin", widget: "string" }
+              - { label: "Email", name: "email", widget: "string" }
+              - { label: "Phone", name: "phone", widget: "string" }
 
-          - name: "education"
-            label: "Education"
-            file: "client/src/content/education.json"
+      - name: "experience"
+        label: "Experience"
+        file: "client/src/content/experience.json"
+        fields:
+          - label: "Experience List"
+            name: "experience"
+            widget: "list"
             fields:
-              - { label: "Education List", name: "education", widget: "list", fields: [
-                  { label: "Degree", name: "degree", widget: "string" },
-                  { label: "Institution", name: "institution", widget: "string" },
-                  { label: "Duration", name: "duration", widget: "string" },
-                  { label: "Location", name: "location", widget: "string" },
-                  { label: "Details", name: "details", widget: "text" },
-                  { label: "Achievement", name: "achievement", widget: "string" },
-                  { label: "Status", name: "status", widget: "select", options: ["Current", "Completed"] }
-              ]}
-
-          - name: "team"
-            label: "Team Section"
-            file: "client/src/content/team.json"
-            fields:
-              - { label: "Heading", name: "heading", widget: "string" }
-              - { label: "Subheading", name: "subheading", widget: "string" }
-              - { label: "Badge Text", name: "badgeText", widget: "string" }
+              - { label: "Role", name: "role", widget: "string" }
+              - { label: "Company", name: "company", widget: "string" }
+              - { label: "Duration", name: "duration", widget: "string" }
               - { label: "Description", name: "description", widget: "text" }
-              - { label: "Team Name", name: "teamName", widget: "string" }
-              - { label: "Team URL", name: "teamUrl", widget: "string" }
+              - { label: "Technologies", name: "technologies", widget: "list", required: false }
+
+      - name: "education"
+        label: "Education"
+        file: "client/src/content/education.json"
+        fields:
+          - label: "Education List"
+            name: "education"
+            widget: "list"
+            fields:
+              - { label: "Degree", name: "degree", widget: "string" }
+              - { label: "Institution", name: "institution", widget: "string" }
+              - { label: "Duration", name: "duration", widget: "string" }
+              - { label: "Location", name: "location", widget: "string" }
+              - { label: "Details", name: "details", widget: "text" }
+              - { label: "Achievement", name: "achievement", widget: "string" }
+              - { label: "Status", name: "status", widget: "select", options: ["Current", "Completed"] }
+
+      - name: "team"
+        label: "Team Section"
+        file: "client/src/content/team.json"
+        fields:
+          - { label: "Heading", name: "heading", widget: "string" }
+          - { label: "Subheading", name: "subheading", widget: "string" }
+          - { label: "Badge Text", name: "badgeText", widget: "string" }
+          - { label: "Description", name: "description", widget: "text" }
+          - { label: "Team Name", name: "teamName", widget: "string" }
+          - { label: "Team URL", name: "teamUrl", widget: "string" }

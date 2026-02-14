@@ -30,7 +30,7 @@ export function Projects() {
         {/* Header */}
         <div ref={ref} className={`text-center mb-8 md:mb-16 transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Featured <span className="text-orange-500">Projects</span>
+            Recent <span className="text-orange-500">Work</span>
           </h2>
           <p className="text-xl text-neutral-400 max-w-2xl mx-auto mb-8">
             A collection of <span className="text-orange-500 font-bold">{totalProjects}</span> projects showcasing my journey in building digital solutions.

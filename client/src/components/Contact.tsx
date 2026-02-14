@@ -116,7 +116,7 @@ export function Contact() {
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Let's{" "}
             <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
-              Work Together
+              Connect
             </span>
           </h2>
           <p className="text-xl text-neutral-300 max-w-2xl mx-auto">

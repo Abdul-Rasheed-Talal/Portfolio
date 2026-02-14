@@ -43,11 +43,11 @@ export function Testimonials() {
                 <div className={`text-center mb-16 transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                     }`}>
                     <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                        What Peers{" "}
-                        <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">Say</span>
+                        Peer{" "}
+                        <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">Feedback</span>
                     </h2>
                     <p className="text-xl text-neutral-300 max-w-2xl mx-auto">
-                        Feedback from classmates and project collaborators
+                        Insights and recommendations from classmates and project collaborators
                     </p>
                 </div>
 

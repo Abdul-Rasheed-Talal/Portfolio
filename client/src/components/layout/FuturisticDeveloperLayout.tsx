@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useMode } from '@/context/ModeContext';
 import {
@@ -15,7 +16,8 @@ import {
     Terminal,
     Activity,
     Layers,
-    Code
+    Code,
+    Zap
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
@@ -25,7 +27,9 @@ import { About } from "@/components/About";
 import { Skills } from "@/components/Skills";
 import { Education } from "@/components/Education";
 import { Contact } from "@/components/Contact";
-import { DevProjectsView } from "@/components/developer/DevProjectsView"; // New View
+import { DevProjectsView } from "@/components/developer/DevProjectsView";
+import { Terminal as TerminalComponent } from "@/components/developer/Terminal";
+import { MatrixOverlay } from "@/components/developer/MatrixOverlay";
 
 // Define the file structure
 type FileNode = {
@@ -68,11 +72,13 @@ interface DeveloperLayoutProps {
 }
 
 export function FuturisticDeveloperLayout({ children }: DeveloperLayoutProps) {
-    const { mode, toggleMode } = useMode();
+    const { mode, toggleMode, isMatrixEnabled, setIsMatrixEnabled, activeDevSidebar, setActiveDevSidebar } = useMode();
     const [activeFile, setActiveFile] = useState<FileNode | null>(null);
-    const [activeSidebar, setActiveSidebar] = useState<'explorer' | 'git' | 'debug'>('explorer');
     const [expandedFolders, setExpandedFolders] = useState<Set<string>>(new Set(['src', 'pages']));
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+    const [isTerminalOpen, setIsTerminalOpen] = useState(true);
+    const [terminalHeight, setTerminalHeight] = useState(300);
+    const [isResizing, setIsResizing] = useState(false);
 
     const [fontSize, setFontSize] = useState(14);
     const [devTheme, setDevTheme] = useState<'void' | 'solarized'>('void');
@@ -95,6 +101,29 @@ export function FuturisticDeveloperLayout({ children }: DeveloperLayoutProps) {
 
     // Sidebar Inputs
     const [searchQuery, setSearchQuery] = useState('');
+
+    // Resize logic
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            if (!isResizing) return;
+            const newHeight = window.innerHeight - e.clientY - 24; // 24 is status bar height
+            if (newHeight > 100 && newHeight < window.innerHeight * 0.7) {
+                setTerminalHeight(newHeight);
+            }
+        };
+
+        const handleMouseUp = () => setIsResizing(false);
+
+        if (isResizing) {
+            window.addEventListener('mousemove', handleMouseMove);
+            window.addEventListener('mouseup', handleMouseUp);
+        }
+
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('mouseup', handleMouseUp);
+        };
+    }, [isResizing]);
 
     // On mount, set default file
     useEffect(() => {
@@ -207,14 +236,17 @@ export function FuturisticDeveloperLayout({ children }: DeveloperLayoutProps) {
                 {/* Floating Navigation Strip (Left) */}
                 <div className="w-14 border-r flex flex-col items-center py-6 gap-6 z-40 transition-colors duration-300"
                     style={{ backgroundColor: isSolarized ? '#002b36' : '#080808', borderColor: borderColor }}>
-                    <div onClick={() => setActiveSidebar('explorer')} className={`p-3 rounded-xl cursor-pointer transition-all duration-300 ${activeSidebar === 'explorer' ? 'shadow-md' : 'opacity-60 hover:opacity-100'}`} style={{ backgroundColor: activeSidebar === 'explorer' ? accentColor : 'transparent', color: activeSidebar === 'explorer' ? (isSolarized ? 'white' : 'black') : textColor }}>
+                    <div onClick={() => setActiveDevSidebar('explorer')} className={`p-3 rounded-xl cursor-pointer transition-all duration-300 ${activeDevSidebar === 'explorer' ? 'shadow-md' : 'opacity-60 hover:opacity-100'}`} style={{ backgroundColor: activeDevSidebar === 'explorer' ? accentColor : 'transparent', color: activeDevSidebar === 'explorer' ? (isSolarized ? 'white' : 'black') : textColor }}>
                         <Box className="w-5 h-5" />
                     </div>
-                    <div onClick={() => setActiveSidebar('git')} className={`p-3 rounded-xl cursor-pointer transition-all duration-300 ${activeSidebar === 'git' ? 'shadow-md' : 'opacity-60 hover:opacity-100'}`} style={{ backgroundColor: activeSidebar === 'git' ? accentColor : 'transparent', color: activeSidebar === 'git' ? (isSolarized ? 'white' : 'black') : textColor }}>
+                    <div onClick={() => setActiveDevSidebar('git')} className={`p-3 rounded-xl cursor-pointer transition-all duration-300 ${activeDevSidebar === 'git' ? 'shadow-md' : 'opacity-60 hover:opacity-100'}`} style={{ backgroundColor: activeDevSidebar === 'git' ? accentColor : 'transparent', color: activeDevSidebar === 'git' ? (isSolarized ? 'white' : 'black') : textColor }}>
                         <GitBranch className="w-5 h-5" />
                     </div>
-                    <div onClick={() => setActiveSidebar('debug')} className={`p-3 rounded-xl cursor-pointer transition-all duration-300 ${activeSidebar === 'debug' ? 'shadow-md' : 'opacity-60 hover:opacity-100'}`} style={{ backgroundColor: activeSidebar === 'debug' ? accentColor : 'transparent', color: activeSidebar === 'debug' ? (isSolarized ? 'white' : 'black') : textColor }}>
+                    <div onClick={() => setActiveDevSidebar('debug')} className={`p-3 rounded-xl cursor-pointer transition-all duration-300 ${activeDevSidebar === 'debug' ? 'shadow-md' : 'opacity-60 hover:opacity-100'}`} style={{ backgroundColor: activeDevSidebar === 'debug' ? accentColor : 'transparent', color: activeDevSidebar === 'debug' ? (isSolarized ? 'white' : 'black') : textColor }}>
                         <Cpu className="w-5 h-5" />
+                    </div>
+                    <div onClick={() => setIsTerminalOpen(!isTerminalOpen)} className={`p-3 rounded-xl cursor-pointer transition-all duration-300 ${isTerminalOpen ? 'shadow-md opacity-100' : 'opacity-60 hover:opacity-100'}`} style={{ backgroundColor: isTerminalOpen ? `${accentColor}20` : 'transparent', color: isTerminalOpen ? accentColor : textColor, border: isTerminalOpen ? `1px solid ${accentColor}40` : '1px solid transparent' }}>
+                        <Terminal className="w-5 h-5" />
                     </div>
                     <div
                         onClick={() => setIsSettingsOpen(true)}
@@ -226,22 +258,22 @@ export function FuturisticDeveloperLayout({ children }: DeveloperLayoutProps) {
                 </div>
 
                 {/* Sidebar Content Panel */}
-                <div className={`w-72 border-r flex flex-col transition-all duration-500 ease-out z-30 ${activeSidebar ? 'translate-x-0' : '-translate-x-72'}`}
+                <div className={`w-72 border-r flex flex-col transition-all duration-500 ease-out z-30 ${activeDevSidebar ? 'translate-x-0' : '-translate-x-72'}`}
                     style={{ backgroundColor: sidebarColor, borderColor: borderColor }}>
                     <div className="h-12 border-b flex items-center px-6" style={{ borderColor: borderColor }}>
                         <span className="font-bold text-sm tracking-wider uppercase opacity-80" style={{ color: textColor }}>
-                            {activeSidebar === 'explorer' && 'Project Files'}
-                            {activeSidebar === 'git' && 'Source Control'}
-                            {activeSidebar === 'debug' && 'System Diagnostics'}
+                            {activeDevSidebar === 'explorer' && 'Project Files'}
+                            {activeDevSidebar === 'git' && 'Source Control'}
+                            {activeDevSidebar === 'debug' && 'System Diagnostics'}
                         </span>
                     </div>
 
                     <div className="flex-1 overflow-y-auto py-4 custom-scrollbar">
                         {/* Explorer Content */}
-                        {activeSidebar === 'explorer' && renderTree(FILE_TREE)}
+                        {activeDevSidebar === 'explorer' && renderTree(FILE_TREE)}
 
                         {/* Git Content */}
-                        {activeSidebar === 'git' && (
+                        {activeDevSidebar === 'git' && (
                             <div className="px-4">
                                 <div className="flex items-center justify-between mb-4">
                                     <span className="text-xs text-[#888]">Changes</span>
@@ -268,7 +300,7 @@ export function FuturisticDeveloperLayout({ children }: DeveloperLayoutProps) {
                         )}
 
                         {/* Debug Content */}
-                        {activeSidebar === 'debug' && (
+                        {activeDevSidebar === 'debug' && (
                             <div className="px-4 space-y-6">
                                 <div>
                                     <div className="text-xs text-[#555] mb-2 uppercase tracking-wide flex justify-between">
@@ -279,6 +311,42 @@ export function FuturisticDeveloperLayout({ children }: DeveloperLayoutProps) {
                                         <div className="flex justify-between"><span>V8 Heap</span><span className="text-[#ccc]">42 MB</span></div>
                                         <div className="flex justify-between"><span>Rendering</span><span className="text-[#ccc]">16.7ms</span></div>
                                         <div className="flex justify-between"><span>Listeners</span><span className="text-[#ccc]">124</span></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div className="text-xs text-[#555] mb-2 uppercase tracking-wide flex justify-between">
+                                        <span>Activity Graph</span>
+                                        <span className="text-[10px] lowercase" style={{ color: accentColor }}>last 12 months</span>
+                                    </div>
+                                    <div className="p-2 rounded border border-[#222] bg-black/40 overflow-hidden">
+                                        <div className="grid grid-cols-12 gap-1 px-1">
+                                            {Array.from({ length: 48 }).map((_, i) => (
+                                                <div
+                                                    key={i}
+                                                    className={`w-3 h-3 rounded-sm transition-colors duration-500`}
+                                                    style={{
+                                                        backgroundColor: Math.random() > 0.7 ? (Math.random() > 0.5 ? accentColor : `${accentColor}60`) : '#111',
+                                                        opacity: Math.random() > 0.3 ? 1 : 0.3
+                                                    }}
+                                                />
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div className="text-xs text-[#555] mb-2 uppercase tracking-wide">System Logs</div>
+                                    <div className="p-2 rounded border border-[#222] bg-black font-mono text-[9px] h-32 overflow-hidden relative">
+                                        <div className="space-y-1 opacity-60 animate-in fade-in slide-in-from-bottom-2 duration-1000">
+                                            <div className="flex gap-2 text-blue-400"><span>[INFO]</span> <span className="text-[#888]">Initializing UI components...</span></div>
+                                            <div className="flex gap-2 text-green-400"><span>[SUCCESS]</span> <span className="text-[#888]">Portfolio mode active</span></div>
+                                            <div className="flex gap-2 text-blue-400"><span>[INFO]</span> <span className="text-[#888]">Fetching projects from DB...</span></div>
+                                            <div className="flex gap-2 text-yellow-400"><span>[WARN]</span> <span className="text-[#888]">High latency detected in Tokyo-1</span></div>
+                                            <div className="flex gap-2 text-blue-400"><span>[INFO]</span> <span className="text-[#888]">Compressing assets (72%)...</span></div>
+                                            <div className="flex gap-2 text-emerald-400"><span>[READY]</span> <span className="text-[#888]">Developer tools online</span></div>
+                                        </div>
+                                        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black pointer-events-none" />
                                     </div>
                                 </div>
 
@@ -318,6 +386,24 @@ export function FuturisticDeveloperLayout({ children }: DeveloperLayoutProps) {
                             </div>
                         )}
                     </div>
+
+                    {/* Terminal Component with Resize Handle */}
+                    {isTerminalOpen && (
+                        <div
+                            className="border-t relative z-20 transition-all duration-75"
+                            style={{
+                                borderColor: borderColor,
+                                height: `${terminalHeight}px`
+                            }}
+                        >
+                            {/* Resize Handle */}
+                            <div
+                                className="absolute -top-1 left-0 right-0 h-2 cursor-ns-resize hover:bg-emerald-500/20 z-30 transition-colors"
+                                onMouseDown={() => setIsResizing(true)}
+                            />
+                            <TerminalComponent onClose={() => setIsTerminalOpen(false)} />
+                        </div>
+                    )}
 
                     {/* Mock Minimap */}
                     {showMinimap && (
@@ -370,6 +456,12 @@ export function FuturisticDeveloperLayout({ children }: DeveloperLayoutProps) {
                                             <div className={`absolute top-0.5 w-3 h-3 bg-black rounded-full transition-all ${showMinimap ? 'right-0.5' : 'left-0.5'}`}></div>
                                         </div>
                                     </div>
+                                    <div className="flex items-center justify-between p-2 rounded hover:bg-[#111] cursor-pointer" onClick={() => setIsMatrixEnabled(!isMatrixEnabled)}>
+                                        <span className="text-sm text-[#ccc]">Matrix Mode</span>
+                                        <div className={`w-8 h-4 rounded-full relative transition-colors ${isMatrixEnabled ? 'bg-[#00ff9d]' : 'bg-[#333]'}`}>
+                                            <div className={`absolute top-0.5 w-3 h-3 bg-black rounded-full transition-all ${isMatrixEnabled ? 'right-0.5' : 'left-0.5'}`}></div>
+                                        </div>
+                                    </div>
                                     <div className="flex items-center justify-between p-2 rounded hover:bg-[#111]">
                                         <span className="text-sm text-[#ccc]">Telemetry</span>
                                         <div className="w-8 h-4 bg-[#333] rounded-full relative"><div className="absolute left-0.5 top-0.5 w-3 h-3 bg-[#666] rounded-full"></div></div>
@@ -390,12 +482,31 @@ export function FuturisticDeveloperLayout({ children }: DeveloperLayoutProps) {
                 style={{ backgroundColor: sidebarColor, borderColor: borderColor }}>
                 <div className="flex items-center gap-4">
                     <span className="flex items-center gap-1" style={{ color: accentColor }}><GitBranch className="w-3 h-3" /> main</span>
-                    <span className="flex items-center gap-1"><Terminal className="w-3 h-3" /> Ready</span>
+                    <button
+                        onClick={() => setIsTerminalOpen(!isTerminalOpen)}
+                        className={`flex items-center gap-1 hover:text-white transition-colors cursor-pointer ${isTerminalOpen ? 'text-emerald-500' : 'text-[#666]'}`}
+                    >
+                        <Terminal className="w-3 h-3" />
+                        {isTerminalOpen ? 'Terminal Active' : 'Open Terminal'}
+                    </button>
+                    <button
+                        onClick={() => setIsMatrixEnabled(!isMatrixEnabled)}
+                        className={`flex items-center gap-1 hover:text-white transition-colors cursor-pointer ${isMatrixEnabled ? 'text-[#00ff9d]' : 'text-[#666]'}`}
+                    >
+                        <Zap className={`w-3 h-3 ${isMatrixEnabled ? 'animate-pulse' : ''}`} />
+                        Matrix: {isMatrixEnabled ? 'ON' : 'OFF'}
+                    </button>
+                    <button
+                        onClick={() => setActiveDevSidebar(activeDevSidebar === 'debug' ? 'explorer' : 'debug')}
+                        className={`flex items-center gap-1 hover:text-white transition-colors cursor-pointer ${activeDevSidebar === 'debug' ? 'text-blue-400' : 'text-[#666]'}`}
+                    >
+                        <Cpu className="w-3 h-3" />
+                        Diagnostics
+                    </button>
                 </div>
                 <div className="flex items-center gap-4">
                     <span>Ln 42, Col 12</span>
                     <span>UTF-8</span>
-                    <span>TypeScript</span>
                 </div>
             </div>
         </div>

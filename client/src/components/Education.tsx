@@ -28,9 +28,9 @@ export function Education() {
         <div className={`text-center mb-16 transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Education{" "}
+            Academic{" "}
             <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
-              Journey
+              Background
             </span>
           </h2>
           <p className="text-xl text-neutral-300 max-w-2xl mx-auto">

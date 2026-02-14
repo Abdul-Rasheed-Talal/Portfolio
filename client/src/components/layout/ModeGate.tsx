@@ -21,7 +21,9 @@ export function ModeGate() {
         }
     }, [mode, isFirstVisit, isBypassed]);
 
-    if (!showModal) return null;
+    const isMobile = typeof window !== 'undefined' && window.matchMedia("(max-width: 768px)").matches;
+
+    if (!showModal || isMobile) return null;
 
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center">

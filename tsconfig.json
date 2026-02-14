@@ -23,6 +23,7 @@
     ],
     "jsx": "preserve",
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
@@ -30,6 +31,8 @@
     "baseUrl": ".",
     "types": [
       "node",
+      "react",
+      "react-dom",
       "vite/client"
     ],
     "paths": {

@@ -11,6 +11,8 @@ import { FeedbackPopup } from "@/components/FeedbackPopup";
 
 import { Suspense, lazy } from "react";
 import Preloader from "@/components/Preloader";
+import { MatrixOverlay } from "@/components/developer/MatrixOverlay";
+import { useMode } from "@/context/ModeContext";
 
 // Lazy load pages
 const Portfolio = lazy(() => import("@/pages/portfolio"));
@@ -40,6 +42,21 @@ function Router() {
 
 import ErrorBoundary from "@/components/ErrorBoundary";
 
+function AppContent() {
+  const { isMatrixEnabled } = useMode();
+  return (
+    <>
+      <Toaster />
+      <ModeGate />
+      <FeedbackPopup />
+      <FuturisticDeveloperLayout>
+        <Router />
+      </FuturisticDeveloperLayout>
+      {isMatrixEnabled && <MatrixOverlay />}
+    </>
+  );
+}
+
 function App() {
   return (
     <ErrorBoundary>
@@ -47,12 +64,7 @@ function App() {
         <ModeProvider>
           <ThemeProvider>
             <TooltipProvider>
-              <Toaster />
-              <ModeGate />
-              <FeedbackPopup />
-              <FuturisticDeveloperLayout>
-                <Router />
-              </FuturisticDeveloperLayout>
+              <AppContent />
             </TooltipProvider>
           </ThemeProvider>
         </ModeProvider>

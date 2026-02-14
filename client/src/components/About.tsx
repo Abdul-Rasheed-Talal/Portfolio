@@ -33,8 +33,8 @@ export function About() {
         <div className={`text-center mb-16 transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            About{" "}
-            <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">Me</span>
+            The Developer{" "}
+            <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">Story</span>
           </h2>
         </div>
 

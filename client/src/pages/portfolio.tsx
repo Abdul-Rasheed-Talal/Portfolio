@@ -13,6 +13,7 @@ const Projects = lazy(() => import("@/components/Projects").then(module => ({ de
 const Education = lazy(() => import("@/components/Education").then(module => ({ default: module.Education })));
 const Testimonials = lazy(() => import("@/components/Testimonials").then(module => ({ default: module.Testimonials })));
 const Contact = lazy(() => import("@/components/Contact").then(module => ({ default: module.Contact })));
+const ExperimentLab = lazy(() => import("@/components/ExperimentLab").then(module => ({ default: module.ExperimentLab })));
 const Footer = lazy(() => import("@/components/Footer").then(module => ({ default: module.Footer })));
 
 const SectionLoader = () => <div className="w-full h-96 flex items-center justify-center"><Skeleton className="w-full max-w-4xl h-64" /></div>;
@@ -31,13 +32,7 @@ export default function Portfolio() {
 
         <ViewportLazyLoader placeholder={<SectionLoader />}>
           <Suspense fallback={<SectionLoader />}>
-            <About />
-          </Suspense>
-        </ViewportLazyLoader>
-
-        <ViewportLazyLoader placeholder={<SectionLoader />}>
-          <Suspense fallback={<SectionLoader />}>
-            <Team />
+            <Projects />
           </Suspense>
         </ViewportLazyLoader>
 
@@ -49,7 +44,19 @@ export default function Portfolio() {
 
         <ViewportLazyLoader placeholder={<SectionLoader />}>
           <Suspense fallback={<SectionLoader />}>
-            <Projects />
+            <ExperimentLab />
+          </Suspense>
+        </ViewportLazyLoader>
+
+        <ViewportLazyLoader placeholder={<SectionLoader />}>
+          <Suspense fallback={<SectionLoader />}>
+            <About />
+          </Suspense>
+        </ViewportLazyLoader>
+
+        <ViewportLazyLoader placeholder={<SectionLoader />}>
+          <Suspense fallback={<SectionLoader />}>
+            <Team />
           </Suspense>
         </ViewportLazyLoader>
 

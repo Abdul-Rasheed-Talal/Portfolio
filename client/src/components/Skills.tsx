@@ -40,7 +40,7 @@ export function Skills() {
         {/* Header */}
         <div ref={ref} className={`text-center mb-16 transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            My <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-600">Skills</span>
+            Technical <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-600">Expertise</span>
           </h2>
           <p className="text-neutral-400 text-lg">
             Technologies and tools I use to bring ideas to life
@@ -54,8 +54,8 @@ export function Skills() {
               key={category.title}
               onClick={() => setActiveTab(category.title)}
               className={`flex-none snap-center flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 border whitespace-nowrap ${activeTab === category.title
-                  ? "bg-gradient-to-r from-orange-500 to-red-600 text-white border-transparent shadow-lg shadow-orange-500/20"
-                  : "bg-neutral-900/50 border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-700 hover:bg-neutral-900"
+                ? "bg-gradient-to-r from-orange-500 to-red-600 text-white border-transparent shadow-lg shadow-orange-500/20"
+                : "bg-neutral-900/50 border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-700 hover:bg-neutral-900"
                 }`}
             >
               {getCategoryIcon(category.title)}

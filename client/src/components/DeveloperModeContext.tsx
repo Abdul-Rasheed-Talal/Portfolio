@@ -36,10 +36,10 @@ export function DeveloperModeProvider({ children }: { children: ReactNode }) {
       const promptDismissed = localStorage.getItem(MOBILE_PROMPT_DISMISSED_KEY);
       const savedMode = localStorage.getItem(STORAGE_KEY);
 
-      if (mobile && !promptDismissed && savedMode === null) {
-        // First time mobile visitor
+      if (mobile && savedMode === null) {
+        // First time mobile visitor - default to normal mode
         setIsDeveloperMode(false);
-        setShowMobilePrompt(true);
+        setShowMobilePrompt(false); // Disable prompt
       } else if (!mobile && savedMode === null) {
         // First time desktop visitor - enable dev mode
         setIsDeveloperMode(true);

@@ -38,7 +38,7 @@ collections:
                   - { label: "Forks", name: "forks", widget: "number", default: 0 }
 
       - name: "skills"
-        label: "Skills"
+        label: "Expertise"
         file: "client/src/content/skills.json"
         editor:
           preview: false
@@ -131,7 +131,7 @@ collections:
               - { label: "Technologies", name: "skills", widget: "string" }
 
       - name: "about"
-        label: "About Me"
+        label: "Story"
         file: "client/src/content/about.json"
         fields:
           - { label: "Bio", name: "bio", widget: "text" }
@@ -160,7 +160,7 @@ collections:
               - { label: "Technologies", name: "technologies", widget: "list", required: false }
 
       - name: "education"
-        label: "Education"
+        label: "Academic Background"
         file: "client/src/content/education.json"
         fields:
           - label: "Education List"

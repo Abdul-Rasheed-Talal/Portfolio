@@ -130,5 +130,19 @@
         }
       ]
     }
+  ],
+  "categories": [
+    {
+      "title": "Database & Design",
+      "color": "#d90606",
+      "iconName": "Mongodb",
+      "skills": [
+        {
+          "name": "MongoDB",
+          "level": 70,
+          "color": "#229e0b"
+        }
+      ]
+    }
   ]
 }

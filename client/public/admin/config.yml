@@ -181,7 +181,7 @@ collections:
               - { label: "Company", name: "company", widget: "string" }
               - { label: "Duration", name: "duration", widget: "string" }
               - { label: "Description", name: "description", widget: "text" }
-              - label: "Technologies", name: "technologies", widget: "list", required: false, field: { label: "Tech", widget: "string" }
+              - { label: "Technologies", name: "technologies", widget: "list", required: false, field: { label: "Tech", widget: "string" } }
 
       - name: "education"
         label: "Academic Background"

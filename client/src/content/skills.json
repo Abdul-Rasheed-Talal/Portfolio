@@ -1,39 +1,29 @@
 {
   "skillCategories": [
     {
-      "title": "Core Technologies",
-      "iconName": "Code2",
-      "color": "#E34F26",
+      "title": "Full Stack Dev",
+      "iconName": "Rocket",
+      "color": "#61DAFB",
       "skills": [
         {
-          "name": "HTML5",
-          "level": 90,
-          "color": "#E34F26"
-        },
-        {
-          "name": "CSS3",
-          "level": 85,
-          "color": "#1572B6"
-        },
-        {
-          "name": "JavaScript",
+          "name": "MongoDB",
           "level": 80,
-          "color": "#F7DF1E"
+          "color": "#47A248"
         },
         {
-          "name": "TypeScript",
+          "name": "Express.js",
           "level": 75,
-          "color": "#3178C6"
+          "color": "#000000"
         },
         {
           "name": "React.js",
-          "level": 75,
+          "level": 85,
           "color": "#61DAFB"
         },
         {
-          "name": "Next.js",
-          "level": 60,
-          "color": "#000000"
+          "name": "Node.js",
+          "level": 80,
+          "color": "#339933"
         }
       ]
     },
@@ -43,93 +33,70 @@
       "color": "#4479A1",
       "skills": [
         {
-          "name": "MySQL Workbench",
-          "level": 65,
+          "name": "MySQL",
+          "level": 85,
           "color": "#4479A1"
         },
         {
-          "name": "Figma",
-          "level": 60,
-          "color": "#F24E1E"
+          "name": "Prisma",
+          "level": 70,
+          "color": "#2D3748"
         },
         {
-          "name": "Tailwind CSS",
+          "name": "Figma",
           "level": 85,
-          "color": "#38B2AC"
+          "color": "#F24E1E"
         }
       ]
     },
     {
-      "title": "Development Tools",
+      "title": "Frontend Tools",
+      "iconName": "Layout",
+      "color": "#38B2AC",
+      "skills": [
+        {
+          "name": "TypeScript",
+          "level": 80,
+          "color": "#3178C6"
+        },
+        {
+          "name": "Tailwind CSS",
+          "level": 90,
+          "color": "#38B2AC"
+        },
+        {
+          "name": "Bootstrap",
+          "level": 85,
+          "color": "#7952B3"
+        }
+      ]
+    },
+    {
+      "title": "Productivity",
       "iconName": "Wrench",
       "color": "#F05032",
       "skills": [
         {
           "name": "Git & GitHub",
-          "level": 80,
+          "level": 90,
           "color": "#F05032"
         },
         {
-          "name": "Postman",
+          "name": "Docker",
           "level": 65,
+          "color": "#2496ED"
+        },
+        {
+          "name": "Postman",
+          "level": 80,
           "color": "#FF6C37"
         },
         {
           "name": "VS Code",
-          "level": 85,
+          "level": 95,
           "color": "#007ACC"
         }
       ]
-    },
-    {
-      "title": "Learning List",
-      "iconName": "BookOpen",
-      "color": "#F05032",
-      "skills": [
-        {
-          "name": "Express",
-          "level": 50,
-          "color": "#000000"
-        },
-        {
-          "name": "REST API",
-          "level": 60,
-          "color": "#009688"
-        },
-        {
-          "name": "AWS",
-          "level": 40,
-          "color": "#FF9900"
-        },
-        {
-          "name": "DevOps",
-          "level": 30,
-          "color": "#239120"
-        }
-      ]
-    },
-    {
-      "title": "Future Goals",
-      "iconName": "Target",
-      "color": "#FFD700",
-      "skills": [
-        {
-          "name": "AI/ML",
-          "level": 0,
-          "color": "#FF69B4"
-        },
-        {
-          "name": "Data Science",
-          "level": 0,
-          "color": "#4B0082"
-        },
-        {
-          "name": "System Design",
-          "level": 0,
-          "color": "#FF4500"
-        }
-      ]
     }
-  ],
-  "categories": []
+  ]
 }

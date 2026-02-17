@@ -39,7 +39,7 @@ export function About() {
   }, [isIntersecting]);
 
   return (
-    <section id="about" className="py-20 px-4">
+    <section className="py-20 px-4">
       <div className="max-w-7xl mx-auto">
         <div className={`text-center mb-16 transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}>

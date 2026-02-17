@@ -31,29 +31,37 @@ export default function Portfolio() {
       <main>
         <Hero />
 
-        <ViewportLazyLoader placeholder={<SectionLoader />}>
-          <Suspense fallback={<SectionLoader />}>
-            <Projects />
-          </Suspense>
-        </ViewportLazyLoader>
+        <div id="projects">
+          <ViewportLazyLoader placeholder={<SectionLoader />}>
+            <Suspense fallback={<SectionLoader />}>
+              <Projects />
+            </Suspense>
+          </ViewportLazyLoader>
+        </div>
 
-        <ViewportLazyLoader placeholder={<SectionLoader />}>
-          <Suspense fallback={<SectionLoader />}>
-            <Skills />
-          </Suspense>
-        </ViewportLazyLoader>
+        <div id="skills">
+          <ViewportLazyLoader placeholder={<SectionLoader />}>
+            <Suspense fallback={<SectionLoader />}>
+              <Skills />
+            </Suspense>
+          </ViewportLazyLoader>
+        </div>
 
-        <ViewportLazyLoader placeholder={<SectionLoader />}>
-          <Suspense fallback={<SectionLoader />}>
-            <ExperimentLab />
-          </Suspense>
-        </ViewportLazyLoader>
+        <div id="lab">
+          <ViewportLazyLoader placeholder={<SectionLoader />}>
+            <Suspense fallback={<SectionLoader />}>
+              <ExperimentLab />
+            </Suspense>
+          </ViewportLazyLoader>
+        </div>
 
-        <ViewportLazyLoader placeholder={<SectionLoader />}>
-          <Suspense fallback={<SectionLoader />}>
-            <About />
-          </Suspense>
-        </ViewportLazyLoader>
+        <div id="about">
+          <ViewportLazyLoader placeholder={<SectionLoader />}>
+            <Suspense fallback={<SectionLoader />}>
+              <About />
+            </Suspense>
+          </ViewportLazyLoader>
+        </div>
 
         <ViewportLazyLoader placeholder={<SectionLoader />}>
           <Suspense fallback={<SectionLoader />}>
@@ -73,11 +81,13 @@ export default function Portfolio() {
           </Suspense>
         </ViewportLazyLoader>
 
-        <ViewportLazyLoader placeholder={<SectionLoader />}>
-          <Suspense fallback={<SectionLoader />}>
-            <Contact />
-          </Suspense>
-        </ViewportLazyLoader>
+        <div id="contact">
+          <ViewportLazyLoader placeholder={<SectionLoader />}>
+            <Suspense fallback={<SectionLoader />}>
+              <Contact />
+            </Suspense>
+          </ViewportLazyLoader>
+        </div>
       </main>
 
       <ViewportLazyLoader placeholder={<div className="h-20 bg-neutral-900" />}>

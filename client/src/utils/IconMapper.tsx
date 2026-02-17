@@ -87,6 +87,10 @@ export const IconMapper = ({ name, className }: { name: string; className?: stri
         "wordpress": FaWordpress,
         "postman": SiPostman, // Ensure import
         "mysqlworkbench": SiMysql, // Use MySQL icon for workbench
+        "vscode": Code2,
+        "visualstudiocode": Code2,
+        "expressjs": SiExpress,
+        "mern": FaReact,
         "aitools": Bot,
         "ai": Brain,
         "ml": Brain,

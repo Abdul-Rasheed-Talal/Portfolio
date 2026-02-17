@@ -25,7 +25,7 @@ export function Projects() {
   };
 
   return (
-    <section id="projects" className="pt-4 pb-24 px-4 relative">
+    <section className="pt-4 pb-24 px-4 relative">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div ref={ref} className={`text-center mb-8 md:mb-16 transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>

@@ -3,23 +3,22 @@ import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { IconMapper } from "@/utils/IconMapper";
 import { motion, AnimatePresence } from "framer-motion";
 import skillsData from "../content/skills.json";
-import { Code2, Database, Wrench, BookOpen, Target, Layout } from "lucide-react";
+import { Code2, Database, Wrench, BookOpen, Target, Layout, Rocket } from "lucide-react";
 
 // Optional: Map JSON categories to specific icons if needed, or use IconMapper dynamically
 const getCategoryIcon = (title: string) => {
   switch (title) {
-    case "Core Technologies": return <Code2 className="w-4 h-4" />;
+    case "Full Stack Dev": return <Rocket className="w-4 h-4" />;
     case "Database & Design": return <Database className="w-4 h-4" />;
-    case "Development Tools": return <Wrench className="w-4 h-4" />;
-    case "Learning List": return <BookOpen className="w-4 h-4" />;
-    case "Future Goals": return <Target className="w-4 h-4" />;
+    case "Frontend Tools": return <Layout className="w-4 h-4" />;
+    case "Productivity": return <Wrench className="w-4 h-4" />;
     default: return <Layout className="w-4 h-4" />;
   }
 };
 
 export function Skills() {
   const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.1 });
-  const [activeTab, setActiveTab] = useState(skillsData.skillCategories[0]?.title || "Core Technologies");
+  const [activeTab, setActiveTab] = useState(skillsData.skillCategories[0]?.title || "Full Stack Dev");
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -31,7 +30,7 @@ export function Skills() {
   const activeCategory = skillsData.skillCategories.find(cat => cat.title === activeTab);
 
   return (
-    <section id="skills" className="pt-24 pb-4 px-4 relative overflow-hidden flex flex-col items-center">
+    <section className="pt-24 pb-4 px-4 relative overflow-hidden flex flex-col items-center">
       {/* Background Elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl -z-10" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl -z-10" />

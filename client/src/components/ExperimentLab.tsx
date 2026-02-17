@@ -58,7 +58,7 @@ export function ExperimentLab() {
     ];
 
     return (
-        <section id="lab" className="py-24 px-4 relative overflow-hidden bg-black">
+        <section className="py-24 px-4 relative overflow-hidden bg-black">
             {/* Background Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-orange-500/10 blur-[120px] rounded-full pointer-events-none" />
 

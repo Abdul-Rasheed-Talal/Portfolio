@@ -5,12 +5,24 @@ import educationJson from "../content/education.json";
 
 const educationData = educationJson.education;
 
-const achievements = [
-  { icon: Trophy, text: "2nd Position in PBTE Board", color: "text-yellow-400" },
-  { icon: Star, text: "97% in DAE 1st Year", color: "text-orange-400" },
-  { icon: Award, text: "95% in Matriculation", color: "text-blue-400" },
-  { icon: Target, text: "5+ Projects Completed", color: "text-green-400" },
-];
+const iconMap: Record<string, any> = {
+  GraduationCap,
+  Award,
+  Trophy,
+  Star,
+  Target,
+  TrendingUp
+};
+
+const achievements = (educationJson.achievements || [
+  { icon: "Trophy", text: "2nd Position in PBTE Board", color: "text-yellow-400" },
+  { icon: "Star", text: "97% in DAE 1st Year", color: "text-orange-400" },
+  { icon: "Award", text: "95% in Matriculation", color: "text-blue-400" },
+  { icon: "Target", text: "5+ Projects Completed", color: "text-green-400" },
+]).map(a => ({
+  ...a,
+  icon: typeof a.icon === 'string' ? iconMap[a.icon] || Award : a.icon
+}));
 
 export function Education() {
   const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.2 });

@@ -18,5 +18,27 @@
             "achievement": "Score: 1147/1200 (95%)",
             "status": "Completed"
         }
+    ],
+    "achievements": [
+        {
+            "icon": "Trophy",
+            "text": "2nd Position in PBTE Board",
+            "color": "text-yellow-400"
+        },
+        {
+            "icon": "Star",
+            "text": "97% in DAE 1st Year",
+            "color": "text-orange-400"
+        },
+        {
+            "icon": "Award",
+            "text": "95% in Matriculation",
+            "color": "text-blue-400"
+        },
+        {
+            "icon": "Target",
+            "text": "5+ Projects Completed",
+            "color": "text-green-400"
+        }
     ]
 }

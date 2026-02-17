@@ -1,5 +1,26 @@
 {
+    "name": "Abdul Rasheed Talal",
+    "title": "Web Developer",
+    "location": "Bhakkar, Pakistan",
+    "passion": "Building amazing things",
     "bio": "Aspiring Full-Stack Developer proficient in HTML, CSS, JavaScript, Bootstrap, and MySQL. Experienced with Git, GitHub, and Figma; currently learning React.js. Passionate about building responsive web apps and exploring DevOps/Cloud (AWS/Azure). Actively seeking internships to gain real-world experience.",
+    "badges": [
+        {
+            "icon": "Coffee",
+            "text": "Tea Enthusiast",
+            "color": "text-orange-400"
+        },
+        {
+            "icon": "Heart",
+            "text": "Open Source Learner",
+            "color": "text-red-400"
+        },
+        {
+            "icon": "Zap",
+            "text": "Problem Solver",
+            "color": "text-yellow-400"
+        }
+    ],
     "social": {
         "github": "https://github.com/Abdul-Rasheed-Talal",
         "linkedin": "https://www.linkedin.com/in/abdulrasheedtalal/",

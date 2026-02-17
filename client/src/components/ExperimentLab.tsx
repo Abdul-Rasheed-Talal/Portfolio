@@ -12,7 +12,8 @@ export function ExperimentLab() {
         isCVModalOpen,
         openCVPreview,
         openDiagnostics,
-        activeDevSidebar
+        activeDevSidebar,
+        isMobile
     } = useMode();
 
     const experiments = [
@@ -32,7 +33,8 @@ export function ExperimentLab() {
             action: toggleMode,
             active: mode === 'developer',
             color: "from-blue-500 to-indigo-700",
-            cta: mode === 'developer' ? "Exit Dev Mode" : "Enter Dev Mode"
+            cta: isMobile ? "Desktop Only" : (mode === 'developer' ? "Exit Dev Mode" : "Enter Dev Mode"),
+            disabled: isMobile
         },
         {
             title: "System Diagnostics",
@@ -41,7 +43,8 @@ export function ExperimentLab() {
             action: openDiagnostics,
             active: mode === 'developer' && activeDevSidebar === 'debug',
             color: "from-purple-500 to-pink-700",
-            cta: "Open Diagnostics"
+            cta: isMobile ? "Desktop Only" : "Open Diagnostics",
+            disabled: isMobile
         },
         {
             title: "Premium CV Engine",
@@ -85,7 +88,7 @@ export function ExperimentLab() {
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ delay: idx * 0.1 }}
-                            className={`group relative p-8 rounded-3xl border border-neutral-800 transition-all duration-500 hover:border-neutral-600 overflow-hidden flex flex-col h-full bg-neutral-900/40 backdrop-blur-sm`}
+                            className={`group relative p-8 rounded-3xl border border-neutral-800 transition-all duration-500 hover:border-neutral-600 overflow-hidden flex flex-col h-full bg-neutral-900/40 backdrop-blur-sm ${(exp as any).disabled ? 'opacity-75' : ''}`}
                         >
                             {/* Card Background Gradient */}
                             <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity bg-gradient-to-br ${exp.color}`} />
@@ -96,17 +99,25 @@ export function ExperimentLab() {
 
                             <h3 className="text-xl font-bold mb-3 group-hover:text-white transition-colors">
                                 {exp.title}
+                                {isMobile && (exp as any).disabled && (
+                                    <span className="ml-2 text-[10px] font-mono text-orange-500 uppercase tracking-tighter">Gated</span>
+                                )}
                             </h3>
 
                             <p className="text-neutral-400 text-sm mb-8 flex-1 leading-relaxed">
                                 {exp.description}
+                                {isMobile && (exp as any).disabled && (
+                                    <span className="block mt-2 text-xs text-orange-400/70 italic">Best experienced on desktop.</span>
+                                )}
                             </p>
 
                             <button
                                 onClick={exp.action}
                                 className={`w-full py-3 rounded-xl font-bold text-sm transition-all duration-300 transform active:scale-95 flex items-center justify-center gap-2 ${exp.active
                                     ? "bg-white text-black shadow-white/10"
-                                    : "bg-neutral-800 text-neutral-300 hover:bg-neutral-700"
+                                    : (exp as any).disabled
+                                        ? "bg-neutral-800/50 text-neutral-500 cursor-not-allowed"
+                                        : "bg-neutral-800 text-neutral-300 hover:bg-neutral-700"
                                     }`}
                             >
                                 {exp.active && <Rocket className="w-4 h-4 animate-bounce" />}

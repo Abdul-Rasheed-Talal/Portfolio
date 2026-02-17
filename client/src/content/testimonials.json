@@ -1,0 +1,25 @@
+{
+    "testimonials": [
+        {
+            "name": "Classmate from GCT",
+            "role": "CIT Student",
+            "content": "Abdul Rasheed helped me debug my C++ project when I was stuck for hours. He has a great way of explaining complex concepts in simple terms.",
+            "avatar": "👨‍🎓",
+            "rating": 5
+        },
+        {
+            "name": "Junior Student",
+            "role": "1st Year CIT",
+            "content": "Whenever I face issues with HTML or CSS, Abdul is my go-to person. He not only solves the problem but teaches me how to avoid it next time.",
+            "avatar": "👨‍💻",
+            "rating": 5
+        },
+        {
+            "name": "Project Partner",
+            "role": "Web Development Team",
+            "content": "Working with Abdul on the GCT Bhakkar website was amazing. His attention to detail and problem-solving skills made our project stand out.",
+            "avatar": "👩‍💻",
+            "rating": 5
+        }
+    ]
+}

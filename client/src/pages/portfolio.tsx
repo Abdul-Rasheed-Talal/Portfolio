@@ -4,6 +4,7 @@ import { Navigation } from "@/components/Navigation";
 import SEO from "@/components/SEO";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ViewportLazyLoader } from "@/components/ViewportLazyLoader";
+import seoData from "@/content/seo.json";
 
 // Lazy load below-the-fold components
 const About = lazy(() => import("@/components/About").then(module => ({ default: module.About })));
@@ -22,9 +23,9 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen bg-black">
       <SEO
-        title="Abdul Rasheed - AI & GenAI Developer"
-        description="Portfolio of Abdul Rasheed, a Full-Stack Generative AI Developer specializing in MERN stack, Next.js, and AI automation."
-        keywords="Abdul Rasheed, AI Developer, Full Stack Developer, Generative AI, MERN Stack, React, Next.js, Portfolio, Web Development"
+        title={seoData.title}
+        description={seoData.description}
+        keywords={seoData.keywords}
       />
       <Navigation />
       <main>

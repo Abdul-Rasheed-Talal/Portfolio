@@ -3,8 +3,40 @@
     "headline": "Abdul Rasheed Talal",
     "subheadline": "Functional Full Stack Developer | Building High-Performance Web Solutions",
     "image": "/assets/profile-picture.jpg",
-    "resumeUrl": "/assets/resume.pdf",
+    "resumeUrl": "/assets/Abdul-Rasheed-internship-CV.pdf",
     "availabilityText": "Seeking Internship Opportunities",
+    "typingTexts": [
+        "Web Developer",
+        "CIT Student",
+        "Problem Solver",
+        "Tech Enthusiast"
+    ],
+    "navItems": [
+        {
+            "href": "#home",
+            "label": "HOME"
+        },
+        {
+            "href": "#projects",
+            "label": "PROJECTS"
+        },
+        {
+            "href": "#skills",
+            "label": "EXPERTISE"
+        },
+        {
+            "href": "#lab",
+            "label": "LAB"
+        },
+        {
+            "href": "#about",
+            "label": "STORY"
+        },
+        {
+            "href": "#contact",
+            "label": "CONNECT"
+        }
+    ],
     "stats": {
         "yearsLearning": "2+",
         "projects": "5+",

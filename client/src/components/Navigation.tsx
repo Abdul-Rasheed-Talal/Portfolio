@@ -8,7 +8,9 @@ import { CVPreviewModal } from "./CVPreviewModal";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
 
-const navItems = [
+import heroData from "../content/hero.json";
+
+const navItems = heroData.navItems || [
   { href: "#home", label: "HOME" },
   { href: "#projects", label: "PROJECTS" },
   { href: "#skills", label: "EXPERTISE" },
@@ -21,7 +23,7 @@ export function Navigation() {
   const { mode, toggleMode, isCVModalOpen, setIsCVModalOpen } = useMode();
   const [activeSection, setActiveSection] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
-  const cvUrl = "/assets/Abdul-Rasheed-internship-CV.pdf";
+  const cvUrl = heroData.resumeUrl || "/assets/Abdul-Rasheed-internship-CV.pdf";
   const { toast } = useToast();
 
   // Check for mobile and disable dev mode
@@ -131,7 +133,7 @@ export function Navigation() {
                     <span>Preview CV</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem className="hover:bg-neutral-800 focus:bg-neutral-800 cursor-pointer py-2.5" asChild>
-                    <a href="/assets/Abdul-Rasheed-internship-CV.pdf" download className="flex items-center gap-2">
+                    <a href={cvUrl} download className="flex items-center gap-2">
                       <Download className="w-4 h-4 text-orange-400" />
                       <span>Download CV</span>
                     </a>

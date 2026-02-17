@@ -4,7 +4,7 @@ import { Github, Mail, MapPin, Phone, Download, Send, Linkedin } from "lucide-re
 import heroData from "../content/hero.json";
 import aboutData from "../content/about.json";
 
-const typingTexts = [
+const typingTexts = heroData.typingTexts || [
   "Web Developer",
   "CIT Student",
   "Problem Solver",

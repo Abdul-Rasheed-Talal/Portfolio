@@ -1,20 +1,31 @@
 import { useState, useEffect } from "react";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
-import { Github, Coffee, Heart, Zap, Linkedin } from "lucide-react";
+import { Github, Coffee, Heart, Zap, Linkedin, Award, Star, Target, TrendingUp } from "lucide-react";
 import aboutData from "../content/about.json";
-import heroData from "../content/hero.json"; // Name/Title are in hero
+import heroData from "../content/hero.json";
+
+const iconMap: Record<string, any> = {
+  Coffee,
+  Heart,
+  Zap,
+  Award,
+  Star,
+  Target,
+  TrendingUp
+};
 
 const userData = {
-  name: heroData.headline,
-  title: "Web Developer", // This isn't in JSON explicitly but "Web Developer" is common
-  location: "Bhakkar, Pakistan", // Hardcoding or moving to JSON? Let's use hardcoded for now or add to about.json
-  // Actually about.json only has bio/social.
-  // Let's use standard placeholders or keep hardcoded simple things if strictly implied.
-  // But user said "update any kind of information".
-  // I should use variables from aboutData if possible or heroData.
+  name: aboutData.name || heroData.headline,
+  title: aboutData.title || "Web Developer",
+  location: aboutData.location || "Bhakkar, Pakistan",
   bio: aboutData.bio,
   social: aboutData.social,
-  availableForHire: aboutData.availableForHire
+  availableForHire: aboutData.availableForHire,
+  badges: aboutData.badges || [
+    { icon: "Coffee", text: "Tea Enthusiast", color: "text-orange-400" },
+    { icon: "Heart", text: "Open Source Learner", color: "text-red-400" },
+    { icon: "Zap", text: "Problem Solver", color: "text-yellow-400" }
+  ]
 };
 
 export function About() {
@@ -44,18 +55,15 @@ export function About() {
             <p className="text-lg text-neutral-300 leading-relaxed">{userData.bio}</p>
 
             <div className="flex flex-wrap gap-4">
-              <div className="flex items-center space-x-2 bg-neutral-900/50 px-4 py-2 rounded-lg border border-neutral-800">
-                <Coffee className="w-5 h-5 text-orange-400" />
-                <span className="text-neutral-300">Tea Enthusiast</span>
-              </div>
-              <div className="flex items-center space-x-2 bg-neutral-900/50 px-4 py-2 rounded-lg border border-neutral-800">
-                <Heart className="w-5 h-5 text-red-400" />
-                <span className="text-neutral-300">Open Source Learner</span>
-              </div>
-              <div className="flex items-center space-x-2 bg-neutral-900/50 px-4 py-2 rounded-lg border border-neutral-800">
-                <Zap className="w-5 h-5 text-yellow-400" />
-                <span className="text-neutral-300">Problem Solver</span>
-              </div>
+              {userData.badges.map((badge, idx) => {
+                const Icon = iconMap[badge.icon] || Zap;
+                return (
+                  <div key={idx} className="flex items-center space-x-2 bg-neutral-900/50 px-4 py-2 rounded-lg border border-neutral-800">
+                    <Icon className={`w-5 h-5 ${badge.color}`} />
+                    <span className="text-neutral-300">{badge.text}</span>
+                  </div>
+                );
+              })}
             </div>
 
             {/* Social Links - Only GitHub */}
@@ -110,7 +118,7 @@ export function About() {
                   <span className="text-green-400">'JavaScript'</span>],
                 </div>
                 <div className="text-neutral-400 ml-4">
-                  passion: <span className="text-green-400">'Building amazing things'</span>
+                  passion: <span className="text-green-400">'{aboutData.passion || 'Building amazing things'}'</span>
                 </div>
                 <div className="text-purple-400">{"}"}</div>
               </div>

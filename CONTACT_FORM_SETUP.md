@@ -27,7 +27,12 @@ function doPost(e) {
     rowData[1] = e.parameter.email || '';
     rowData[2] = e.parameter.subject || '';
     rowData[3] = e.parameter.message || '';
-    rowData[4] = e.parameter.timestamp || new Date().toISOString();
+    
+    // Format timestamp for Pakistan (GMT+5)
+    // Format: Wed, 02 - 2026, 3:00 PM
+    var now = new Date();
+    var formattedDate = Utilities.formatDate(now, "GMT+5", "EEE, dd - yyyy, h:mm a");
+    rowData[4] = formattedDate;
     
     // Add row to sheet
     sheet.appendRow(rowData);

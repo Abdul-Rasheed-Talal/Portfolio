@@ -7,6 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { Mail, Github, MapPin, Send, Loader2, Phone, CheckCircle } from "lucide-react";
 
+import aboutData from "../content/about.json";
 
 interface ContactFormData {
   name: string;
@@ -19,25 +20,25 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email",
-    value: "mabdulrasheedtalal@gmail.com",
-    link: "mailto:mabdulrasheedtalal@gmail.com"
+    value: aboutData.social.email,
+    link: `mailto:${aboutData.social.email}`
   },
   {
     icon: Phone,
     title: "Phone",
-    value: "03361115907",
-    link: "tel:03361115907"
+    value: aboutData.social.phone,
+    link: `tel:${aboutData.social.phone}`
   },
   {
     icon: Github,
     title: "GitHub",
-    value: "@Abdul-Rasheed-Talal",
-    link: "https://github.com/Abdul-Rasheed-Talal"
+    value: `@${aboutData.social.github.split('/').pop()}`,
+    link: aboutData.social.github
   },
   {
     icon: MapPin,
     title: "Location",
-    value: "Bhakkar, Pakistan",
+    value: aboutData.location,
     link: null
   }
 ];

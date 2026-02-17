@@ -27,7 +27,7 @@ collections:
               - label: "Technologies"
                 name: "technologies"
                 widget: "list"
-                field: { label: "Tech", name: "tech", widget: "string" }
+                field: { label: "Tech", widget: "string" }
               - { label: "Live Demo URL", name: "liveUrl", widget: "string", required: false }
               - { label: "GitHub URL", name: "githubUrl", widget: "string", required: false }
               - label: "Stats"
@@ -122,6 +122,16 @@ collections:
           - { label: "Availability Text", name: "availabilityText", widget: "string", default: "Seeking Internship Opportunities" }
           - { label: "Hero Image", name: "image", widget: "image" }
           - { label: "Resume URL", name: "resumeUrl", widget: "string" }
+          - label: "Typing Animations"
+            name: "typingTexts"
+            widget: "list"
+            field: { label: "Text", widget: "string" }
+          - label: "Navigation Items"
+            name: "navItems"
+            widget: "list"
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "Anchor (e.g. #home)", name: "href", widget: "string" }
           - label: "Stats"
             name: "stats"
             widget: "object"
@@ -134,8 +144,22 @@ collections:
         label: "Story"
         file: "client/src/content/about.json"
         fields:
+          - { label: "Full Name", name: "name", widget: "string" }
+          - { label: "Professional Title", name: "title", widget: "string" }
+          - { label: "Location", name: "location", widget: "string" }
+          - { label: "Passion Statement", name: "passion", widget: "string" }
           - { label: "Bio", name: "bio", widget: "text" }
           - { label: "Available for Hire", name: "availableForHire", widget: "boolean", default: true }
+          - label: "Badges"
+            name: "badges"
+            widget: "list"
+            fields:
+              - { label: "Label", name: "text", widget: "string" }
+              - label: "Icon"
+                name: "icon"
+                widget: "select"
+                options: ["Coffee", "Heart", "Zap", "Award", "Star", "Target", "TrendingUp"]
+              - { label: "Color Class", name: "color", widget: "string", default: "text-orange-400" }
           - label: "Social Links"
             name: "social"
             widget: "object"
@@ -157,7 +181,7 @@ collections:
               - { label: "Company", name: "company", widget: "string" }
               - { label: "Duration", name: "duration", widget: "string" }
               - { label: "Description", name: "description", widget: "text" }
-              - { label: "Technologies", name: "technologies", widget: "list", required: false }
+              - label: "Technologies", name: "technologies", widget: "list", required: false, field: { label: "Tech", widget: "string" }
 
       - name: "education"
         label: "Academic Background"
@@ -174,6 +198,30 @@ collections:
               - { label: "Details", name: "details", widget: "text" }
               - { label: "Achievement", name: "achievement", widget: "string" }
               - { label: "Status", name: "status", widget: "select", options: ["Current", "Completed"] }
+          - label: "Key Achievements"
+            name: "achievements"
+            widget: "list"
+            fields:
+              - { label: "Text", name: "text", widget: "string" }
+              - label: "Icon"
+                name: "icon"
+                widget: "select"
+                options: ["Trophy", "Star", "Award", "Target", "TrendingUp"]
+              - { label: "Color Class", name: "color", widget: "string", default: "text-orange-400" }
+
+      - name: "testimonials"
+        label: "Testimonials"
+        file: "client/src/content/testimonials.json"
+        fields:
+          - label: "Testimonials List"
+            name: "testimonials"
+            widget: "list"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Role", name: "role", widget: "string" }
+              - { label: "Feedback", name: "content", widget: "text" }
+              - { label: "Avatar/Emoji", name: "avatar", widget: "string" }
+              - { label: "Rating (1-5)", name: "rating", widget: "number", default: 5 }
 
       - name: "team"
         label: "Team Section"
@@ -185,3 +233,11 @@ collections:
           - { label: "Description", name: "description", widget: "text" }
           - { label: "Team Name", name: "teamName", widget: "string" }
           - { label: "Team URL", name: "teamUrl", widget: "string" }
+
+      - name: "seo"
+        label: "SEO Settings"
+        file: "client/src/content/seo.json"
+        fields:
+          - { label: "Site Title", name: "title", widget: "string" }
+          - { label: "Meta Description", name: "description", widget: "text" }
+          - { label: "Keywords", name: "keywords", widget: "string" }

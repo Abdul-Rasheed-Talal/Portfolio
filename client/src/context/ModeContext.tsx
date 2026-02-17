@@ -17,6 +17,7 @@ interface ModeContextType {
     setActiveDevSidebar: (sidebar: string) => void;
     openCVPreview: () => void;
     openDiagnostics: () => void;
+    isMobile: boolean;
 }
 
 const ModeContext = createContext<ModeContextType | undefined>(undefined);
@@ -27,27 +28,50 @@ export function ModeProvider({ children }: { children: React.ReactNode }) {
     const [isMatrixEnabled, setIsMatrixEnabled] = useState(false);
     const [isCVModalOpen, setIsCVModalOpen] = useState(false);
     const [activeDevSidebar, setActiveDevSidebar] = useState('explorer');
+    const [isMobile, setIsMobile] = useState(false);
     const { toast } = useToast();
 
     useEffect(() => {
         // Check localStorage on mount
         const savedMode = localStorage.getItem('portfolio-mode') as Mode | null;
         const isMobileMatch = window.matchMedia("(max-width: 768px)").matches;
+        setIsMobile(isMobileMatch);
+
+        const handleResize = (e: MediaQueryListEvent) => {
+            setIsMobile(e.matches);
+        };
+        const mql = window.matchMedia("(max-width: 768px)");
+        mql.addEventListener('change', handleResize);
 
         if (savedMode) {
-            setModeState(savedMode);
+            // Only apply saved developer mode if not on mobile
+            if (savedMode === 'developer' && isMobileMatch) {
+                setModeState('normal');
+                document.documentElement.setAttribute('data-mode', 'normal');
+            } else {
+                setModeState(savedMode);
+                document.documentElement.setAttribute('data-mode', savedMode);
+            }
             setIsFirstVisit(false);
-            document.documentElement.setAttribute('data-mode', savedMode);
         } else if (isMobileMatch) {
-            // Default to normal mode on mobile to skip the choice gate
             setModeState('normal');
             setIsFirstVisit(false);
             document.documentElement.setAttribute('data-mode', 'normal');
-            // We don't save to localStorage yet to allow desktop switch later if they use dev tools
         }
+
+        return () => mql.removeEventListener('change', handleResize);
     }, []);
 
     const setMode = (newMode: Mode) => {
+        if (newMode === 'developer' && isMobile) {
+            toast({
+                title: "Desktop Experience Required",
+                description: "Developer Mode is optimized for laptops and desktops. Switch to a larger screen for the full terminal experience.",
+                duration: 4000,
+            });
+            return;
+        }
+
         setModeState(newMode);
         localStorage.setItem('portfolio-mode', newMode);
         document.documentElement.setAttribute('data-mode', newMode);
@@ -55,6 +79,15 @@ export function ModeProvider({ children }: { children: React.ReactNode }) {
     };
 
     const toggleMode = () => {
+        if (isMobile && mode !== 'developer') {
+            toast({
+                title: "Desktop Experience Required",
+                description: "Developer Mode is best experienced on a desktop. Please switch to a larger screen.",
+                duration: 4000,
+            });
+            return;
+        }
+
         const newMode = mode === 'developer' ? 'normal' : 'developer';
         setMode(newMode);
 
@@ -70,6 +103,14 @@ export function ModeProvider({ children }: { children: React.ReactNode }) {
     const openCVPreview = () => setIsCVModalOpen(true);
 
     const openDiagnostics = () => {
+        if (isMobile) {
+            toast({
+                title: "Desktop Feature",
+                description: "System diagnostics are only available in Developer Mode on desktop devices.",
+                duration: 4000,
+            });
+            return;
+        }
         if (mode !== 'developer') {
             setMode('developer');
         }
@@ -87,7 +128,7 @@ export function ModeProvider({ children }: { children: React.ReactNode }) {
 
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [mode]);
+    }, [mode, isMobile]);
 
     return (
         <ModeContext.Provider value={{
@@ -102,7 +143,8 @@ export function ModeProvider({ children }: { children: React.ReactNode }) {
             activeDevSidebar,
             setActiveDevSidebar,
             openCVPreview,
-            openDiagnostics
+            openDiagnostics,
+            isMobile
         }}>
             {children}
         </ModeContext.Provider>

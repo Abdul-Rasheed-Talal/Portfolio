@@ -1,20 +1,22 @@
 import { Github, Mail, Heart, Linkedin } from "lucide-react";
 
 
+import aboutData from "../content/about.json";
+
 const socialLinks = [
   {
     icon: Github,
-    href: "https://github.com/Abdul-Rasheed-Talal",
+    href: aboutData.social.github,
     label: "GitHub"
   },
   {
     icon: Linkedin,
-    href: "https://www.linkedin.com/in/abdulrasheedtalal/",
+    href: aboutData.social.linkedin,
     label: "LinkedIn"
   },
   {
     icon: Mail,
-    href: "mailto:mabdulrasheedtalal@gmail.com",
+    href: `mailto:${aboutData.social.email}`,
     label: "Email"
   }
 ];

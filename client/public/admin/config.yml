@@ -27,7 +27,7 @@ collections:
               - label: "Technologies"
                 name: "technologies"
                 widget: "list"
-                field: { label: "Tech", widget: "string" }
+                field: { label: "Tech", name: "tech", widget: "string" }
               - { label: "Live Demo URL", name: "liveUrl", widget: "string", required: false }
               - { label: "GitHub URL", name: "githubUrl", widget: "string", required: false }
               - label: "Stats"
@@ -125,7 +125,7 @@ collections:
           - label: "Typing Animations"
             name: "typingTexts"
             widget: "list"
-            field: { label: "Text", widget: "string" }
+            field: { label: "Text", name: "text", widget: "string" }
           - label: "Navigation Items"
             name: "navItems"
             widget: "list"
@@ -181,7 +181,7 @@ collections:
               - { label: "Company", name: "company", widget: "string" }
               - { label: "Duration", name: "duration", widget: "string" }
               - { label: "Description", name: "description", widget: "text" }
-              - { label: "Technologies", name: "technologies", widget: "list", required: false, field: { label: "Tech", widget: "string" } }
+              - { label: "Technologies", name: "technologies", widget: "list", required: false, field: { label: "Tech", name: "tech", widget: "string" } }
 
       - name: "education"
         label: "Academic Background"

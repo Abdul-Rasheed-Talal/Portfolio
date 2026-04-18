@@ -62,6 +62,24 @@
         "forks": 0,
         "updated": "1 month ago"
       }
+    },
+    {
+      "stats": {
+        "stars": 0,
+        "forks": 0
+      },
+      "title": "Full Stack Quiz App",
+      "description": "A full stack quiz app with login and authentication system with using JWT real time results calculation with server side rendering built using express and implemented password hashing using bcrypt",
+      "image": "/images/uploads/o.png",
+      "technologies": [
+        "Express",
+        "mongoDB",
+        "JWT",
+        "bcrypt",
+        "Javascript (ES6+)"
+      ],
+      "githubUrl": "https://github.com/Abdul-Rasheed-Talal/full_stack_quiz_app",
+      "liveUrl": "https://full-stack-quiz-app-delta.vercel.app/"
     }
   ]
 }

@@ -1,26 +1,22 @@
 {
   "projects": [
     {
-      "liveUrl": "https://gctbhakkar.netlify.app",
-      "technologies": [
-        "HTML",
-        "CSS",
-        "JavaScript",
-        "Bootstrap"
-      ],
-      "githubUrl": "https://github.com/Abdul-Rasheed-Talal/gct-bhakkar",
-      "featured": true,
-      "duration": "11/2025 - Present",
-      "title": "GCT Bhakkar Website",
-      "id": 1,
-      "image": "/assets/projects/gct-bhakkar.png",
-      "description": "Designed and developed a dynamic and responsive website for Government College of Technology Bhakkar. Used JavaScript DOM manipulation to dynamically update page content with interactive UI behavior and form validation.",
-      "category": "Web Development",
       "stats": {
         "stars": 0,
-        "forks": 0,
-        "updated": "Just now"
-      }
+        "forks": 0
+      },
+      "title": "Full Stack Quiz App",
+      "description": "A full stack quiz app with login and authentication system with using JWT real time results calculation with server side rendering built using express and implemented password hashing using bcrypt",
+      "image": "/images/uploads/o.png",
+      "technologies": [
+        "Express",
+        "mongoDB",
+        "JWT",
+        "bcrypt",
+        "Javascript (ES6+)"
+      ],
+      "githubUrl": "https://github.com/Abdul-Rasheed-Talal/full_stack_quiz_app",
+      "liveUrl": "https://full-stack-quiz-app-delta.vercel.app/"
     },
     {
       "liveUrl": "https://spotify-frontend-project.netlify.app/",
@@ -44,6 +40,28 @@
       }
     },
     {
+      "liveUrl": "https://gctbhakkar.netlify.app",
+      "technologies": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Bootstrap"
+      ],
+      "githubUrl": "https://github.com/Abdul-Rasheed-Talal/gct-bhakkar",
+      "featured": true,
+      "duration": "11/2025 - Present",
+      "title": "GCT Bhakkar Website",
+      "id": 1,
+      "image": "/assets/projects/gct-bhakkar.png",
+      "description": "Designed and developed a dynamic and responsive website for Government College of Technology Bhakkar. Used JavaScript DOM manipulation to dynamically update page content with interactive UI behavior and form validation.",
+      "category": "Web Development",
+      "stats": {
+        "stars": 0,
+        "forks": 0,
+        "updated": "Just now"
+      }
+    },
+    {
       "liveUrl": null,
       "technologies": [
         "C++",
@@ -62,24 +80,6 @@
         "forks": 0,
         "updated": "1 month ago"
       }
-    },
-    {
-      "stats": {
-        "stars": 0,
-        "forks": 0
-      },
-      "title": "Full Stack Quiz App",
-      "description": "A full stack quiz app with login and authentication system with using JWT real time results calculation with server side rendering built using express and implemented password hashing using bcrypt",
-      "image": "/images/uploads/o.png",
-      "technologies": [
-        "Express",
-        "mongoDB",
-        "JWT",
-        "bcrypt",
-        "Javascript (ES6+)"
-      ],
-      "githubUrl": "https://github.com/Abdul-Rasheed-Talal/full_stack_quiz_app",
-      "liveUrl": "https://full-stack-quiz-app-delta.vercel.app/"
     }
   ]
 }
